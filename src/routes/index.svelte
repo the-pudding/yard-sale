@@ -1,13 +1,12 @@
 <script>
 	import { getContext } from "svelte";
-	import Demo from "$components/demo/Demo.svelte";
+	import Yardsale from "$components/yardsale/Yardsale.svelte";
 	import WIP from "$components/helpers/WIP.svelte";
 	// import Footer from "$components/Footer.svelte";
 
-	// const copy = getContext("copy");
-	// const data = getContext("data");
+	const copy = getContext("copy");
 </script>
 
-<WIP />
-<Demo />
+<!-- <WIP /> -->
+<Yardsale copy={copy}/>
 <!-- <Footer /> -->

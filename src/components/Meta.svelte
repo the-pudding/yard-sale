@@ -1,5 +1,5 @@
 <script>
-	export let title = "Title TK";
+	export let title = "Yardsale";
 	export let description = "Description TK";
 	export let url = "https://pudding.cool";
 	export let keywords = "";

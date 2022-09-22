@@ -11,14 +11,15 @@ const fetchGoogle = async ({ id, gid }) => {
 	const base = "https://docs.google.com";
 	const post = gid ? `spreadsheets/u/1/d/${id}/export?format=csv&id=${id}&gid=${gid}` : `document/d/${id}/export?format=txt`;
 	const url = `${base}/${post}`;
-
 	try {
 		const response = await fetch(url);
+
 		const text = await response.text();
 
 		if (gid) return text;
 
 		const parsed = archieml.load(text);
+		
 		const str = JSON.stringify(parsed);
 		return str;
 

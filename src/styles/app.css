@@ -89,3 +89,9 @@ h5 {
 h6 {
 	font-size: var(--20px, 20px);
 }
+
+.body_container {
+	max-width:  700px;
+	margin:  0 auto;
+	padding: 0 20px;		
+}
