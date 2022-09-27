@@ -1,113 +1,183 @@
+<div id="pareto-box" class="ai2html">
 
-<section>
 	<style type='text/css' media='screen,print'>
-		#gu-pareto-mobile { display: block;}
-		#gu-pareto-tablet { display: none;}
-		#gu-pareto-laptop { display: none;}
-		#gu-pareto-monitor { display: none;}
-		@media (min-width: 639.5px) { 
-			#gu-pareto-mobile { display: none;}
-			#gu-pareto-tablet { display: block;}
-			#gu-pareto-laptop { display: none;}
-			#gu-pareto-monitor { display: none;}
-		} 
-		@media (min-width: 859.5px) { 
-			#gu-pareto-mobile { display: none;}
-			#gu-pareto-tablet { display: none;}
-			#gu-pareto-laptop { display: block;}
-			#gu-pareto-monitor { display: none;}
-		} 
-		@media (min-width: 1079.5px) { 
-			#gu-pareto-mobile { display: none;}
-			#gu-pareto-tablet { display: none;}
-			#gu-pareto-laptop { display: none;}
-			#gu-pareto-monitor { display: block;}
-		} 
+		#pareto-box .artboard {
+			margin:0 auto;
+		}
+		#pareto-box .artboard p {
+			margin:0;
+		}
+		.aiAbs {
+			position:absolute;
+		}
+		.aiImg {
+			display:block;
+			width:100% !important;
+		}
+		.aiBackgroundImg{
+			display:block;
+			position:relative;
+			background-repeat:no-repeat;
+			background-size:cover;
+			width:100% !important;
+		}
+		.aiPointText p { white-space: nowrap; }
 	</style>
+	<style type='text/css' media='screen,print'>
+			#pareto-mobile { display: block;}
+			#pareto-tablet { display: none;}
+			#pareto-laptop { display: none;}
+			#pareto-monitor { display: none;}
+		@media (min-width: 639.5px) { 
+			#pareto-mobile { display: none;}
+			#pareto-tablet { display: block;}
+			#pareto-laptop { display: none;}
+			#pareto-monitor { display: none;}
+			} 
+		@media (min-width: 859.5px) { 
+			#pareto-mobile { display: none;}
+			#pareto-tablet { display: none;}
+			#pareto-laptop { display: block;}
+			#pareto-monitor { display: none;}
+			} 
+		@media (min-width: 1079.5px) { 
+			#pareto-mobile { display: none;}
+			#pareto-tablet { display: none;}
+			#pareto-laptop { display: none;}
+			#pareto-monitor { display: block;}
+			} 
+	</style>
+
+	<style type='text/css' media='screen,print'>
+		/* Custom CSS */
+				.text { font-family: Arial; color: red;}
+	</style>
+
 	<!-- Artboard: mobile -->
-	<div id="gu-pareto-mobile" class="gu-artboard gu-artboard-v3" data-min-width='375' data-max-width='639'>
+	<div id="pareto-mobile" class="artboard artboard-v3" data-min-width='375' data-max-width='639'>
 		<style type='text/css' media='screen,print'>
-			#gu-pareto-mobile {
+			#pareto-mobile {
 				position:relative;
 				overflow:hidden;
 			}
+			#pareto-mobile p {
+				font-weight:500;
+				font-size:48px;
+				line-height:58px;
+				filter:alpha(opacity=100);
+				-ms-filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+				opacity:1;
+				text-align:left;
+				color:rgb(0,0,0);
+				text-transform:none;
+				padding-bottom:0;
+				padding-top:0;
+				mix-blend-mode:normal;
+				font-style:normal;
+			}
 		</style>
-		<div id="gu-ai0-0" class="gu-aiBackgroundImg" style="width:100%;padding-bottom:128.21%; background-image:url(assets/yardsale/ai2html-output_pareto/pareto-mobile.png);"></div>
+		<div id="ai0-0" class="aiBackgroundImg" style="width:100%;padding-bottom:128.21%; background-image:url(assets/yardsale/output_pareto/pareto-mobile.png);"></div>
+		<div id="ai0-1" class="text aiAbs" style="top:35.3581%;left:4.0237%;width:53.3333%;">
+			<p>test</p>
+		</div>
 	</div>
 
 	<!-- Artboard: tablet -->
-	<div id="gu-pareto-tablet" class="gu-artboard gu-artboard-v3" data-min-width='640' data-max-width='859'>
+	<div id="pareto-tablet" class="artboard artboard-v3" data-min-width='640' data-max-width='859'>
 		<style type='text/css' media='screen,print'>
-			#gu-pareto-tablet {
+			#pareto-tablet {
 				position:relative;
 				overflow:hidden;
 				width:640px;
 			}
+			#pareto-tablet p {
+				font-weight:500;
+				font-size:48px;
+				line-height:58px;
+				filter:alpha(opacity=100);
+				-ms-filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+				opacity:1;
+				text-align:left;
+				color:rgb(0,0,0);
+				text-transform:none;
+				padding-bottom:0;
+				padding-top:0;
+				mix-blend-mode:normal;
+				font-style:normal;
+			}
 		</style>
-		<div id="gu-ai1-0" class="gu-aiBackgroundImg" style="width:100%;padding-bottom:116.07%; background-image:url(assets/yardsale/ai2html-output_pareto/pareto-tablet.png);"></div>
+		<div id="ai1-0" class="aiBackgroundImg" style="width:100%;padding-bottom:116.07%; background-image:url(assets/yardsale/output_pareto/pareto-tablet.png);"></div>
+		<div id="ai1-1" class="text aiAbs" style="top:29.6169%;left:5.4851%;width:31.25%;">
+			<p>test</p>
+		</div>
 	</div>
 
 	<!-- Artboard: laptop -->
-	<div id="gu-pareto-laptop" class="gu-artboard gu-artboard-v3" data-min-width='860' data-max-width='1079'>
+	<div id="pareto-laptop" class="artboard artboard-v3" data-min-width='860' data-max-width='1079'>
 		<style type='text/css' media='screen,print'>
-			#gu-pareto-laptop {
+			#pareto-laptop {
 				position:relative;
 				overflow:hidden;
 				width:860px;
 			}
+			#pareto-laptop p {
+				font-weight:500;
+				font-size:48px;
+				line-height:58px;
+				filter:alpha(opacity=100);
+				-ms-filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+				opacity:1;
+				text-align:left;
+				color:rgb(0,0,0);
+				text-transform:none;
+				padding-bottom:0;
+				padding-top:0;
+				mix-blend-mode:normal;
+				font-style:normal;
+			}
 		</style>
-		<div id="gu-ai2-0" class="gu-aiBackgroundImg" style="width:100%;padding-bottom:46.51%; background-image:url(assets/yardsale/ai2html-output_pareto/pareto-laptop.png);"></div>
+		<div id="ai2-0" class="aiBackgroundImg" style="width:100%;padding-bottom:46.51%; background-image:url(assets/yardsale/output_pareto/pareto-laptop.png);"></div>
+		<div id="ai2-1" class="text aiAbs" style="top:18%;left:2.436%;width:23.2558%;">
+			<p>test</p>
+		</div>
 	</div>
 
 	<!-- Artboard: monitor -->
-	<div id="gu-pareto-monitor" class="gu-artboard gu-artboard-v3" data-min-width='1080'>
+	<div id="pareto-monitor" class="artboard artboard-v3" data-min-width='1080'>
 		<style type='text/css' media='screen,print'>
-			#gu-pareto-monitor {
+			#pareto-monitor {
 				position:relative;
 				overflow:hidden;
 				width:1080px;
 			}
+			#pareto-monitor p {
+				font-weight:500;
+				font-size:48px;
+				line-height:58px;
+				filter:alpha(opacity=100);
+				-ms-filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+				opacity:1;
+				text-align:left;
+				color:rgb(0,0,0);
+				text-transform:none;
+				padding-bottom:0;
+				padding-top:0;
+				mix-blend-mode:normal;
+				font-style:normal;
+			}
 		</style>
-		<div id="gu-ai3-0" class="gu-aiBackgroundImg" style="width:100%;padding-bottom:41.38%; background-image:url(assets/yardsale/ai2html-output_pareto/pareto-monitor.png);"></div>
+		<div id="ai3-0" class="aiBackgroundImg" style="width:100%;padding-bottom:41.38%; background-image:url(assets/yardsale/output_pareto/pareto-monitor.png);"></div>
+		<div id="ai3-1" class="text aiAbs" style="top:16.1105%;left:3.7752%;width:18.5185%;">
+			<p>test</p>
+		</div>
 	</div>
-</section>
 
-<style>
-	section {
-		margin: 0 auto;
-		display:  block;
-		max-width: 1080px;
-	}
-	h2 {
-		font-size:  22px;
-		font-weight:  bold;
-	}
-	figure {
-		margin: 1rem auto;
-		width: 100%;
-	}
-	.gu-artboard, .gu-aiBackgroundImg {
-		display:  block;
-		width:  100%;
-	}
-	#gu-pareto-box .gu-artboard {
-		margin:0 auto;
-	}
-	#gu-pareto-box .gu-artboard p {
-		margin:0;
-	}
-	.gu-aiAbs {
-		position:absolute;
-	}
-	.gu-aiImg {
-		display:block;
-		width:100% !important;
-	}
-	.gu-aiBackgroundImg {
-		display:block;
-		position:relative;
-		background-repeat:no-repeat;
-		background-size:cover;
-		width:100% !important;
-	}
-</style>
+	<!-- Custom HTML -->
+		
+
+
+	<!-- Custom JS -->
+		
+
+	
+</div>
