@@ -7,6 +7,6 @@
 	const copy = getContext("copy");
 </script>
 
-<!-- <WIP /> -->
+<WIP />
 <Yardsale copy={copy}/>
 <!-- <Footer /> -->
