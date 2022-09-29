@@ -31,7 +31,7 @@
 				playRounds();
 			}
 		}, 1)
-		roundLimit += 1000;
+		roundLimit += 10000;
 	}
 
 	function playRounds() {
@@ -115,7 +115,7 @@
 
 <div class="body_container">
 	<div class="toolbar">
-		<div class="toolItem">
+<!-- 		<div class="toolItem">
 			<div class="toolLabel">Starting amount for each player: <span class="toolValue">${startingAmount}</span></div>
 			<Range min=100 max=2000 bind:value={startingAmount} on:change={generatePlayers}/>
 			
@@ -124,7 +124,7 @@
 			<div class="toolLabel">Wager: <span class="toolValue">{maxWager}% of poorer player's wealth</span></div>
 			<Range min=10 max=50 bind:value={maxWager}/>
 			
-		</div>
+		</div> -->
 		<div class="toolItem">
 			<div class="toolLabel">Round: <span class="toolValue">{round}</span></div>
 		</div>
@@ -152,7 +152,7 @@
 	.toolItem { font-family: "National 2 Web";  padding: 0px; font-weight:  bold;}
 	.toolLabel { margin-bottom: 20px; }
 	.player {
-		fill:  rgba(221,28,119,0.7);
+		fill:  #9e9ac8;
 	}
 	svg line {
 		stroke: #ccc; 

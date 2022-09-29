@@ -93,5 +93,18 @@ h6 {
 .body_container {
 	max-width:  700px;
 	margin:  0 auto;
-	padding: 0 20px;		
+	padding: 0 20px;	
+	font-family:  "National 2 Web";
+	font-size: 17px;	
+}
+
+.body_container section h2 {
+	font-size:  22px;
+	font-weight:  bold;
+	margin-bottom:  6px;
+}
+.body_container section .dek {
+	font-size:  17px;
+	font-style:  italic;
+	margin-top:  0px;
 }

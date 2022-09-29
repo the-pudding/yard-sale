@@ -15,7 +15,7 @@
 	}
 </script>
 <div class="body_container">
-	{#if hed != undefined}
+	{#if hed != ""}
 	<h3>{hed}</h3>
 	{/if}
 	<p>
