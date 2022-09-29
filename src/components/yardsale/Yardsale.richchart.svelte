@@ -20,12 +20,14 @@
 		bottom: p,
 		right: p
 	};
-
+	export let hed;
+	export let dek;
 	const formatTickY = d => "$"+d;
 </script>
 <div class="body_container">
 	<section>
-		<h2>Rich chart</h2>
+		<h2>{hed}</h2>
+		<div class='dek'>{dek}</div>
 		<figure>
 			<LayerCake 
 			{data}
@@ -48,10 +50,6 @@
 </section>
 </div>
 <style>
-	h2 {
-		font-size:  22px;
-		font-weight:  bold;
-	}
 	figure {
 		margin: 1rem auto;
 		width: 100%;

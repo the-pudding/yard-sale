@@ -14,37 +14,37 @@
 	import YardsaleYSM2 from "$components/yardsale/Yardsale.YSM2.svelte";
 </script>
 
-<div id="top">
+<!-- <div id="top">
 	<div class="body_container">
 		<h1>{copy.Hed}</h1>
 		<h3>{copy.Dek}</h3>
 	</div>
-</div>
+</div> -->
 
 <div id="body">
 	<!-- SECTION 1 -->
-	<YardsaleScrolly words={copy.scrolly} />
-	<YardsaleCopy words={copy.IntroSection1} />
-	<YardsalePoorChart />
-	<YardsaleCopy words={copy.IntroSection2} />
-	<YardsaleRichChart />
-	<YardsaleCopy words={copy.IntroSection3} />
+	<YardsaleScrolly words={copy.scrolly} hed={copy.Hed} dek={copy.Dek} />
+	<YardsaleCopy hed="" words={copy.IntroSection1} />
+	<YardsalePoorChart hed="How the poorer person fairs in this game" dek="If they win every other coin flip..." />
+	<YardsaleCopy hed="" words={copy.IntroSection2} />
+	<YardsaleRichChart hed="How a richer person fairs in this game" dek="If they win every other coin flip..." />
+	<YardsaleCopy hed="" words={copy.IntroSection3} />
 
 	<!-- SECTION 2 -->
 	<YardsaleCopy hed={copy.MiddleHed} words={copy.MiddleSection1} />
 	<YardsaleParetoChart />
-	<YardsaleCopy words={copy.MiddleSection2} />
+	<YardsaleCopy hed="" words={copy.MiddleSection2} />
 	<YardsaleFedChart />
-	<YardsaleCopy words={copy.MiddleSection3} />
+	<YardsaleCopy hed="" words={copy.MiddleSection3} />
 	<YardsaleYSM />
-	<YardsaleCopy words={copy.MiddleSection4} />
+	<YardsaleCopy hed="" words={copy.MiddleSection4} />
 
 	<!-- SECTION 3 -->
 	<YardsaleCopy hed={copy.EndHed} words={copy.EndSection1} />
 	<YardsaleYSM2 />
-	<YardsaleCopy words={copy.EndSection2} />
+	<YardsaleCopy hed="" words={copy.EndSection2} />
 	<YardsaleTop400 />
-	<YardsaleCopy words={copy.EndSection3} />
+	<YardsaleCopy hed="" words={copy.EndSection3} />
 
 </div>
 
