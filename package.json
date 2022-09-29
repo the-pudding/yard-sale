@@ -1,5 +1,5 @@
 {
-	"name": "svelte-starter",
+	"name": "yard-sale",
 	"version": "4.0.2",
 	"scripts": {
 		"gdoc": "node tasks/fetch-google.js",
