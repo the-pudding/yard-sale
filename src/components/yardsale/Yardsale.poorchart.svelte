@@ -26,7 +26,7 @@
 </script>
 <div class="body_container">
 	<section>
-		<h2>{hed}</h2>
+		<h3>{hed}</h3>
 		<div class='dek'>{dek}</div>
 		<figure>
 			<LayerCake 

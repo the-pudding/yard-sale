@@ -5,6 +5,8 @@
 
 	import YardsaleScrolly from "$components/yardsale/Yardsale.scrolly.svelte";
 	import YardsaleCopy from "$components/yardsale/Yardsale.copy.svelte";
+	import YardsaleMathDiagram from "$components/yardsale/Yardsale.mathdiagram.svelte";
+	import YardsaleMathSimulation from "$components/yardsale/Yardsale.mathsimulation.svelte";
 	import YardsalePoorChart from "$components/yardsale/Yardsale.poorchart.svelte";
 	import YardsaleRichChart from "$components/yardsale/Yardsale.richchart.svelte";
 	import YardsaleParetoChart from "$components/yardsale/Yardsale.paretochart.svelte";
@@ -23,12 +25,18 @@
 
 <div id="body">
 	<!-- SECTION 1 -->
-	<YardsaleScrolly words={copy.scrolly} hed={copy.Hed} dek={copy.Dek} />
+	<YardsaleScrolly words={copy.scrolly1} container="scrolly1" />
+	<YardsaleScrolly words={copy.scrolly2} container="scrolly2" />
+	<YardsaleScrolly words={copy.scrolly3} container="scrolly3" />
+	<YardsaleCopy hed="" words={copy.Hed} />
 	<YardsaleCopy hed="" words={copy.IntroSection1} />
-	<YardsalePoorChart hed="How the poorer person fairs in this game" dek="If they win every other coin flip..." />
+	<YardsaleMathDiagram />
 	<YardsaleCopy hed="" words={copy.IntroSection2} />
-	<YardsaleRichChart hed="How a richer person fairs in this game" dek="If they win every other coin flip..." />
+	<YardsalePoorChart hed="How the poorer person fairs in this game" dek="If they win every other coin flip..." />
 	<YardsaleCopy hed="" words={copy.IntroSection3} />
+	<YardsaleRichChart hed="How a richer person fairs in this game" dek="If they win every other coin flip..." />
+	<YardsaleCopy hed="" words={copy.IntroSection4} />
+	<YardsaleMathSimulation />
 
 	<!-- SECTION 2 -->
 	<YardsaleCopy hed={copy.MiddleHed} words={copy.MiddleSection1} />

@@ -16,9 +16,16 @@
 </script>
 <div class="body_container">
 	{#if hed != ""}
-	<h3>{hed}</h3>
+	<h2>{hed}</h2>
 	{/if}
 	<p>
 		{@html convertToHTML(words)}
 	</p>
 </div>
+
+<style>
+#top h2 {
+	 font-size: 3rem;
+    line-height: 1.1em;	
+}
+</style>
