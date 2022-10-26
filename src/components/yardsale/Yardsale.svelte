@@ -28,20 +28,19 @@
 	<YardsaleScrolly words={copy.scrolly1} container="scrolly1" />
 	<YardsaleScrolly words={copy.scrolly2} container="scrolly2" />
 	<YardsaleScrolly words={copy.scrolly3} container="scrolly3" />
-	<YardsaleCopy hed="" words={copy.Hed} />
 	<YardsaleCopy hed="" words={copy.IntroSection1} />
-	<YardsaleMathDiagram />
+	<YardsaleMathSimulation />
 	<YardsaleCopy hed="" words={copy.IntroSection2} />
 	<YardsalePoorChart hed="How the poorer person fairs in this game" dek="If they win every other coin flip..." />
 	<YardsaleCopy hed="" words={copy.IntroSection3} />
 	<YardsaleRichChart hed="How a richer person fairs in this game" dek="If they win every other coin flip..." />
 	<YardsaleCopy hed="" words={copy.IntroSection4} />
-	<YardsaleMathSimulation />
+
 
 	<!-- SECTION 2 -->
 	<YardsaleCopy hed={copy.MiddleHed} words={copy.MiddleSection1} />
-	<YardsaleParetoChart />
 	<YardsaleCopy hed="" words={copy.MiddleSection2} />
+	<YardsaleParetoChart />
 	<YardsaleFedChart />
 	<YardsaleCopy hed="" words={copy.MiddleSection3} />
 	<YardsaleYSM />
