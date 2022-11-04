@@ -40,14 +40,13 @@
 		right: p
 	};
 	const formatTickY = d => "$"+d;
+	let wagerData = getWager();
 
 	function playRound(event) {
 		let player = event.target.getAttribute("player");
+		wagerData = getWager();
 
-		let wager = players.p1.data[round].y * 0.2;
-		if (players.p1.data[round].y > players.p2.data[round].y) {
-			wager = players.p2.data[round].y * 0.2;
-		}
+		let wager = wagerData[0];
 		
 		players[player].wins += 1;
 		round += 1;
@@ -76,6 +75,7 @@
 		if (players.p2.wealth < players.p2.minmax[0]) {
 			players.p2.minmax[0] = players.p2.wealth * 0.9;
 		}
+		wagerData = getWager();
 	}
 
 	function reset() {
@@ -104,18 +104,63 @@
 			}
 		}
 	}
+
+	function getWager() {
+		let w = players.p1.data[round].y * 0.2;
+		let poorerPlayer = "Player 1"; 
+		if (players.p1.data[round].y > players.p2.data[round].y) {
+			w = players.p2.data[round].y * 0.2;
+			poorerPlayer = "Player 2";
+		}
+		return [w, poorerPlayer];
+	}
+
+	function formatMoney(d) {
+		if (d >= 0) {
+			return "$" + Math.round(d);
+		}
+		return "-$" + Math.abs(Math.round(d));
+	}
 </script>
 <div class="body_container">
-	<div class="chart_container">
-		<span class="reset" on:click={reset}>Reset</span>
-		<section>
-			<h3>Poorer player <span class="winButton" player="p1" on:click={playRound}>Win</span></h3>
-			<div class="stats">
-				<div class="wins">Record: {players.p1.wins}-{round-players.p1.wins}</div>
-				<div class="winRate">Win pct: {players.p1.rate}%</div>
-				<div class="wealth">Wealth: ${ Math.round(players.p1.wealth) }</div>
-				<div class="wealth">Net earnings: ${ Math.round(players.p1.wealth - 100) }</div>
+	<div class="profile_container">
+		<div class="profile">
+			<div class="headshot">
+
 			</div>
+			<h3>Player 1</h3>
+			<div class="stats ysm_data">
+				<div class="wins">Record: {players.p1.wins}-{round-players.p1.wins} ({players.p1.rate}%)</div>
+				<div class="wealth">Wealth: { formatMoney(players.p1.wealth) }</div>
+				<div class="wealth">Net earnings: { formatMoney(players.p1.wealth - 100) }</div>
+			</div>
+		</div>
+
+		<div class="profile">
+			<div class="headshot">
+				
+				
+			</div>
+			<h3>Player 2</h3>
+			<div class="stats ysm_data">
+				<div class="wins">Record: {players.p2.wins}-{round-players.p2.wins} ({players.p2.rate}%)</div>
+				<div class="wealth">Wealth: { formatMoney(players.p2.wealth) }</div>
+				<div class="wealth">Net earnings: { formatMoney(players.p2.wealth - 1000) }</div>
+			</div>
+			
+		</div>
+
+	</div>
+	<div class="fullInfo">
+		<div class="wager_amount">
+			Wager: {formatMoney(wagerData[0])}
+			<div class="wager_info">(20% of {wagerData[1]}'s wealth)</div>
+		</div>
+		<div class="winButton button winp1" player="p1" on:click={playRound}>Player 1 wins</div>
+		<div class="winButton button winp2" player="p2" on:click={playRound}>Player 2 wins</div>
+	</div>
+	<div class="chart_container">
+		<section>
 			<figure>
 				<LayerCake 
 				data={players.p1.data}
@@ -137,14 +182,6 @@
 		</figure>
 	</section>
 	<section>
-		<h3>Richer player <span class="winButton" player="p2" on:click={playRound}>Win</span></h3>
-		<div class="stats">
-			<div class="wins">Record: {players.p2.wins}-{round-players.p2.wins}</div>
-			<div class="winRate">Win pct: {players.p2.rate}%</div>
-			<div class="wealth">Wealth: ${ Math.round(players.p2.wealth) }</div>
-			<div class="wealth">Net earnings: ${ Math.round(players.p2.wealth - 1000) }</div>
-		</div>
-		
 		<figure>
 			<LayerCake
 			data={players.p2.data}
@@ -166,6 +203,9 @@
 	</figure>
 </section>
 </div>
+<div class="resetContainer">
+	<div class="reset" on:click={reset}>Reset</div>
+</div>
 </div>
 <style>
 	figure {
@@ -173,60 +213,104 @@
 		width: 100%;
 		height: 40vh;
 	}
-	.chart_container {
+	.chart_container, .resetContainer {
 		width:  150%;
 		margin-left: -25%;
 		display: flex;
 		position: relative;
+		font-family: "National 2 Web"; 
+	}
+	@media only screen and (max-width: 1100px) {
+		.chart_container, .resetContainer {
+			width:  100%;
+			margin-left: 0%;
+		}
 	}
 	.body_container  {
 		width: 100%;
-	}
-	.reset {
-		position: absolute;
-		right: 0px;
-		top:  20px;
-		background: rgba(0,0,0,0.1);
-		color:  #999;
-		padding:  5px;
-		cursor: pointer;
-		-webkit-touch-callout: none;
-		-webkit-user-select: none; 
-		-khtml-user-select: none; 
-		-moz-user-select: none; 
-		-ms-user-select: none; 
-		user-select: none;
-	}
-	.reset:hover {
-		text-decoration: underline;
-	}
-	.reset:active {
-		color:  black;
-	}
-	.body_container section {
-		flex: 2;
-		margin-right:  10px;
-	}
-	section h3 {
-		-webkit-touch-callout: none;
+		margin-top: 50px;
+		font-family: "National 2 Web";
+				-webkit-touch-callout: none;
 		-webkit-user-select: none; 
 		-khtml-user-select: none; 
 		-moz-user-select: none; 
 		-ms-user-select: none; 
 		user-select: none; 
 	}
-	.winButton {
-		cursor: pointer;
-		margin:  0 10px;
-		padding:  5px;
-		font-size:  16px;
-		border:  1px solid #aaa;
+	
+	.body_container section {
+		flex: 2;
+		margin-right:  10px;
+	}
+	.fullInfo {
+		margin-top: 10px; 
+		position: relative;
+		width: 100%;
+		text-align: center;
+		/*border: 1px solid #ccc;*/
+		padding: 5px;
+		line-height: 1.1em;
+	}
+	.wager_amount {
+		text-transform: uppercase;
+	}
+	.wager_info {
+		text-transform: none;
+		font-weight: normal;
+		font-size: 14px;
+		color: #888;
+	}
+	h3 {
+		font-weight: 500;
+		margin: 0 0 5px 0;
+	}
+	.body_container section:nth-child(2) {
+		text-align: right;
+	}
+	.profile_container {
+		display: block;
+		width: 100%;
+		position: relative;
+		height: 120px;
+	}
+	.profile {
+		position: absolute;
+		width: calc(50% - 120px);
+	}
+	.profile:nth-child(1) {
+		left: 0px;
+		margin-left: 120px;
+	}
+	.profile:nth-child(2) {
+		right: 0px;
+		margin-right: 120px;
+		text-align: right;
+	}
+	.headshot {
+		width: 100px;
+		height: 120px;
 		background: white;
+		position: absolute;
+		top: 0;
+		border: 1px solid #000;
 	}
-	.winButton:hover {
-		text-decoration: underline;
+	.profile:nth-child(1) .headshot {
+		left: -120px;
 	}
-	.winButton:active{
-		background: #ccc;
+	.profile:nth-child(2) .headshot {
+		right: -120px;
+	}
+	.winButton {
+		position: absolute;
+		display: inline-block;
+		width: 100px;
+		bottom: 0;
+		height: 100%;
+	}
+	.winp1 {
+		left:  0px;
+	}
+	.winp2 {
+		right: 0;
 	}
 </style>

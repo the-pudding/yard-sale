@@ -13,7 +13,6 @@
 	import YardsaleFedChart from "$components/yardsale/Yardsale.fedchart.svelte";
 	import YardsaleTop400 from "$components/yardsale/Yardsale.top400.svelte";
 	import YardsaleYSM from "$components/yardsale/Yardsale.YSM.svelte";
-	import YardsaleYSM2 from "$components/yardsale/Yardsale.YSM2.svelte";
 </script>
 
 <!-- <div id="top">
@@ -31,10 +30,8 @@
 	<YardsaleCopy hed="" words={copy.IntroSection1} />
 	<YardsaleMathSimulation />
 	<YardsaleCopy hed="" words={copy.IntroSection2} />
-	<YardsalePoorChart hed="How the poorer person fairs in this game" dek="If they win every other coin flip..." />
 	<YardsaleCopy hed="" words={copy.IntroSection3} />
-	<YardsaleRichChart hed="How a richer person fairs in this game" dek="If they win every other coin flip..." />
-	<YardsaleCopy hed="" words={copy.IntroSection4} />
+
 
 
 	<!-- SECTION 2 -->
@@ -43,12 +40,12 @@
 	<YardsaleParetoChart />
 	<YardsaleFedChart />
 	<YardsaleCopy hed="" words={copy.MiddleSection3} />
-	<YardsaleYSM />
+	<YardsaleYSM redist=-1 />
 	<YardsaleCopy hed="" words={copy.MiddleSection4} />
 
 	<!-- SECTION 3 -->
 	<YardsaleCopy hed={copy.EndHed} words={copy.EndSection1} />
-	<YardsaleYSM2 />
+	<YardsaleYSM redist=1 />
 	<YardsaleCopy hed="" words={copy.EndSection2} />
 	<YardsaleTop400 />
 	<YardsaleCopy hed="" words={copy.EndSection3} />

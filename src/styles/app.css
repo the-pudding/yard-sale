@@ -90,7 +90,7 @@ h6 {
 	font-size: var(--20px, 20px);
 }
 body {
-	background-color: #f3eaf4;
+	background-color: var(--category-bg-purple);
 }
 .body_container {
 	max-width:  700px;
@@ -103,17 +103,17 @@ body {
 
 .body_container h2 {
 	font-family: 'Tiempos Headline Web',Georgia,Times,serif;
-    font-size: 3rem;
-    line-height: 1.1em;
-    text-align: center;	
+	font-size: 3rem;
+	line-height: 1.1em;
+	text-align: center;	
 	/*font-weight:  bold;*/
 	margin-top: 50px;
 	margin-bottom:  6px;
 }
 .body_container section h3 {
 	font-family: 'Tiempos Text Web',Georgia,Times,serif;
-    font-size: 1.7rem;
-    line-height: 1.1em;	
+	font-size: 1.7rem;
+	line-height: 1.1em;	
 	font-weight:  bold;
 	margin-bottom:  6px;
 	margin-top: 30px;
@@ -122,4 +122,73 @@ body {
 	font-size:  17px;
 	font-style:  italic;
 	margin-top:  0px;
+}
+.body_container .button {
+	font-family: "National 2 Web"; 
+	text-align: center;
+	cursor: pointer;
+	margin:  0 0px;
+	padding:  5px;
+	font-size:  17px;
+	border:  1px solid #000;
+	background: white;
+	line-height: 1.1em;
+	box-shadow: 2px 2px 0px 0px #000;
+}
+
+.body_container .button:hover {
+	text-decoration: underline;
+}
+.body_container .button:active{
+	margin-left: 2px;
+	margin-bottom: -2px;
+	box-shadow: 0px 0px 0px 0px #000;
+}
+
+
+.ysm_data {
+	font-size: 15px;
+	line-height: 1.3em;
+	color: #666;
+	font-family: "National 2 Web"; 
+}
+.chartText {
+	fill: var(--color-gray-600);
+	font-size: 0.725em;
+	font-weight: 200;
+}
+.roundItem {
+	position: absolute;
+	right: 0px;
+	bottom: 0px;
+	color: black;
+}
+
+.resetContainer {
+	width: 100%;
+	height: 50px;
+	position: relative;
+}
+.reset {
+	position: absolute;
+	right: 0px;
+	top:  0px;
+	background: white;
+	color:  #333;
+	border: 1px solid #000;
+	padding:  5px;
+	cursor: pointer;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none; 
+	-khtml-user-select: none; 
+	-moz-user-select: none; 
+	-ms-user-select: none; 
+	user-select: none;
+	box-shadow: none !important;
+}
+.reset:hover {
+	text-decoration: underline;
+}
+.reset:active {
+	color:  black;
 }

@@ -35,6 +35,10 @@
 		"scrolly2-3": [4, 0, 0, 100],
 		"scrolly2-4": [4, 0, 0, 100],
 		"scrolly2-5": [5, 0, 0, 100],
+		"scrolly2-6": [5, 0, 0, 100],
+		"scrolly2-7": [5, 0, 0, 100],
+		"scrolly2-8": [5, 0, 0, 100],
+		"scrolly2-9": [5, 0, 0, 100],
 		"scrolly3-0": [6, 0, 0, 100, 2, 1],
 		"scrolly3-1": [6, 0, 0, 100, 2, 1],
 		"scrolly3-2": [6, 0, 0, 100, 10000, 20],
@@ -96,7 +100,7 @@
 		/*min-height:  500px;*/
 		z-index: 2;
 		overflow: hidden;
-		background:  white;
+		border: 2px solid #000;
 	}
 	
 	.scrollyBackground img {

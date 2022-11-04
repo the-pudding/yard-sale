@@ -12,6 +12,11 @@
 	let chartWidth;
 	export let increment;
 
+	let stepHeight = 600;
+	let stepWidth = 600;
+	let panelHeight = stepWidth * 0.8;
+	let chartHeight = panelHeight - 50;
+
 	function generatePlayers() {
 		players = [];
 		for (let i in [...Array(playerNumber).keys()]) {
@@ -110,6 +115,10 @@
 
 
 	$: {
+		stepWidth = stepWidth;
+		stepHeight = stepHeight;
+		panelHeight = stepWidth * 0.8; 
+		chartHeight = panelHeight - 50;
 		increment = increment;
 		roundLimit = roundLimit;
 		generatePlayers();
@@ -118,36 +127,48 @@
 	}
 </script>
 
-<div class="body_container">
-	<div class="toolbar">
-		<div class="toolItem">
-			<div class="toolLabel">Round: <span class="toolValue">{round}</span></div>
-		</div>
-	</div>
-	
-	<div class="chartArea" bind:clientWidth={chartWidth}>
+<div class="body_container"  bind:clientHeight={stepHeight} bind:clientWidth={stepWidth}>	
+	<div class="chartArea" bind:clientWidth={chartWidth} style="height:{panelHeight}px;">
 		<svg>
 			{#each ticks as tick}
-			<line x1=0 x2={chartWidth} y1={300 - (tick / highestNumber * 300) } y2={300 - (tick / highestNumber * 300)}></line>
-			<text x=0 y={300 - (tick / highestNumber * 300) - 5}>${comma(tick)}</text>
+			<line x1=0 x2={chartWidth} y1={ chartHeight - (tick / highestNumber * chartHeight) } y2={chartHeight - (tick / highestNumber * chartHeight)}></line>
+			<text class="chartText" x=0 y={chartHeight - (tick / highestNumber * chartHeight) - 5}>${comma(tick)}</text>
 			{/each}
 			{#each players as player}
-			<rect class="player" x={player.order * ((chartWidth-50) /playerNumber) + 50 } width={chartWidth / 200} height={player.height} y={windowHeight - player.height}></rect>
+			<rect class="player" x={player.order * ((chartWidth-50) /playerNumber) + 50 } width={chartWidth / 200} height={player.height} y={chartHeight - player.height}></rect>
 			{/each}
 		</svg>
 	</div>
+	<div class="toolbar ysm_data">
+		<div class="toolItem roundItem">
+			<div class="toolLabel">Round: <span class="toolValue">{round}</span></div>
+		</div>
+	</div>
 </div>
 <style>
-	.body_container {padding:  20px;}
-	.chartArea { height: 300px; width: 100%; background: white; margin-bottom: 10px; }
+	.toolbar {
+		position: absolute;
+		right:  10px;
+		top: 20px;
+		width: 100%;
+		height: 20px;
+		margin-top: 10px;
+	}
+	.toolLabel {
+		display: inline-block;
+		padding: 0 0 0 5px;
+		background: var(--category-bg-purple);
+	}
+	.body_container { padding:  20px; width: 100%; height:  100%;}
+	.chartArea {  width: 100%; margin-bottom: 10px; }
 	svg { width: 100%; height: 100%; }
-	.toolItem { font-family: "National 2 Web";  padding: 0px; font-weight:  bold;}
 	.toolLabel { margin-bottom: 20px; }
 	.player {
 		fill:  #9e9ac8;
 	}
 	svg line {
-		stroke: #ccc; 
+		stroke-dasharray: 4px 4px;
+		stroke: var(--color-gray-300);
 		transition: all 100ms cubic-bezier(0.250, 0.100, 0.250, 1.000);
 		transition-timing-function: cubic-bezier(0.250, 0.100, 0.250, 1.000);
 	}
