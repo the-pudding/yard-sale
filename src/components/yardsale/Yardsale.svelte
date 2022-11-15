@@ -30,8 +30,6 @@
 	<YardsaleCopy hed="" words={copy.IntroSection1} />
 	<YardsaleMathSimulation />
 	<YardsaleCopy hed="" words={copy.IntroSection2} />
-	<YardsaleCopy hed="" words={copy.IntroSection3} />
-
 
 
 	<!-- SECTION 2 -->

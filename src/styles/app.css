@@ -90,19 +90,24 @@ h6 {
 	font-size: var(--20px, 20px);
 }
 body {
-	background-color: var(--category-bg-purple);
+	background: white;
+}
+.interactive_container {
+		width: 100%;
+		background-color: var(--category-bg-purple);
+		padding: 50px 0;
 }
 .body_container {
 	max-width:  700px;
 	margin:  0 auto;
-	padding: 0 20px;	
-	font-family:  "Tiempos Text Web", serif;
+	padding: 50px 20px;	
+	font-family: "National 2 Web"; 
 	font-size: 18px;
 	line-height: 1.6em;	
 }
 
 .body_container h2 {
-	font-family: 'Tiempos Headline Web',Georgia,Times,serif;
+/*	font-family: 'Tiempos Headline Web',Georgia,Times,serif;*/
 	font-size: 3rem;
 	line-height: 1.1em;
 	text-align: center;	
@@ -111,7 +116,7 @@ body {
 	margin-bottom:  6px;
 }
 .body_container section h3 {
-	font-family: 'Tiempos Text Web',Georgia,Times,serif;
+/*	font-family: 'Tiempos Text Web',Georgia,Times,serif;*/
 	font-size: 1.7rem;
 	line-height: 1.1em;	
 	font-weight:  bold;
@@ -159,7 +164,7 @@ body {
 }
 .roundItem {
 	position: absolute;
-	right: 0px;
+	right: 20px;
 	bottom: 0px;
 	color: black;
 }
@@ -191,4 +196,51 @@ body {
 }
 .reset:active {
 	color:  black;
+}
+
+/* Speech bubbles*/
+
+.speechBubble {
+	position: absolute;
+	background: white;
+	padding: 5px;
+	max-width: 130px;
+	border-radius: 8px;
+	font-size: 12px;
+	line-height: 14px;
+	text-align:left;
+	font-family: "National 2 Web", sans-serif;
+	box-shadow: 10px 6px 41px 0px rgba(0,0,0,0.75);
+-webkit-box-shadow: 10px 6px 41px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: 10px 6px 41px 0px rgba(0,0,0,0.75);
+}
+.speechBubble.player1bubble {
+	left: 22%;
+	bottom: 70%;
+}
+.speechBubble.player1bubble:before {
+	content: "";
+	width: 0;
+	height: 0;
+	border-left: 2px solid transparent;
+	border-right: 10px solid transparent;
+	border-top: 15px solid #fff;
+	position: absolute;
+	top: 100%;
+	left: 10px;
+}
+.speechBubble.player2bubble {
+	right: 30%;
+	bottom: 60%;
+}
+.speechBubble.player2bubble:before {
+	content: "";
+	width: 0;
+	height: 0;
+	border-left: 10px solid transparent;
+	border-right: 2px solid transparent;
+	border-top: 15px solid #fff;
+	position: absolute;
+	top: 100%;
+	right: 10px;
 }

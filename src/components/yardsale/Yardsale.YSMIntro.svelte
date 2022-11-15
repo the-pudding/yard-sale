@@ -4,7 +4,7 @@
 	let ticks = [];
 	let windowHeight = 300;
 	let playerNumber = 100;
-	let startingAmount = 100;
+	let startingAmount = 1000;
 	let highestNumber = 0;
 	let maxWager = 20;
 	let round = 0;
@@ -24,7 +24,8 @@
 				"wealth": startingAmount,
 				"id": i,
 				"order": 0,
-				"height": 0
+				"height": 0,
+				"is_it_me": 0
 			} 
 			players.push(player);
 		}
@@ -36,8 +37,9 @@
 			if (round < roundLimit) {
 				for (var i = 0; i < increment; i++) {
 					playRounds();
+					sortPlayers();
 				}
-				sortPlayers();
+				
 			} else if (round != roundLimit) {
 				round = 0;
 			}
@@ -57,6 +59,53 @@
 		}
 		round+= 1;
 	}
+	
+	function sortPlayers() {
+		highestNumber = 2000;
+		players.sort(dynamicSort("wealth"));
+
+		players.forEach(function(d) {
+			if (d.wealth > highestNumber) {
+				highestNumber = d.wealth;
+			}
+		});
+		// setting the ticks based on the highest number
+		
+		if (highestNumber > 50000) {
+			highestNumber = 100000;
+		} else if (highestNumber > 10000) {
+			highestNumber = 50000;
+		} else if (highestNumber > 2000) {
+			highestNumber = 10000;
+		}
+		let highestTick = highestNumber;
+		ticks = [];
+
+		for (var i = 0; i < highestTick; i += highestTick/5) {
+			ticks.push(i);
+		}
+		for (var i = 0; i < players.length; i++) {
+			players[i].is_it_me = i == 0 ? 1 : 0; 
+			players[i].order = i;
+			players[i].height = (players[i].wealth / highestNumber) * windowHeight;
+		}
+
+
+	}
+
+
+	$: {
+		stepWidth = stepWidth;
+		stepHeight = stepHeight;
+		panelHeight = stepWidth * 0.8; 
+		chartHeight = panelHeight - 50;
+		increment = increment;
+		roundLimit = roundLimit;
+		generatePlayers();
+		sortPlayers();
+		playGame();
+	}
+
 
 	// UTILTIES
 	function dynamicSort(property) {
@@ -86,45 +135,6 @@
 		return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 	}
 
-	function sortPlayers() {
-		highestNumber = 0;
-		players.sort(dynamicSort("wealth"));
-		players.forEach(function(d) {
-			if (d.wealth > highestNumber) {
-				highestNumber = d.wealth;
-			}
-		});
-		highestNumber = highestNumber * 1.2;
-		// Giving some breathing room for the highest number
-		// highestNumber = highestNumber <= 200 ? 200 : highestNumber * 1.2;
-		// setting the ticks based on the highest number
-		let highestTickRounder = 100; //Math.pow(10,highestNumber.toString().length-2);
-		let highestTick = Math.round(highestNumber / highestTickRounder)*highestTickRounder * 2;
-		ticks = [];
-		// for (var i = 0; i < highestTick; i += highestTick/10) {
-		// 	ticks.push(i);
-		// }
-		for (var i = 0; i < highestTick; i += highestTick/10) {
-			ticks.push(i);
-		}
-		for (var i = 0; i < players.length; i++) {
-			players[i].order = i;
-			players[i].height = (players[i].wealth / highestNumber) * windowHeight;
-		}
-	}
-
-
-	$: {
-		stepWidth = stepWidth;
-		stepHeight = stepHeight;
-		panelHeight = stepWidth * 0.8; 
-		chartHeight = panelHeight - 50;
-		increment = increment;
-		roundLimit = roundLimit;
-		generatePlayers();
-		sortPlayers();
-		playGame();
-	}
 </script>
 
 <div class="body_container"  bind:clientHeight={stepHeight} bind:clientWidth={stepWidth}>	
@@ -135,20 +145,20 @@
 			<text class="chartText" x=0 y={chartHeight - (tick / highestNumber * chartHeight) - 5}>${comma(tick)}</text>
 			{/each}
 			{#each players as player}
-			<rect class="player" x={player.order * ((chartWidth-50) /playerNumber) + 50 } width={chartWidth / 200} height={player.height} y={chartHeight - player.height}></rect>
+			<rect class="player player{player.is_it_me}" x={player.order * ((chartWidth-50) /playerNumber) + 50 } width={chartWidth / 200} height={player.height} y={chartHeight - player.height}></rect>
 			{/each}
 		</svg>
 	</div>
 	<div class="toolbar ysm_data">
 		<div class="toolItem roundItem">
-			<div class="toolLabel">Round: <span class="toolValue">{round}</span></div>
+			<div class="toolLabel">Round: <span class="toolValue">{comma(round)}</span></div>
 		</div>
 	</div>
 </div>
 <style>
 	.toolbar {
 		position: absolute;
-		right:  10px;
+		left:  10px;
 		top: 20px;
 		width: 100%;
 		height: 20px;
@@ -156,24 +166,30 @@
 	}
 	.toolLabel {
 		display: inline-block;
-		padding: 0 0 0 5px;
-		background: var(--category-bg-purple);
+/*		color: white;*/
+/*		font-weight: bold;*/
+/*		background: var(--category-bg-purple);*/
 	}
 	.body_container { padding:  20px; width: 100%; height:  100%;}
 	.chartArea {  width: 100%; margin-bottom: 10px; }
 	svg { width: 100%; height: 100%; }
 	.toolLabel { margin-bottom: 20px; }
 	.player {
-		fill:  #9e9ac8;
+		fill:  #6e016b;
+	}
+	.player.player1 {
+		fill: yellow;
 	}
 	svg line {
 		stroke-dasharray: 4px 4px;
-		stroke: var(--color-gray-300);
+/*		stroke: var(--color-gray-300);*/
+		stroke: rgba(0,0,0,0.2);
 		transition: all 100ms cubic-bezier(0.250, 0.100, 0.250, 1.000);
 		transition-timing-function: cubic-bezier(0.250, 0.100, 0.250, 1.000);
 	}
 	svg text {
-		font-family: "National 2 Web"; 
+		font-family: "National 2 Web";
+		fill: #000;
 		transition: all 100ms cubic-bezier(0.250, 0.100, 0.250, 1.000);
 		transition-timing-function: cubic-bezier(0.250, 0.100, 0.250, 1.000);
 	}
