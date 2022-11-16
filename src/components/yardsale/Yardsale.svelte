@@ -24,9 +24,9 @@
 
 <div id="body">
 	<!-- SECTION 1 -->
-	<YardsaleScrolly words={copy.scrolly1} container="scrolly1" />
-	<YardsaleScrolly words={copy.scrolly2} container="scrolly2" />
-	<YardsaleScrolly words={copy.scrolly3} container="scrolly3" />
+	<YardsaleScrolly words={copy.scrolly1} container="scrolly1" scrollyNum=0 />
+	<YardsaleScrolly words={copy.scrolly2} container="scrolly2" scrollyNum=1 />
+	<YardsaleScrolly words={copy.scrolly3} container="scrolly3" scrollyNum=2 />
 	<YardsaleCopy hed="" words={copy.IntroSection1} />
 	<YardsaleMathSimulation />
 	<YardsaleCopy hed="" words={copy.IntroSection2} />
@@ -34,12 +34,11 @@
 
 	<!-- SECTION 2 -->
 	<YardsaleCopy hed={copy.MiddleHed} words={copy.MiddleSection1} />
-	<YardsaleCopy hed="" words={copy.MiddleSection2} />
 	<YardsaleParetoChart />
 	<YardsaleFedChart />
-	<YardsaleCopy hed="" words={copy.MiddleSection3} />
+	<YardsaleCopy hed="" words={copy.MiddleSection2} />
 	<YardsaleYSM redist=-1 />
-	<YardsaleCopy hed="" words={copy.MiddleSection4} />
+	<YardsaleCopy hed="" words={copy.MiddleSection3} />
 
 	<!-- SECTION 3 -->
 	<YardsaleCopy hed={copy.EndHed} words={copy.EndSection1} />

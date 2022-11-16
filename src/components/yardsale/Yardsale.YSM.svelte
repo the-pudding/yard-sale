@@ -5,7 +5,8 @@
 	let ticks = [];
 	let windowHeight = 300;
 	let playerNumber = 100;
-	let startingAmount = 100;
+	let startingAmount = 1000;
+	let worldrecord = 0;
 	let highestNumber = 0;
 	let maxWager = 20;
 	let round = 0;
@@ -94,54 +95,74 @@
 		return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 	}
 
+
 	function sortPlayers() {
-		highestNumber = 0;
 		players.sort(dynamicSort("wealth"));
 		// Iterating through player to determine highest number AND to give players the redistributed pot
+		worldrecord = 0;
+		highestNumber = 0;
 		for (let i = 0; i < players.length; i++) {
 			players[i].wealth = players[i].wealth + redistributionPot / 100;
-			if (players[i].wealth > highestNumber) {
-				highestNumber = players[i].wealth;
+			if (players[i].wealth > worldrecord) {
+				worldrecord = players[i].wealth;
 			}
 		};
-		highestNumber = highestNumber * 1.2;
+		if (worldrecord > 68000) {
+			highestNumber = 100000;
+		} else if (worldrecord > 33000) {
+			highestNumber = 75000;
+		} else if (worldrecord > 23000) {
+			highestNumber = 50000;
+		} else if (worldrecord > 9000) {
+			highestNumber = 25000;
+		} else if (worldrecord > 4800) {
+			highestNumber = 10000;
+		} else if (worldrecord > 2400) {
+			highestNumber = 5000;
+		} else {
+			highestNumber = 2500;
+		}
 		// Giving some breathing room for the highest number
 		// highestNumber = highestNumber <= 200 ? 200 : highestNumber * 1.2;
 		// setting the ticks based on the highest number
-		let highestTickRounder = 100; //Math.pow(10,highestNumber.toString().length-2);
-		let highestTick = Math.round(highestNumber / highestTickRounder)*highestTickRounder * 2;
 		ticks = [];
-		// for (var i = 0; i < highestTick; i += highestTick/10) {
-		// 	ticks.push(i);
-		// }
-		for (var i = 0; i < highestTick; i += highestTick/10) {
+		for (var i = 0; i < highestNumber; i += highestNumber/5) {
 			ticks.push(i);
 		}
 		for (var i = 0; i < players.length; i++) {
 			players[i].order = i;
 			players[i].height = (players[i].wealth / highestNumber) * windowHeight;
+			players[i].height = players[i].height < 2 ? 2 : players[i].height;
 		}
 	}
 
 	function reset() {
+		worldrecord = 0;
+		highestNumber = 0;
 		round = 0;
 		roundLimit = 0;
 		generatePlayers();
 		sortPlayers();
 	}
+
+	
 	generatePlayers();
 	sortPlayers();	
 
 	$: {
 		redistribution = redistribution;
 		startingAmount = startingAmount;
-		generatePlayers();
-		sortPlayers();
+		// generatePlayers();
+		// sortPlayers();
 	}
 </script>
 
-<div class="body_container">
+<div class="interactive_container">
+	<div class="ysm_container">
 	<div class="toolbar ysm_data">
+		
+		
+
 		{#if redist == 1}
 			<!-- <div class="toolItem">
 				<div class="toolLabel">Starting amount for each player: <span class="toolValue">${startingAmount}</span></div>
@@ -153,15 +174,13 @@
 				<Range min=1 max=100 bind:value={maxWager}/>
 				
 			</div> -->
+			<div class="toolLabel"><strong>Redistribution</strong> How much of each player's wealth should be redistributed to everyone else after each round?</div>
 			<div class="toolItem">
-				<div class="toolLabel">Redistribution: <span class="toolValue">{redistribution}% of everyone's wealth redistributed each round</span></div>
 				<Range min=0 max=100 bind:value={redistribution}/>
-				
+				<div class="toolValue">{redistribution}% redistributed</div>
 			</div>
 		{/if}
-		<div class="toolItem roundItem">
-			<div class="toolLabel">Round: <span class="toolValue">{round}</span></div>
-		</div>
+
 		<div class="toolItem">
 			{#if !running}
 				<button class="toolLabel button" on:click={playGame}>
@@ -175,32 +194,65 @@
 				<button class="toolLabel button" disabled>Simulating...</button>
 			{/if}
 		</div>	
+
 	</div>
 	
-	<div class="chartArea" bind:clientWidth={chartWidth}>
+	<div class="chartArea extrawide" bind:clientWidth={chartWidth}>
+			<div class="toolLabel">Round: <span class="toolValue">{comma(round)}</span></div>
 		<svg>
 			{#each ticks as tick}
 			<line x1=0 x2={chartWidth} y1={300 - (tick / highestNumber * 300) } y2={300 - (tick / highestNumber * 300)}></line>
 			<text class="chartText" x=0 y={300 - (tick / highestNumber * 300) - 5}>${comma(tick)}</text>
 			{/each}
 			{#each players as player}
-			<rect class="player" x={player.order * ((chartWidth-50) /playerNumber) + 50 } width={chartWidth / 200} height={player.height} y={windowHeight - player.height}></rect>
+			<rect class="player" x={player.order * ((chartWidth-100) / playerNumber) + 50 } width={chartWidth / 200} height={player.height} y={windowHeight - player.height}></rect>
 			{/each}
 		</svg>
 	</div>
-	<div class="resetContainer">
+	<div class="extrawide resetContainer">
 	<div class="reset button" on:click={reset}>Reset</div>
+</div>
 </div>
 </div>
 
 <style>
 	.toolbar {
 		position: relative;
+		margin-bottom: 10px;
+		text-align: center;
 	}
-	.body_container { padding:  20px;}
-	.chartArea { height: 300px; width: 100%; margin-bottom: 10px; }
-	svg { width: 100%; height: 100%; }
-	.toolLabel { margin-bottom: 20px; }
+	.toolItem {
+		width: 100%;
+		margin: 20px auto;
+		color: black;
+		max-width: 400px;
+	}
+	.toolLabel {
+		color: black;
+		font-size: 16px;
+		line-height: 1.5em;
+		max-width: 500px;
+		margin: 0 auto;
+	}
+	.toolValue {
+		margin-top: -40px;
+		font-size: 16px;
+		font-weight: bold;
+		margin-bottom: 50px;
+	}
+	.range {
+		margin: 10px 0;
+	}
+	.ysm_container {
+		width: 100%;
+		max-width:700px;
+		margin: 10px auto 0;
+		font-family: "National 2 Web"; 
+	}
+	.interactive_container { padding:  20px; max-width: 100%; }
+	.chartArea { height: 340px; margin-bottom: 10px; background: white; padding: 10px; box-sizing: border-box; border: 1px solid #ccc; }
+	svg { width: calc(100% - 30px); height: 100%; }
+	.chartArea .toolLabel { position: absolute; right: 10px; top: 10px }
 	.player {
 		fill:  #9e9ac8;
 	}
@@ -211,7 +263,7 @@
 		transition-timing-function: cubic-bezier(0.250, 0.100, 0.250, 1.000);
 	}
 	svg text {
-		font-family: "National 2 Web"; 
+		
 		transition: all 100ms cubic-bezier(0.250, 0.100, 0.250, 1.000);
 		transition-timing-function: cubic-bezier(0.250, 0.100, 0.250, 1.000);
 	}

@@ -3,36 +3,24 @@
 	import YardsaleYSMIntro from "$components/yardsale/Yardsale.YSMIntro.svelte";
 	import Scrolly from "$components/helpers/Scrolly.svelte";
 	import { fade } from 'svelte/transition';
-	export let words;
-	export let container;
-	let currentStage;
-	let currentStageNumber = 0;
-	let value = 0;
+	export let words; // words from google doc
+	export let scrollyNum; // 0 to 2
+	
+	export let container; // container name, ie "scrolly3"
+	let currentStageNumber = 0; // stage number
+	let currentStage; // full stage name, ie "scrolly3-1"
+
+	let value = 0; // current step, binded to scroll 
 	let stepHeight = 600;
 	let stepWidth = 600;
 	let panelHeight = stepWidth * 0.8;
 	let bgColor = "#000"
+	let r = 0;
+	let currentText;
+	let heightMultiplier = 1.2;
 
-	let gameinfo = {
-		"player1": 1000,
-		"player2": 1000,
-		"wager": 200
-	}
-
-	function convertToHTML(text) {
-		let finalText = [];
-		let textArray = text.split("\n");
-		textArray.forEach(function(line) {
-			if (line.indexOf("Component|") != -1) {
-				let compName = line.split("|")[1];
-				line = `<svelte:component this=${compName}></svelte:component>`
-			}
-			finalText.push(line);
-		})
-		return "<p>" + finalText.join("</p><p>") + "</p>";
-	}
-
-	let stageLookup = {
+	// Keyframes for each stage
+	const stageLookup = {
 		"scrolly1-0": [
 			{"image":"pawnshop", "xmetric":"left", "x":0, "ymetric": "top", "y":0, "width": 100, "opacity": 1},
 			{"image":"watch-zoom", "xmetric":"left", "x":0, "ymetric": "top","y":0, "width": 100, "opacity": 0},
@@ -162,7 +150,8 @@
 		"scrolly3-3": {"roundLimit":10000, "increment":1000},
 	}
 
-	let wealthLookup = {
+	// Game info for each stage
+	const wealthLookup = {
 		"0": {
 			"player1": 0,
 			"player2": 0,
@@ -242,24 +231,36 @@
 		}
 	}
 
-	$: {
-		newScroll(value)
-		currentStage = currentStage;
-		stepWidth = stepWidth;
-		stepHeight = stepHeight;
-		panelHeight = stepWidth;
-	}
+	
+	// Runs on new stage
 	function newScroll(v) {
 		v = v == undefined ? currentStageNumber : v;
 		currentStageNumber = v;
 		currentStage = v == undefined ? stageLookup[container + "-0"] : stageLookup[container + "-" + v];
 
+		// sets backgroudn colors for scrolly
 		if (container == "scrolly1" && currentStageNumber == 0) {
 			bgColor = "#000";
+		} else if (container == "scrolly3") {
+			bgColor = "#f3ebf7";
+		}  else {
+			bgColor = "#7c6a85";
+		}
+		if (stepWidth > 600) {
+			heightMultiplier = 1;
 		} else {
-			bgColor = "rgb(118,102,135)";
+			heightMultiplier = 1.2;
 		}
 	}
+
+
+	// Keeping track + ticking up numbers in the comic's game info section
+	let gameinfo = {
+		"player1": 1000,
+		"player2": 1000,
+		"wager": 200
+	}
+
 	setInterval(function() {
 		updateWealth("player1");
 		updateWealth("player2");
@@ -274,53 +275,97 @@
 		}
 	}
 
+
+	// Utility functions
 	function comma(x) {
 		return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	}
+
+	function convertToHTML(text) {
+		let finalText = [];
+		let textArray = text.split("\n");
+		textArray.forEach(function(line) {
+			if (line.indexOf("Component|") != -1) {
+				let compName = line.split("|")[1];
+				line = `<svelte:component this=${compName}></svelte:component>`
+			}
+			finalText.push(line);
+		})
+		return "<p>" + finalText.join("</p><p>") + "</p>";
+	}
+
+	$: {
+		newScroll(value)
+		currentStage = currentStage;
+		stepWidth = stepWidth;
+		stepHeight = stepHeight;
+		panelHeight = stepWidth * heightMultiplier;
+		currentText = words[currentStageNumber];
 	}
 	
 </script>
 <div class="interactive_container">
-<section class="scrolly" id={container}>
-	<div class="scrollyBackground" bind:clientHeight={stepHeight} bind:clientWidth={stepWidth} style="background:{bgColor};height:{panelHeight}px;">
-		{#if container != "scrolly3"}
-		{#each currentStage as { image, xmetric, x, ymetric, y, width, opacity }, i}
-		<img class="{image}" src="assets/yardsale/art/{image}.png" alt="stageImage" style="{xmetric}: {x}%; {ymetric}: {y}%; width: {width}%; opacity:{opacity};" in:fade={{ delay: 0 }} out:fade/>
-		{/each}
-		{#if container == "scrolly2" && wealthLookup[currentStageNumber].player1Words != "" }
-		<div class="speechBubble player1bubble" in:fade={{ delay: 400 }} out:fade>{wealthLookup[currentStageNumber].player1Words}</div>
-		{/if}
-		{#if container == "scrolly2" && wealthLookup[currentStageNumber].player2Words != "" }
-		<div class="speechBubble player2bubble" in:fade={{ delay: 400 }} out:fade>{wealthLookup[currentStageNumber].player2Words}</div>
-		{/if}
-		{:else}
-		<YardsaleYSMIntro roundLimit={currentStage.roundLimit} increment={currentStage.increment} />
-		{/if}
-		
-		<div class="gameContainer">
-			{#if container == "scrolly2" && [2,3,4,5,7,8,9,10].indexOf(currentStageNumber) != -1 }
-			<div class="player1 wealthNumber" in:fade={{ delay: 400 }} out:fade>${comma(gameinfo.player1)}</div>
-			<div class="player2 wealthNumber" in:fade={{ delay: 400 }} out:fade>${comma(gameinfo.player2)}</div>
-			{/if}
-			{#if container == "scrolly2" && [2,3,7,8,9].indexOf(currentStageNumber) != -1 }
-			<div class="wager" in:fade={{ delay: 0 }} out:fade>Wager<br><span>${comma(gameinfo.wager)}</span></div>
-			{/if}
-		</div>
-		
-	</div>
-	<div class="scrollyContainer">
-		<Scrolly bind:value top={400}>
-			{#each words as text, i}
-			{@const active = value === i}
-			<div class="step" class:active>
-				<p>{@html convertToHTML(text + "<span style='color: #aaa;font-size:10px;margin-left:5px;'>" + i + "</span>")}</p>
-			</div>
+	<section class="scrolly" id={container}>
+		<div class="scrollyBackground" bind:clientHeight={stepHeight} bind:clientWidth={stepWidth} style="background:{bgColor};height:{panelHeight}px;">
+
+			<!-- If it's not the third scrolly, display the comic -->
+			{#if container != "scrolly3"}
+			{#each currentStage as { image, xmetric, x, ymetric, y, width, opacity }, i}
+			<img class="{image}" src="assets/yardsale/art/{image}.png" alt="stageImage" style="{xmetric}: {x}%; {ymetric}: {y}%; width: {width}%; opacity:{opacity};" in:fade={{ delay: 0 }} out:fade/>
 			{/each}
-		</Scrolly>
-	</div>
-</section>
+
+			<!-- Speech bubbles -->
+			{#if container == "scrolly2" && wealthLookup[currentStageNumber].player1Words != "" }
+			<div class="speechBubble player1bubble" in:fade={{ delay: 400 }} out:fade>{wealthLookup[currentStageNumber].player1Words}</div>
+			{/if}
+			{#if container == "scrolly2" && wealthLookup[currentStageNumber].player2Words != "" }
+			<div class="speechBubble player2bubble" in:fade={{ delay: 400 }} out:fade>{wealthLookup[currentStageNumber].player2Words}</div>
+			{/if}
+			{:else}
+			<!-- YSM simulation -->
+			<YardsaleYSMIntro roundLimit={currentStage.roundLimit} increment={currentStage.increment} bind:round={r}/>
+			{/if}
+
+			<!-- Comic coin flip overlay data -->
+			<div class="gameContainer">
+				{#if container == "scrolly2" && [2,3,4,5,7,8,9,10].indexOf(currentStageNumber) != -1 }
+				<div class="player1 wealthNumber" in:fade={{ delay: 400 }} out:fade>${comma(gameinfo.player1)}</div>
+				<div class="player2 wealthNumber" in:fade={{ delay: 400 }} out:fade>${comma(gameinfo.player2)}</div>
+				{/if}
+				{#if container == "scrolly2" && [2,3,7,8,9].indexOf(currentStageNumber) != -1 }
+				<div class="wager" in:fade={{ delay: 0 }} out:fade>Wager<br><span>${comma(gameinfo.wager)}</span></div>
+				{/if}
+			</div>
+
+			<div class="comicText">
+				{#if container == "scrolly3" && currentStageNumber == 2 && r == 10000}
+				{@html convertToHTML("Whoa, you lost all your money. Meanwhile, one person ended up with nearly all of the wealth!")}
+				{:else}
+				{currentText}
+				{/if}
+			</div>
+		</div>
+		<div class="scrollyContainer">
+			<Scrolly bind:value top={400}>
+				{#each words as text, i}
+				{@const active = value === i}
+				<div class="step step{i}" class:active>
+					{#if container == "scrolly3" && currentStageNumber == 2 && r == 10000}
+					<p>{@html convertToHTML("Whoa, you lost all your money. Meanwhile, one person ended up with nearly all of the wealth!")}</p>
+					{:else}
+					<p>{@html convertToHTML(text)}</p>
+					{/if}
+				</div>
+				{/each}
+			</Scrolly>
+		</div>
+	</section>
 </div>
 
 <style>
+	.interactive_container {
+		padding: 10px 0;
+	}
 	.gameContainer {
 		position: absolute;
 		top: 28%;
@@ -360,23 +405,38 @@
 		margin: 0px auto;
 	}
 	.scrollyContainer {
-		width: 38%;
+		margin-left: 65%;
+		width: 35%;
+		opacity: 0;
+		pointer-events: none;
 	}
 	.scrollyBackground {
 		position: sticky;
-		/*top: 4em;*/
-		float: right;
-		top:  2rem;
+		top:  5vh;
 		width:  59%;
-		margin-right: 1%;
-		/*border: 2px solid #000;*/
+		margin: 0 auto;
 		height:  auto;
-		/*min-height:  500px;*/
 		z-index: 2;
 		overflow: hidden;
-		border: 3px solid #000;
+		border: 1px solid #666;
+		padding-bottom: 100px;
+		max-height: 90vh;
 	}
-	
+	.comicText {
+		font-family: "National 2 Web", sans-serif;
+		font-size: 20px;
+		border: 2px solid #000;
+		position: absolute;
+		bottom: 10px;
+		left: 10px;
+		width: calc(100% - 20px);
+		margin-top: 10px;
+		background: white;
+		padding: 10px;
+		min-height: 120px;
+		box-sizing: border-box;
+		box-shadow: 2px 2px 0px 2px #000;
+	}
 	.scrollyBackground img {
 		position: absolute;
 		width:  100%;
@@ -398,7 +458,7 @@
 		-webkit-box-shadow: 0px -1px 25px 0px rgba(0,0,0,0.75) inset;
 		-moz-box-shadow: 0px -1px 25px 0px rgba(0,0,0,0.75) inset;
 	}
-	
+
 	.scrollyBackground .hidden {
 		opacity:  0;
 	}
@@ -425,6 +485,8 @@
 		font-size:  23px;
 		padding:  4rem 0;
 		box-sizing: border-box;
+/*		color: white;
+		text-shadow: -1px -1px 6px rgba(0, 0, 0, 0.5);*/
 	}
 	@media only screen and (max-width: 640px) {
 

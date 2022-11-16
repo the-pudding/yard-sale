@@ -5,9 +5,10 @@
 	let windowHeight = 300;
 	let playerNumber = 100;
 	let startingAmount = 1000;
+	let worldrecord = 0;
 	let highestNumber = 0;
 	let maxWager = 20;
-	let round = 0;
+	export let round = 0;
 	export let roundLimit;
 	let chartWidth;
 	export let increment;
@@ -37,9 +38,8 @@
 			if (round < roundLimit) {
 				for (var i = 0; i < increment; i++) {
 					playRounds();
-					sortPlayers();
 				}
-				
+				sortPlayers();
 			} else if (round != roundLimit) {
 				round = 0;
 			}
@@ -61,36 +61,45 @@
 	}
 	
 	function sortPlayers() {
-		highestNumber = 2000;
+		worldrecord = 0;
+		highestNumber = 0;
 		players.sort(dynamicSort("wealth"));
 
 		players.forEach(function(d) {
-			if (d.wealth > highestNumber) {
-				highestNumber = d.wealth;
+			if (d.wealth > worldrecord) {
+				worldrecord = d.wealth;
 			}
 		});
 		// setting the ticks based on the highest number
 		
-		if (highestNumber > 50000) {
+		if (worldrecord > 68000) {
 			highestNumber = 100000;
-		} else if (highestNumber > 10000) {
+		} else if (worldrecord > 33000) {
+			highestNumber = 75000;
+		} else if (worldrecord > 23000) {
 			highestNumber = 50000;
-		} else if (highestNumber > 2000) {
+		} else if (worldrecord > 9000) {
+			highestNumber = 25000;
+		} else if (worldrecord > 4800) {
 			highestNumber = 10000;
+		} else if (worldrecord > 2400) {
+			highestNumber = 5000;
+		} else {
+			highestNumber = 2500;
 		}
-		let highestTick = highestNumber;
 		ticks = [];
 
-		for (var i = 0; i < highestTick; i += highestTick/5) {
-			ticks.push(i);
+		for (var i = 0; i < highestNumber; i += highestNumber/5) {
+			const tick_y = getHeight(i);
+			ticks.push([i, tick_y]);
 		}
+
 		for (var i = 0; i < players.length; i++) {
 			players[i].is_it_me = i == 0 ? 1 : 0; 
 			players[i].order = i;
-			players[i].height = (players[i].wealth / highestNumber) * windowHeight;
+			players[i].height = chartHeight - getHeight(players[i].wealth);
+			players[i].height = players[i].height < 2 ? 2 : players[i].height;
 		}
-
-
 	}
 
 
@@ -120,6 +129,10 @@
 		}
 	}
 
+	function getHeight(h) {
+		return chartHeight - (h / highestNumber * chartHeight);
+	}
+
 	function shuffle(array) {
 		let currentIndex = array.length,  randomIndex;
 		while (currentIndex != 0) {
@@ -137,12 +150,12 @@
 
 </script>
 
-<div class="body_container"  bind:clientHeight={stepHeight} bind:clientWidth={stepWidth}>	
+<div class="ysm_container interactive_container"  bind:clientHeight={stepHeight} bind:clientWidth={stepWidth}>	
 	<div class="chartArea" bind:clientWidth={chartWidth} style="height:{panelHeight}px;">
 		<svg>
 			{#each ticks as tick}
-			<line x1=0 x2={chartWidth} y1={ chartHeight - (tick / highestNumber * chartHeight) } y2={chartHeight - (tick / highestNumber * chartHeight)}></line>
-			<text class="chartText" x=0 y={chartHeight - (tick / highestNumber * chartHeight) - 5}>${comma(tick)}</text>
+			<line x1=0 x2={chartWidth} y1={ tick[1] } y2={ tick[1] }></line>
+			<text class="chartText" x=0 y={tick[1] - 5}>${comma(tick[0])}</text>
 			{/each}
 			{#each players as player}
 			<rect class="player player{player.is_it_me}" x={player.order * ((chartWidth-50) /playerNumber) + 50 } width={chartWidth / 200} height={player.height} y={chartHeight - player.height}></rect>
@@ -151,7 +164,7 @@
 	</div>
 	<div class="toolbar ysm_data">
 		<div class="toolItem roundItem">
-			<div class="toolLabel">Round: <span class="toolValue">{comma(round)}</span></div>
+			<div class="toolLabel">Round: <strong><span class="toolValue">{comma(round)}</span></strong> </div>
 		</div>
 	</div>
 </div>
@@ -166,23 +179,21 @@
 	}
 	.toolLabel {
 		display: inline-block;
-/*		color: white;*/
-/*		font-weight: bold;*/
-/*		background: var(--category-bg-purple);*/
+		font-size: 16px;
+		line-height: 1.3em;
 	}
-	.body_container { padding:  20px; width: 100%; height:  100%;}
+	.ysm_container { padding:  20px; width: 100%; height:  100%;}
 	.chartArea {  width: 100%; margin-bottom: 10px; }
 	svg { width: 100%; height: 100%; }
 	.toolLabel { margin-bottom: 20px; }
 	.player {
-		fill:  #6e016b;
+		fill:  #9e9ac8;
 	}
 	.player.player1 {
-		fill: yellow;
+		fill: red;
 	}
 	svg line {
 		stroke-dasharray: 4px 4px;
-/*		stroke: var(--color-gray-300);*/
 		stroke: rgba(0,0,0,0.2);
 		transition: all 100ms cubic-bezier(0.250, 0.100, 0.250, 1.000);
 		transition-timing-function: cubic-bezier(0.250, 0.100, 0.250, 1.000);

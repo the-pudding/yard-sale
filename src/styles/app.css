@@ -90,61 +90,64 @@ h6 {
 	font-size: var(--20px, 20px);
 }
 body {
-	background: white;
+	background: #f2e6f0;
+	overflow-x: hidden;
 }
 .interactive_container {
-		width: 100%;
-		background-color: var(--category-bg-purple);
-		padding: 50px 0;
+	width: 100%;
+	padding: 10px 0;
 }
 .body_container {
-	max-width:  700px;
+	width: 100%;
+	max-width:  500px;
 	margin:  0 auto;
-	padding: 50px 20px;	
+	padding: 10px;	
 	font-family: "National 2 Web"; 
 	font-size: 18px;
-	line-height: 1.6em;	
+	line-height: 1.6em;
+	box-sizing: border-box;
 }
 
 .body_container h2 {
 /*	font-family: 'Tiempos Headline Web',Georgia,Times,serif;*/
-	font-size: 3rem;
-	line-height: 1.1em;
-	text-align: center;	
-	/*font-weight:  bold;*/
-	margin-top: 50px;
-	margin-bottom:  6px;
+font-size: 1.8rem;
+line-height: 1.1em;
+text-align: center;	
+font-weight:  bold;
+margin-top: 50px;
+margin-bottom:  6px;
 }
 .body_container section h3 {
 /*	font-family: 'Tiempos Text Web',Georgia,Times,serif;*/
-	font-size: 1.7rem;
-	line-height: 1.1em;	
-	font-weight:  bold;
-	margin-bottom:  6px;
-	margin-top: 30px;
+font-size: 1.7rem;
+line-height: 1.1em;	
+font-weight:  bold;
+margin-bottom:  6px;
+margin-top: 30px;
 }
 .body_container section .dek {
 	font-size:  17px;
 	font-style:  italic;
 	margin-top:  0px;
 }
-.body_container .button {
+.interactive_container .button {
 	font-family: "National 2 Web"; 
 	text-align: center;
 	cursor: pointer;
 	margin:  0 0px;
 	padding:  5px;
-	font-size:  17px;
+	font-size:  15px;
 	border:  1px solid #000;
 	background: white;
 	line-height: 1.1em;
 	box-shadow: 2px 2px 0px 0px #000;
+	color: black;
 }
 
-.body_container .button:hover {
+.interactive_container .button:hover {
 	text-decoration: underline;
 }
-.body_container .button:active{
+.interactive_container .button:active{
 	margin-left: 2px;
 	margin-bottom: -2px;
 	box-shadow: 0px 0px 0px 0px #000;
@@ -154,7 +157,7 @@ body {
 .ysm_data {
 	font-size: 15px;
 	line-height: 1.3em;
-	color: #666;
+	color: var(--color-gray-600);
 	font-family: "National 2 Web"; 
 }
 .chartText {
@@ -211,8 +214,8 @@ body {
 	text-align:left;
 	font-family: "National 2 Web", sans-serif;
 	box-shadow: 10px 6px 41px 0px rgba(0,0,0,0.75);
--webkit-box-shadow: 10px 6px 41px 0px rgba(0,0,0,0.75);
--moz-box-shadow: 10px 6px 41px 0px rgba(0,0,0,0.75);
+	-webkit-box-shadow: 10px 6px 41px 0px rgba(0,0,0,0.75);
+	-moz-box-shadow: 10px 6px 41px 0px rgba(0,0,0,0.75);
 }
 .speechBubble.player1bubble {
 	left: 22%;
@@ -243,4 +246,27 @@ body {
 	position: absolute;
 	top: 100%;
 	right: 10px;
+}
+
+.extrawide {
+	width:  140%;
+	margin-left: -20%;
+}
+
+@media only screen and (max-width: 1400px) {
+	.extrawide {
+		width:  120%;
+		margin-left: -10%;
+	}
+}
+
+@media only screen and (max-width: 1100px) {
+	.extrawide {
+		width:  100%;
+		margin-left: 0%;
+	}
+}
+blockquote {
+	padding: 15px;
+	background: rgba(0,0,0,0.1);
 }
