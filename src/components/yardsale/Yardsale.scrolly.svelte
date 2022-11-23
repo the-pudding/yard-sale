@@ -15,17 +15,17 @@
 	let stepWidth = 600;
 	let panelHeight = stepWidth * 0.8;
 	let bgColor = "#000"
+	let bgOpacity = 1;
 	let r = 0;
 	let currentText;
-	let heightMultiplier = 1.2;
 
 	// Keyframes for each stage
 	const stageLookup = {
 		"scrolly1-0": [
-			{"image":"pawnshop", "xmetric":"left", "x":0, "ymetric": "top", "y":0, "width": 100, "opacity": 1},
-			{"image":"watch-zoom", "xmetric":"left", "x":0, "ymetric": "top","y":0, "width": 100, "opacity": 0},
+			{"image":"pawnshop", "xmetric":"left", "x":0, "ymetric": "top", "y":0, "width": 105, "opacity": 1},
+			{"image":"watch-zoom", "xmetric":"left", "x":0, "ymetric": "top","y":0, "width": 105, "opacity": 0},
 			{"image":"phone", "xmetric":"left","x":-50, "ymetric": "top", "y":20, "width": 30, "opacity": 0},
-			{"image":"plus-minus", "xmetric":"left","x":0, "ymetric": "top", "y":0, "width": 100, "opacity": 0}
+			{"image":"plus-minus", "xmetric":"left","x":0, "ymetric": "top", "y":0, "width": 105, "opacity": 0}
 			],
 		"scrolly1-1": [
 			{"image":"pawnshop", "xmetric":"left","x":-20, "ymetric": "top", "y":-20, "width": 140, "opacity": 0},
@@ -241,15 +241,13 @@
 		// sets backgroudn colors for scrolly
 		if (container == "scrolly1" && currentStageNumber == 0) {
 			bgColor = "#000";
+			bgOpacity = 1;
 		} else if (container == "scrolly3") {
-			bgColor = "#f3ebf7";
+			bgColor = "#c8becf";
+			bgOpacity = 0.5;
 		}  else {
 			bgColor = "#7c6a85";
-		}
-		if (stepWidth > 600) {
-			heightMultiplier = 1;
-		} else {
-			heightMultiplier = 1.2;
+			bgOpacity = 1;
 		}
 	}
 
@@ -299,7 +297,7 @@
 		currentStage = currentStage;
 		stepWidth = stepWidth;
 		stepHeight = stepHeight;
-		panelHeight = stepWidth * heightMultiplier;
+		panelHeight = stepWidth;
 		currentText = words[currentStageNumber];
 	}
 	
@@ -307,41 +305,47 @@
 <div class="interactive_container">
 	<section class="scrolly" id={container}>
 		<div class="scrollyBackground" bind:clientHeight={stepHeight} bind:clientWidth={stepWidth} style="background:{bgColor};height:{panelHeight}px;">
+			<div class="scrollyImageContainer">
+				<!-- If it's not the third scrolly, display the comic -->
+				{#if container != "scrolly3"}
+				{#each currentStage as { image, xmetric, x, ymetric, y, width, opacity }, i}
+				<img class="{image}" src="assets/yardsale/art/{image}.png" alt="stageImage" style="{xmetric}: {x}%; {ymetric}: {y}%; width: {width}%; opacity:{opacity};" in:fade={{ delay: 0 }} out:fade/>
+				{/each}
 
-			<!-- If it's not the third scrolly, display the comic -->
-			{#if container != "scrolly3"}
-			{#each currentStage as { image, xmetric, x, ymetric, y, width, opacity }, i}
-			<img class="{image}" src="assets/yardsale/art/{image}.png" alt="stageImage" style="{xmetric}: {x}%; {ymetric}: {y}%; width: {width}%; opacity:{opacity};" in:fade={{ delay: 0 }} out:fade/>
-			{/each}
-
-			<!-- Speech bubbles -->
-			{#if container == "scrolly2" && wealthLookup[currentStageNumber].player1Words != "" }
-			<div class="speechBubble player1bubble" in:fade={{ delay: 400 }} out:fade>{wealthLookup[currentStageNumber].player1Words}</div>
-			{/if}
-			{#if container == "scrolly2" && wealthLookup[currentStageNumber].player2Words != "" }
-			<div class="speechBubble player2bubble" in:fade={{ delay: 400 }} out:fade>{wealthLookup[currentStageNumber].player2Words}</div>
-			{/if}
-			{:else}
-			<!-- YSM simulation -->
-			<YardsaleYSMIntro roundLimit={currentStage.roundLimit} increment={currentStage.increment} bind:round={r}/>
-			{/if}
-
-			<!-- Comic coin flip overlay data -->
-			<div class="gameContainer">
-				{#if container == "scrolly2" && [2,3,4,5,7,8,9,10].indexOf(currentStageNumber) != -1 }
-				<div class="player1 wealthNumber" in:fade={{ delay: 400 }} out:fade>${comma(gameinfo.player1)}</div>
-				<div class="player2 wealthNumber" in:fade={{ delay: 400 }} out:fade>${comma(gameinfo.player2)}</div>
+				<!-- Speech bubbles -->
+				{#if container == "scrolly2" && wealthLookup[currentStageNumber].player1Words != "" }
+				<div class="speechBubble player1bubble" in:fade={{ delay: 400 }} out:fade>{wealthLookup[currentStageNumber].player1Words}</div>
 				{/if}
-				{#if container == "scrolly2" && [2,3,7,8,9].indexOf(currentStageNumber) != -1 }
-				<div class="wager" in:fade={{ delay: 0 }} out:fade>Wager<br><span>${comma(gameinfo.wager)}</span></div>
+				{#if container == "scrolly2" && wealthLookup[currentStageNumber].player2Words != "" }
+				<div class="speechBubble player2bubble" in:fade={{ delay: 400 }} out:fade>{wealthLookup[currentStageNumber].player2Words}</div>
 				{/if}
+				{:else}
+				<!-- YSM simulation -->
+				<YardsaleYSMIntro roundLimit={currentStage.roundLimit} increment={currentStage.increment} bind:round={r}/>
+				{/if}
+
+				<!-- Comic coin flip overlay data -->
+				<div class="gameContainer">
+					{#if container == "scrolly2" && [2,3,4,5,7,8,9,10].indexOf(currentStageNumber) != -1 }
+					<div class="player1 wealthNumber" in:fade={{ delay: 400 }} out:fade>${comma(gameinfo.player1)}</div>
+					<div class="player2 wealthNumber" in:fade={{ delay: 400 }} out:fade>${comma(gameinfo.player2)}</div>
+					{/if}
+					{#if container == "scrolly2" && [2,3,7,8,9].indexOf(currentStageNumber) != -1 }
+					<div class="wager" in:fade={{ delay: 0 }} out:fade>Wager<br><span>${comma(gameinfo.wager)}</span></div>
+					{/if}
+				</div>
+				<!-- Scroll down hint on stage 1 -->
+				{#if container == "scrolly1" && currentStageNumber < 1}
+				<div class="scrolldown_hint" out:fade></div>
+				{/if}
+
+				<div class="fuzzy" style="opacity:{bgOpacity};"></div>
 			</div>
-
 			<div class="comicText">
 				{#if container == "scrolly3" && currentStageNumber == 2 && r == 10000}
-				{@html convertToHTML("Whoa, you lost all your money. Meanwhile, one person ended up with nearly all of the wealth!")}
+				<p>Whoa, you lost all your money. Meanwhile, one person ended up with nearly all of the wealth!</p>
 				{:else}
-				{currentText}
+				{@html convertToHTML(currentText)}
 				{/if}
 			</div>
 		</div>
@@ -351,9 +355,9 @@
 				{@const active = value === i}
 				<div class="step step{i}" class:active>
 					{#if container == "scrolly3" && currentStageNumber == 2 && r == 10000}
-					<p>{@html convertToHTML("Whoa, you lost all your money. Meanwhile, one person ended up with nearly all of the wealth!")}</p>
+					<p>Whoa, you lost all your money. Meanwhile, one person ended up with nearly all of the wealth!</p>
 					{:else}
-					<p>{@html convertToHTML(text)}</p>
+					<p>{text}</p>
 					{/if}
 				</div>
 				{/each}
@@ -365,7 +369,9 @@
 <style>
 	.interactive_container {
 		padding: 10px 0;
+		font-family: "National 2 Web", sans-serif;
 	}
+
 	.gameContainer {
 		position: absolute;
 		top: 28%;
@@ -379,12 +385,27 @@
 	.gameContainer .wealthNumber {
 		position: absolute;
 		color: white;
-		background: #333;
+		background: #420070;
 		padding: 2px;
-		font-size: 13px;
+		font-size: 24px;
+	}
+	@media only screen and (max-width: 860px) {
+		.gameContainer .wealthNumber {
+			font-size: 20px;
+		}
+	}
+	@media only screen and (max-width: 600px) {
+		.gameContainer .wealthNumber {
+			font-size: 16px;
+		}
+	}
+	@media only screen and (max-width: 400px) {
+		.gameContainer .wealthNumber {
+			font-size: 13px;
+		}
 	}
 	.gameContainer .wager {
-		color: white;
+		color: #f5dcf2;
 		width:110px;
 		left:50%;
 		margin-left:-55px;
@@ -412,30 +433,61 @@
 	}
 	.scrollyBackground {
 		position: sticky;
-		top:  5vh;
-		width:  59%;
+		top:  2.5vh;
+		width:  90%;
 		margin: 0 auto;
 		height:  auto;
 		z-index: 2;
-		overflow: hidden;
-		border: 1px solid #666;
-		padding-bottom: 100px;
-		max-height: 90vh;
-	}
-	.comicText {
-		font-family: "National 2 Web", sans-serif;
-		font-size: 20px;
 		border: 2px solid #000;
+/*		padding-bottom: 100px;*/
+		max-height: 95vh;
+		max-width: 100vh;
+	}
+	.scrollyImageContainer {
+		width: 100%;
+		height: 100%;
 		position: absolute;
-		bottom: 10px;
-		left: 10px;
-		width: calc(100% - 20px);
-		margin-top: 10px;
-		background: white;
-		padding: 10px;
-		min-height: 120px;
-		box-sizing: border-box;
-		box-shadow: 2px 2px 0px 2px #000;
+		left: 0;
+		top: 0;
+		overflow: hidden;
+	}
+
+	.fuzzy {
+		animation: grain 20s steps(10) infinite;
+		content: "";
+		background-image: url("assets/yardsale/grain.png");
+		height: 500%;
+		width: 500%;
+		opacity: 1;
+		position: absolute;
+		left: -125%;
+		top: -125%;
+	}
+	@keyframes grain {
+		0%, 100% { transform:translate(0, 0) }
+		10% { transform:translate(-5%, -10%) }
+		20% { transform:translate(8%, 5%) }
+		30% { transform:translate(-7%, -5%) }
+		40% { transform:translate(5%, 20%) }
+		50% { transform:translate(-15%, -10%) }
+		60% { transform:translate(0%, 0%) }
+		70% { transform:translate(0%, -12%) }
+		80% { transform:translate(-10%, 12%) }
+		90% { transform:translate(10%, -10%) }
+	}
+	.scrolldown_hint {
+		position: absolute;
+		width: 0; 
+		height: 0; 
+		border-left: 20px solid transparent;
+		border-right: 20px solid transparent;
+		border-top: 20px solid var(--category-purple2);
+		left: 50%;
+		bottom: 25%;
+		margin-left: -10px;
+		opacity: 0.7;
+		z-index: 1000;
+		animation: bounce 1s ease infinite;
 	}
 	.scrollyBackground img {
 		position: absolute;
@@ -445,15 +497,15 @@
 		transition-timing-function: cubic-bezier(0.250, 0.100, 0.250, 1.000);
 	}
 	.player1-happy, .player2-happy, .player3-happy {
-		background: #e28aff !important;
-		border: 2px solid #333;
+		background: var(--category-purple) !important;
+		border: 2px solid var(--category-bg-purple);
 		box-shadow: 0px -1px 25px 0px rgba(0,0,0,0.75) inset;
 		-webkit-box-shadow: 0px -1px 25px 0px rgba(0,0,0,0.75) inset;
 		-moz-box-shadow: 0px -1px 25px 0px rgba(0,0,0,0.75) inset; 
 	} 
 	.player1-sad, .player2-sad, .player3-sad {
-		background: rgb(118,102,135) !important;
-		border: 2px solid #333;
+		background: var(--category-purple2) !important;
+		border: 2px solid var(--category-bg-purple);
 		box-shadow: 0px -1px 25px 0px rgba(0,0,0,0.75) inset;
 		-webkit-box-shadow: 0px -1px 25px 0px rgba(0,0,0,0.75) inset;
 		-moz-box-shadow: 0px -1px 25px 0px rgba(0,0,0,0.75) inset;
@@ -488,17 +540,24 @@
 /*		color: white;
 		text-shadow: -1px -1px 6px rgba(0, 0, 0, 0.5);*/
 	}
-	@media only screen and (max-width: 640px) {
 
+	@media only screen and (max-width: 640px) {
+		.scrolly {
+			margin-bottom: 100px;
+		}
 		.scrollyContainer {
-			width: 98%;
-			margin: 0 1%;
+			width: 100%;
+			margin: 0 0%;
 		}
 		.scrollyBackground {
-			width:  98%;
-			margin: 1%;
+			width:  101.5%;
+			top: 0;
+			margin: 0% auto;
 			min-height: none;
 			float: none;
+			border: none;
+			border-bottom: 2px solid #000;
+			border-top: 2px solid #000;
 		}
 		.step > p {
 			padding: 0rem 1%;

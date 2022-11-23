@@ -5,6 +5,7 @@
 
 	export let gridlines = true;
 	export let tickMarks = false;
+	export let baseTick = 100;
 	export let xTick = 0;
 	export let yTick = 0;
 	export let dxTick = 0;
@@ -27,19 +28,29 @@
 			class="tick tick-{tick}"
 			transform="translate({$xRange[0]}, {$yScale(tick)})"
 		>
-			{#if gridlines !== false}
+			{#if tick == baseTick && gridlines !== false}
+				<line class="gridline baseTick" x2="100%" y1={yTick} y2={yTick} />
+				<text
+				x={xTick}
+				y={yTick}
+				dx={dxTick}
+				dy={dyTick}
+				style="text-anchor:{textAnchor};" class="baseTickWord">{formatTick(tick)}</text
+			>
+			{:else}
 				<line class="gridline" x2="100%" y1={yTick} y2={yTick} />
-			{/if}
-			{#if tickMarks === true}
-				<line class="tick-mark" x1="0" x2={6} y1={yTick} y2={yTick} />
-			{/if}
-			<text
+				<text
 				x={xTick}
 				y={yTick}
 				dx={dxTick}
 				dy={dyTick}
 				style="text-anchor:{textAnchor};">{formatTick(tick)}</text
 			>
+			{/if}
+			{#if tickMarks === true}
+				<line class="tick-mark" x1="0" x2={6} y1={yTick} y2={yTick} />
+			{/if}
+			
 		</g>
 	{/each}
 </g>
@@ -51,13 +62,24 @@
 	}
 
 	.tick line {
-		stroke: var(--color-gray-300);
+		stroke: var(--category-purple2);
+		opacity: 0.5;
 	}
 	.tick .gridline {
 		stroke-dasharray: 4px 4px;
 	}
+	.tick .gridline.baseTick {
+/*		stroke-dasharray: 4px 0;*/
+		stroke: var(--category-bg-purple);
+		opacity: 1;
+		stroke-width: 1.1;
+	}
 
 	.tick text {
-		fill: var(--color-gray-600);
+		fill: var(--category-purple2);
+	}
+	.tick text.baseTickWord {
+		fill: var(--category-bg-purple);
+		font-weight: bold;	
 	}
 </style>

@@ -58,7 +58,7 @@
 	input[type="range"]::-webkit-slider-runnable-track {
 		width: 100%;
 		height: calc(var(--thumb-width) / 4);
-		background: var(--color-gray-300);
+		background: #ccc;
 		border-radius: 4px;
 	}
 
@@ -66,7 +66,7 @@
 		height: var(--thumb-width);
 		width: var(--thumb-width);
 		border-radius: 50%;
-		background: var(--color-gray-900);
+		background: var(--category-bg-purple);
 		appearance: none;
 		margin-top: calc(var(--thumb-width) / -3);
 	}

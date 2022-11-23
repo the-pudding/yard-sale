@@ -106,7 +106,7 @@
 	$: {
 		stepWidth = stepWidth;
 		stepHeight = stepHeight;
-		panelHeight = stepWidth * 0.8; 
+		panelHeight = stepWidth * 0.7; 
 		chartHeight = panelHeight - 50;
 		increment = increment;
 		roundLimit = roundLimit;
@@ -190,7 +190,7 @@
 		fill:  #9e9ac8;
 	}
 	.player.player1 {
-		fill: red;
+		fill: #ff7e00;
 	}
 	svg line {
 		stroke-dasharray: 4px 4px;

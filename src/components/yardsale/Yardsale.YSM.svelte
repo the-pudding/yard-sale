@@ -3,7 +3,7 @@
 	import Range from "$components/helpers/Range.svelte";
 	let players = [];
 	let ticks = [];
-	let windowHeight = 300;
+	let windowHeight;
 	let playerNumber = 100;
 	let startingAmount = 1000;
 	let worldrecord = 0;
@@ -11,7 +11,7 @@
 	let maxWager = 20;
 	let round = 0;
 	let roundLimit = 0;
-	let chartWidth;
+	let chartWidth, chartHeight;
 	let redistribution = 0;
 	let redistributionPot = 0;
 	let running = false;
@@ -86,7 +86,7 @@
 			randomIndex = Math.floor(Math.random() * currentIndex);
 			currentIndex--;
 			[array[currentIndex], array[randomIndex]] = [
-			array[randomIndex], array[currentIndex]];
+				array[randomIndex], array[currentIndex]];
 		}
 		return array;
 	}
@@ -131,7 +131,7 @@
 		}
 		for (var i = 0; i < players.length; i++) {
 			players[i].order = i;
-			players[i].height = (players[i].wealth / highestNumber) * windowHeight;
+			players[i].height = (players[i].wealth / highestNumber) * chartHeight;
 			players[i].height = players[i].height < 2 ? 2 : players[i].height;
 		}
 	}
@@ -150,20 +150,19 @@
 	sortPlayers();	
 
 	$: {
+		chartHeight = windowHeight - 50;
 		redistribution = redistribution;
 		startingAmount = startingAmount;
-		// generatePlayers();
-		// sortPlayers();
+		generatePlayers();
+		sortPlayers();
 	}
 </script>
 
 <div class="interactive_container">
 	<div class="ysm_container">
-	<div class="toolbar ysm_data">
-		
-		
+		<div class="toolbar ysm_data">
 
-		{#if redist == 1}
+			{#if redist == 1}
 			<!-- <div class="toolItem">
 				<div class="toolLabel">Starting amount for each player: <span class="toolValue">${startingAmount}</span></div>
 				<Range min=100 max=2000 bind:value={startingAmount} on:change={generatePlayers}/>
@@ -174,71 +173,115 @@
 				<Range min=1 max=100 bind:value={maxWager}/>
 				
 			</div> -->
-			<div class="toolLabel"><strong>Redistribution</strong> How much of each player's wealth should be redistributed to everyone else after each round?</div>
+			<div class="toolLabel"><strong>Redistribution</strong>: How much of each player's wealth should be redistributed to everyone else after each round?</div>
 			<div class="toolItem">
 				<Range min=0 max=100 bind:value={redistribution}/>
-				<div class="toolValue">{redistribution}% redistributed</div>
+				<div class="toolValue">{redistribution}%</div>
 			</div>
-		{/if}
-
-		<div class="toolItem">
-			{#if !running}
-				<button class="toolLabel button" on:click={playGame}>
-				{#if round < 999}
-					Play 1,000 rounds
-				{:else}
-					Play another 1,000 rounds
-				{/if}
-				</button>
-			{:else}
-				<button class="toolLabel button" disabled>Simulating...</button>
 			{/if}
-		</div>	
 
-	</div>
-	
-	<div class="chartArea extrawide" bind:clientWidth={chartWidth}>
+		</div>
+
+		<div class="chartArea" bind:clientWidth={chartWidth} bind:clientHeight={windowHeight}>
 			<div class="toolLabel">Round: <span class="toolValue">{comma(round)}</span></div>
-		<svg>
-			{#each ticks as tick}
-			<line x1=0 x2={chartWidth} y1={300 - (tick / highestNumber * 300) } y2={300 - (tick / highestNumber * 300)}></line>
-			<text class="chartText" x=0 y={300 - (tick / highestNumber * 300) - 5}>${comma(tick)}</text>
-			{/each}
-			{#each players as player}
-			<rect class="player" x={player.order * ((chartWidth-100) / playerNumber) + 50 } width={chartWidth / 200} height={player.height} y={windowHeight - player.height}></rect>
-			{/each}
-		</svg>
+			<div class="toolItem">
+				{#if !running}
+				<button class="toolLabel button" on:click={playGame}>
+					{#if round < 999}
+					Play 1,000 rounds
+					{:else}
+					Another 1,000 rounds
+					{/if}
+				</button>
+				{:else}
+				<button class="toolLabel button" disabled>Simulating...</button>
+				{/if}
+			</div>	
+			<svg>
+				{#each ticks as tick}
+				<line x1=0 x2={chartWidth} y1={chartHeight - (tick / highestNumber * chartHeight) } y2={chartHeight - (tick / highestNumber * chartHeight)}></line>
+				<text class="chartText" x=0 y={chartHeight - (tick / highestNumber * chartHeight) - 5}>${comma(tick)}</text>
+				{/each}
+				{#each players as player}
+				<rect class="player" x={player.order * ((chartWidth-100) / playerNumber) + 50 } width={chartWidth / 200} height={player.height} y={chartHeight - player.height}></rect>
+				{/each}
+			</svg>
+		</div>
+		<div class="resetContainer">
+			<div class="reset button" on:click={reset}>Reset</div>
+		</div>
 	</div>
-	<div class="extrawide resetContainer">
-	<div class="reset button" on:click={reset}>Reset</div>
-</div>
-</div>
 </div>
 
 <style>
+	.interactive_container {
+		overflow-x: hidden;
+	}
+	.ysm_container {
+		background: white;
+		padding: 20px 0 0px;
+		border: 1px solid var(--category-purple2);
+	}
+
+	@media only screen and (max-width: 640px) {
+		.ysm_container {
+			border: none;
+			border-top: 1px solid var(--category-bg-purple);
+			border-bottom: 1px solid var(--category-bg-purple);
+		}
+	}
 	.toolbar {
 		position: relative;
 		margin-bottom: 10px;
 		text-align: center;
 	}
 	.toolItem {
-		width: 100%;
-		margin: 20px auto;
+		text-align: right;
 		color: black;
+		position: absolute;
+		right: 10px;
+		top: 0px;
+	}
+	.toolbar .toolLabel {
+		display: block;
+		max-width: 500px;
+		margin: 0 auto;
+		font-family: "National 2 Web"; 
+		font-size: 18px;
+		line-height: 1.6em;
+		color: var(--category-bg-purple);
+	}
+	.toolbar .toolLabel strong {
+		color: var(--category-bg-purple);
+	}
+	.toolbar .toolItem {
+		width: 80%;
+		position: relative;
+		margin: 20px auto 0;
 		max-width: 400px;
 	}
-	.toolLabel {
+	.chartArea .toolItem .toolLabel {
 		color: black;
 		font-size: 16px;
 		line-height: 1.5em;
 		max-width: 500px;
 		margin: 0 auto;
+		right: 0px;
+		left: auto;
+		width: 200px;
+	}
+	.toolbar .toolValue {
+		color: var(--category-bg-purple);
+		position: absolute;
+		left: 102%;
+		top: 30px;
 	}
 	.toolValue {
 		margin-top: -40px;
 		font-size: 16px;
 		font-weight: bold;
-		margin-bottom: 50px;
+		margin-bottom: 20px;
+		color: var(--category-bg-purple);
 	}
 	.range {
 		margin: 10px 0;
@@ -249,10 +292,9 @@
 		margin: 10px auto 0;
 		font-family: "National 2 Web"; 
 	}
-	.interactive_container { padding:  20px; max-width: 100%; }
-	.chartArea { height: 340px; margin-bottom: 10px; background: white; padding: 10px; box-sizing: border-box; border: 1px solid #ccc; }
+	.chartArea { height: 60vh; max-height: 500px; margin-bottom: 10px; padding: 10px; box-sizing: border-box; }
 	svg { width: calc(100% - 30px); height: 100%; }
-	.chartArea .toolLabel { position: absolute; right: 10px; top: 10px }
+	.chartArea .toolLabel { position: absolute; left: 10px; top: 10px }
 	.player {
 		fill:  #9e9ac8;
 	}
@@ -263,7 +305,7 @@
 		transition-timing-function: cubic-bezier(0.250, 0.100, 0.250, 1.000);
 	}
 	svg text {
-		
+
 		transition: all 100ms cubic-bezier(0.250, 0.100, 0.250, 1.000);
 		transition-timing-function: cubic-bezier(0.250, 0.100, 0.250, 1.000);
 	}

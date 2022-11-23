@@ -66,12 +66,13 @@
 
 	line,
 	.tick line {
-		stroke: var(--color-gray-300);
+		stroke: var(--category-purple2);
 		stroke-dasharray: 2;
+		opacity: 0.5;
 	}
 
 	.tick text {
-		fill: var(--color-gray-600);
+		fill: var(--category-purple2);
 	}
 
 	.tick .tick-mark,

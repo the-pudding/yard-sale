@@ -90,7 +90,7 @@ h6 {
 	font-size: var(--20px, 20px);
 }
 body {
-	background: #f2e6f0;
+	background: #eddbc0;
 	overflow-x: hidden;
 }
 .interactive_container {
@@ -109,21 +109,19 @@ body {
 }
 
 .body_container h2 {
-/*	font-family: 'Tiempos Headline Web',Georgia,Times,serif;*/
-font-size: 1.8rem;
-line-height: 1.1em;
-text-align: center;	
-font-weight:  bold;
-margin-top: 50px;
-margin-bottom:  6px;
+	font-size: 1.8rem;
+	line-height: 1.1em;
+	text-align: center;	
+	font-weight:  bold;
+	margin-top: 50px;
+	margin-bottom:  6px;
 }
 .body_container section h3 {
-/*	font-family: 'Tiempos Text Web',Georgia,Times,serif;*/
-font-size: 1.7rem;
-line-height: 1.1em;	
-font-weight:  bold;
-margin-bottom:  6px;
-margin-top: 30px;
+	font-size: 1.7rem;
+	line-height: 1.1em;	
+	font-weight:  bold;
+	margin-bottom:  6px;
+	margin-top: 30px;
 }
 .body_container section .dek {
 	font-size:  17px;
@@ -137,11 +135,11 @@ margin-top: 30px;
 	margin:  0 0px;
 	padding:  5px;
 	font-size:  15px;
-	border:  1px solid #000;
-	background: white;
+	border:  1px solid var(--category-bg-purple);
+	background: var(--category-purple);
 	line-height: 1.1em;
-	box-shadow: 2px 2px 0px 0px #000;
-	color: black;
+	box-shadow: 2px 2px 0px 0px  var(--category-bg-purple);
+	color:  var(--category-bg-purple);
 }
 
 .interactive_container .button:hover {
@@ -157,11 +155,11 @@ margin-top: 30px;
 .ysm_data {
 	font-size: 15px;
 	line-height: 1.3em;
-	color: var(--color-gray-600);
+	color: var(--category-bg-purple);
 	font-family: "National 2 Web"; 
 }
 .chartText {
-	fill: var(--color-gray-600);
+	fill: var(--category-purple2);
 	font-size: 0.725em;
 	font-weight: 200;
 }
@@ -179,11 +177,11 @@ margin-top: 30px;
 }
 .reset {
 	position: absolute;
-	right: 0px;
+	right: 5px;
 	top:  0px;
-	background: white;
-	color:  #333;
-	border: 1px solid #000;
+	background: var(--category-purple);
+	color:  var(--category-bg-purple);
+	border: 1px solid var(--category-bg-purple);
 	padding:  5px;
 	cursor: pointer;
 	-webkit-touch-callout: none;
@@ -205,21 +203,37 @@ margin-top: 30px;
 
 .speechBubble {
 	position: absolute;
-	background: white;
+	background: var(--category-purple);
+	color: var(--category-bg-purple) !important;
 	padding: 5px;
 	max-width: 130px;
 	border-radius: 8px;
 	font-size: 12px;
-	line-height: 14px;
+	line-height: 1.2em;
 	text-align:left;
 	font-family: "National 2 Web", sans-serif;
 	box-shadow: 10px 6px 41px 0px rgba(0,0,0,0.75);
 	-webkit-box-shadow: 10px 6px 41px 0px rgba(0,0,0,0.75);
 	-moz-box-shadow: 10px 6px 41px 0px rgba(0,0,0,0.75);
 }
+@media only screen and (min-width: 420px) {
+	.speechBubble {
+		font-size: 14px;
+		padding: 6px;
+		max-width: 140px;
+	}
+}
+
+@media only screen and (min-width: 740px) {
+	.speechBubble {
+		font-size: 16px;
+		padding: 10px;
+		max-width: 230px;
+	}
+}
 .speechBubble.player1bubble {
 	left: 22%;
-	bottom: 70%;
+	bottom: 68%;
 }
 .speechBubble.player1bubble:before {
 	content: "";
@@ -227,7 +241,7 @@ margin-top: 30px;
 	height: 0;
 	border-left: 2px solid transparent;
 	border-right: 10px solid transparent;
-	border-top: 15px solid #fff;
+	border-top: 15px solid  var(--category-purple);
 	position: absolute;
 	top: 100%;
 	left: 10px;
@@ -242,7 +256,7 @@ margin-top: 30px;
 	height: 0;
 	border-left: 10px solid transparent;
 	border-right: 2px solid transparent;
-	border-top: 15px solid #fff;
+	border-top: 15px solid var(--category-purple);
 	position: absolute;
 	top: 100%;
 	right: 10px;
@@ -269,4 +283,45 @@ margin-top: 30px;
 blockquote {
 	padding: 15px;
 	background: rgba(0,0,0,0.1);
+}
+@keyframes bounce {
+	0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+	40% {transform: translateY(-10px);}
+	60% {transform: translateY(-3px);}
+}
+
+
+.comicText {
+	font-family: "National 2 Web", sans-serif;
+	font-size: 3vh;
+	border: 2px solid #000;
+	position: absolute;
+	bottom: 20px;
+	left: 10px;
+	padding: 0 10px;
+	width: calc(100% - 20px);
+	background: white;
+	box-sizing: border-box;
+	color: #555;
+	box-shadow: 2px 2px 0px 2px #000;
+}
+.comicText p span.highlight {
+	font-weight: bold;
+	color: var(--category-bg-purple);
+}
+.comicText p span.orange {
+	font-weight: bold;
+	color: #ff7e00;
+}
+
+@media only screen and (max-width: 640px) {
+	.comicText {
+		bottom: auto;
+		top: 100%;
+		left: 0px;
+		width: 100%;
+		background: none;
+		border: none;
+		box-shadow: none;
+	}
 }

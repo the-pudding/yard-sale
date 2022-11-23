@@ -126,67 +126,61 @@
 		return [w, poorerPlayer];
 	}
 
-	function formatMoney(d) {
+	function comma(x) {
+		return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	}
+
+	function formatMoney(d, plusminus) {
 		if (d >= 0) {
-			return "$" + Math.round(d);
+			if (plusminus && d > 0) {
+				return "+$" + comma(Math.round(d));
+			}
+			return "$" + comma(Math.round(d));
 		}
-		return "-$" + Math.abs(Math.round(d));
+		return "-$" + comma((Math.abs(Math.round(d))));
 	}
 </script>
 <div class="interactive_container">
 	<div class="ysm_container">
-		<div class="profile_container">
-			<div class="profile profile1">
-				<div class="headshot bg-{players.p1.mood}" style="background-image:url(assets/yardsale/art/player1-{players.p1.mood}.png)">
-					{#if players.p1.wins == 0 && players.p2.wins == 0}
-					<div class="speechBubble player1bubble" in:fade={{ delay: 0 }} out:fade>Click below to give me a win!</div>
-					{/if}
-					{#if players.p1.wins == 1 && players.p2.wins == 0}
-					<div class="speechBubble player1bubble" in:fade={{ delay: 0 }} out:fade>Yes! I win $20!</div>
-					{/if}
-					{#if players.p1.rate < 45 && players.p1.latest == "lost" && players.p2.wins > 2}
-					<div class="speechBubble player1bubble" in:fade={{ delay: 0 }} out:fade>Let me win half the time!</div>
-					{/if}
-					{#if players.p1.rate == 50 && players.p1.wins > 2 && players.p1.wealth < players.p2.wealth}
-					<div class="speechBubble player1bubble" in:fade={{ delay: 0 }} out:fade>I've won 50%, but my net earnings is down!?</div>
-					{/if}
-				</div>
-				<h3>Player 1</h3>
-				<div class="stats ysm_data">
-					<div class="wins">Record: {players.p1.wins}-{round-players.p1.wins} ({players.p1.rate}%)</div>
-					<div class="wealth">Wealth: { formatMoney(players.p1.wealth) }</div>
-					<div class="wealth">Net earnings: { formatMoney(players.p1.wealth - 100) }</div>
-				</div>
-			</div>
-
-			<div class="profile profile2">
-				<div class="headshot bg-{players.p2.mood}" style="background-image:url(assets/yardsale/art/player4-{players.p2.mood}.png)">
-					{#if players.p2.rate < 45 && players.p2.latest == "lost" && players.p1.wins > 2 }
-					<div class="speechBubble player2bubble" in:fade={{ delay: 0 }} out:fade>This is unfair.</div>
-					{/if}
-				</div>
-				<h3>Player 2</h3>
-				<div class="stats ysm_data">
-					<div class="wins">Record: {players.p2.wins}-{round-players.p2.wins} ({players.p2.rate}%)</div>
-					<div class="wealth">Wealth: { formatMoney(players.p2.wealth) }</div>
-					<div class="wealth">Net earnings: { formatMoney(players.p2.wealth - 1000) }</div>
-				</div>
-
-			</div>
-
-		</div>
 		<div class="fullInfo">
-			
-			<div class="winButton button winp1" player="p1" on:click={playRound}>Player 1 wins</div>
-			<div class="winButton button winp2" player="p2" on:click={playRound}>Player 2 wins</div>
 			<div class="wager_amount">
-				Wager: {formatMoney(wagerData[0])}
+				Winner gets <strong>{formatMoney(wagerData[0])}</strong>
 				<div class="wager_info">(20% of {wagerData[1]}'s wealth)</div>
 			</div>
 		</div>
 		<div class="chart_container extrawide">
+
+			<!-- PLAYER 1 CONTAINER -->
 			<section>
 				<figure>
+					<div class="profile profile1">
+						<div class="headshot bg-{players.p1.mood}" style="background-image:url(assets/yardsale/art/player1-{players.p1.mood}.png)">
+							{#if players.p1.wins == 0 && players.p2.wins == 0}
+							<div class="speechBubble player1bubble" in:fade={{ delay: 0 }} out:fade>I bet 20% of my money!</div>
+							{/if}
+							{#if players.p1.wins == 1 && players.p2.wins == 0}
+							<div class="speechBubble player1bubble" in:fade={{ delay: 0 }} out:fade>Yes! I win $20!</div>
+							{/if}
+							{#if players.p1.rate < 45 && players.p1.latest == "lost" && players.p2.wins > 2}
+							<div class="speechBubble player1bubble" in:fade={{ delay: 0 }} out:fade>Let me win half the time!</div>
+							{/if}
+							{#if players.p1.rate == 50 && players.p1.wins > 2 && players.p1.wealth < players.p2.wealth}
+							<div class="speechBubble player1bubble" in:fade={{ delay: 0 }} out:fade>I've won 50%, but I lost money!?</div>
+							{/if}
+						</div>
+						<div class="playerName">
+							<strong>Player 1</strong>
+							<br>{ formatMoney(players.p1.wealth) }
+							<br>{players.p1.wins}-{round-players.p1.wins} ({players.p1.rate}%)
+						</div>
+
+						<!-- Winner buttons -->
+						{#if round == 0}
+						<div class="winButton button winp1 bounce" player="p1" on:click={playRound}>Win</div>
+						{:else}
+						<div class="winButton button winp1" player="p1" on:click={playRound}>Win</div>
+						{/if}
+					</div>
 					<LayerCake 
 					data={players.p1.data}
 					{x}
@@ -196,18 +190,33 @@
 					yDomain={ [players.p1.minmax[0], players.p1.minmax[1]] } 
 					>
 					<Svg>
-						<AxisY formatTick={formatTickY} />
+						<AxisY formatTick={formatTickY} baseTick=100 />
 						<AxisX />
 						<Line 
-						strokeWidth="4"
-						stroke="black"
+						strokeWidth="5"
+						stroke="#420070"
+						words={ formatMoney(players.p1.wealth - 100, true) }
 						/>
 					</Svg>
 				</LayerCake>
 			</figure>
 		</section>
+
+		<!-- PLAYER 2 CONTAINER -->
 		<section>
 			<figure>
+				<div class="profile profile2">
+					<div class="headshot bg-{players.p2.mood}" style="background-image:url(assets/yardsale/art/player4-{players.p2.mood}.png)">
+						{#if players.p2.rate < 45 && players.p2.latest == "lost" && players.p1.wins > 2 }
+						<div class="speechBubble player2bubble" in:fade={{ delay: 0 }} out:fade>This is unfair.</div>
+						{/if}
+					</div>
+					<div class="playerName"><strong>Player 2</strong>
+						<br>{ formatMoney(players.p2.wealth) }
+						<br>{players.p2.wins}-{round-players.p2.wins} ({players.p2.rate}%)
+					</div>
+					<div class="winButton button winp2" player="p2" on:click={playRound}>Win</div>
+				</div>
 				<LayerCake
 				data={players.p2.data}
 				{x}
@@ -217,11 +226,12 @@
 				yDomain={ [players.p2.minmax[0], players.p2.minmax[1]] } 
 				>
 				<Svg>
-					<AxisY formatTick={formatTickY} />
+					<AxisY formatTick={formatTickY} baseTick=1000 />
 					<AxisX />
 					<Line 
-					strokeWidth="4"
-					stroke="black"
+					strokeWidth="5"
+					stroke="#420070"
+					words={ formatMoney(players.p2.wealth - 1000, true) }
 					/>
 				</Svg>
 			</LayerCake>
@@ -240,7 +250,8 @@
 	figure {
 		margin: 1rem auto;
 		width: 100%;
-		height: 40vh;
+		height: 50vh;
+		position: relative;
 	}
 	.chart_container, .resetContainer {
 		display: flex;
@@ -250,9 +261,10 @@
 	.ysm_container  {
 		width: 100%;
 		max-width:700px;
-		margin: 50px auto 0;
+		margin: 0px auto;
 		padding: 0 10px;
 		font-family: "National 2 Web";
+		color:  var(--category-bg-purple);
 		-webkit-touch-callout: none;
 		-webkit-user-select: none; 
 		-khtml-user-select: none; 
@@ -265,15 +277,15 @@
 		flex: 2;
 	}
 	.ysm_container section figure {
-		background: white;
-		padding: 3px;
-		border: 1px solid #ccc;
+		background: white; 
+		padding: 60px 5px 5px;
+		border: 1px solid var(--category-purple2);
 	}
 	.ysm_container section:nth-child(1) {
-		margin-right:  20px;
+		margin-right:  5px;
 	}
 	.ysm_container section:nth-child(2) {
-		margin-left:  20px;
+		margin-left:  5px;
 	}
 	@media only screen and (max-width: 550px) {
 		.chart_container, .resetContainer {
@@ -288,26 +300,23 @@
 		figure {
 			margin: 1rem auto;
 			width: 100%;
-			height: 30vh;
+			height: 35vh;
 		}
 	}
-	.fullInfo {
-		margin-top: 10px; 
+	.fullInfo { 
 		position: relative;
 		width: 100%;
 		text-align: center;
 		padding: 5px;
 		line-height: 1.1em;
-	}
-	.wager_amount {
-		text-transform: uppercase;
-		font-weight: bold;
+		font-size: 24px;
+		margin: 10px 0;
 	}
 	.wager_info {
 		text-transform: none;
 		font-weight: normal;
 		font-size: 14px;
-		color: #888;
+		color: var(--category-purple2);
 	}
 	h3 {
 		font-weight: 500;
@@ -320,96 +329,74 @@
 		display: block;
 		width: 100%;
 		position: relative;
-		height: 120px;
+		height: 50px;
 	}
 	.profile {
 		position: absolute;
-		width: calc(50% - 120px);
+		width: 100%;
+		top: 10px;
+		left: 5px;
 	}
-	.profile:nth-child(1) {
-		left: 0px;
-		margin-left: 120px;
+	.playerName {
+		position: absolute;
+		width: calc(100% - 60px);
+		top: 0px;
+		left: 60px;
+		line-height: 1.2em;
 	}
-	.profile:nth-child(2) {
-		right: 0px;
-		margin-right: 120px;
-		text-align: right;
+	.profile1 {
+		left: 5px;
 	}
 	.headshot {
-		width: 100px;
-		height: 120px;
+		width: 50px;
+		height: 60px;
 		background: #b1a4ba;
 		position: absolute;
 		top: 0;
-		border: 2px solid #000;
+		border: 1px solid var(--category-bg-purple);
 		background-size: 120% auto;
 		background-repeat: no-repeat;
 		background-position: 30% 2px;
-		box-shadow: 0px -1px 25px 0px rgba(0,0,0,0.75) inset;
-		-webkit-box-shadow: 0px -1px 25px 0px rgba(0,0,0,0.75) inset;
-		-moz-box-shadow: 0px -1px 25px 0px rgba(0,0,0,0.75) inset; 
+		box-shadow: 0px -1px 25px 0px rgba(0,0,0,0.4) inset;
+		-webkit-box-shadow: 0px -1px 25px 0px rgba(0,0,0,0.4) inset;
+		-moz-box-shadow: 0px -1px 25px 0px rgba(0,0,0,0.4) inset; 
 	}
 	@media only screen and (max-width: 550px) {
-		.headshot {
-			display: none;
-		}
-		.wager_info {
-			visibility: hidden;
-		}
 		.profile {
 			margin: 0 !important;
-			width: calc(50% - 10px);
 		}
 		.fullInfo {
 			margin-top: 0;
 		}
 	}
 	.headshot.bg-sad {
-		background-color: rgb(118,102,135);
+		background-color: var(--category-purple);
 	}
 	.headshot.bg-happy {
-		background-color: #e28aff;
-	}
-	.profile:nth-child(1) .headshot {
-		left: -120px;
-	}
-	.profile:nth-child(2) .headshot {
-		right: -120px;
+		background-color: var(--category-purple);
 	}
 	.winButton {
 		position: absolute;
-		display: inline-block;
-		width: 100px;
-		bottom: 0;
-		height: 100%;
+		right: 20px;
+		top: 0px;
+		width: 60px;
 	}
-	.winp1 {
-		left:  0px;
-	}
-	.winp2 {
-		right: 0;
+	.winButton.bounce {
+		animation: bounce 1s ease infinite;
 	}
 
 	.speechBubble {
-		width: 96%;
-		bottom: 90%;
+		width: 240%;
+		bottom: 110%;
 		color: black;
 	}
-	.speechBubble.player1bubble {
+	.speechBubble {
 		left: 2%;
 	}
-	.speechBubble.player1bubble:before {
+	.speechBubble:before {
 		border-right: 3px solid transparent;
-		left: auto;
-		right: 6px;
-	}
-	.speechBubble.player2bubble {
-		left: 2%;
-	}
-	.speechBubble.player2bubble:before {
-		border-left: 3px solid transparent;
+		left: 30%;
 		right: auto;
-		left: 6px;
 	}
-	
+
 </style>
