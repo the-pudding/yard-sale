@@ -90,7 +90,7 @@ h6 {
 	font-size: var(--20px, 20px);
 }
 body {
-	background: #eddbc0;
+	background: #d5d0d9;
 	overflow-x: hidden;
 }
 .interactive_container {
@@ -158,6 +158,20 @@ body {
 	color: var(--category-bg-purple);
 	font-family: "National 2 Web"; 
 }
+
+.player.player0, .player.player99  {
+	fill: var(--category-bg-purple);
+	position: relative;
+}
+.player1Text, .player2Text {
+	fill: var(--category-bg-purple);
+	font-weight: bold;
+	font-size: 14px;
+}
+.player2Text {
+	text-anchor: end;
+}
+
 .chartText {
 	fill: var(--category-purple2);
 	font-size: 0.725em;
@@ -201,54 +215,97 @@ body {
 
 /* Speech bubbles*/
 
-.speechBubble {
-	position: absolute;
-	background: var(--category-purple);
+
+.speechBubble, .comicText {
+	background: var(--speechbg);
+	background: white;
 	color: var(--category-bg-purple) !important;
 	padding: 5px;
-	max-width: 130px;
-	border-radius: 8px;
-	font-size: 12px;
-	line-height: 1.2em;
-	text-align:left;
-	font-family: "National 2 Web", sans-serif;
-	box-shadow: 10px 6px 41px 0px rgba(0,0,0,0.75);
-	-webkit-box-shadow: 10px 6px 41px 0px rgba(0,0,0,0.75);
-	-moz-box-shadow: 10px 6px 41px 0px rgba(0,0,0,0.75);
+/*	border-radius: 8px;*/
+font-size: 12px;
+line-height: 1.5em;
+text-align:left;
+font-family: "National 2 Web", sans-serif;
+box-shadow: 10px 6px 41px 0px rgba(0,0,0,0.3);
+-webkit-box-shadow: 10px 6px 41px 0px rgba(0,0,0,0.3);
+-moz-box-shadow: 10px 6px 41px 0px rgba(0,0,0,0.3);
 }
+.comicText p {
+	margin: 0 0 16px  !important;
+}
+.comicText p:last-child {
+	margin: 0  !important;
+}
+.comicText {	
+	max-width: 500px;
+	position: absolute;
+	bottom: 20px;
+	left: 20px;
+	width: calc(100% - 20px);
+}
+.comicText p span.highlight {
+/*	font-weight: bold;
+	color: var(--category-bg-purple);
+	padding: 0px 1px;
+	background: var(--category-purple);*/
+}
+.comicText p span.orange {
+	font-weight: bold;
+	color: #ff7e00;
+}
+.speechBubble {
+	position: absolute;
+	max-width: 130px;
+}
+/*@media only screen and (max-width: 640px) {
+	.comicText {
+		bottom: auto;
+		top: 100%;
+		left: 0px;
+		width: 100%;
+		transform: translateX(0%);
+		background: none;
+		border: none;
+		box-shadow: none;
+	}
+}*/
 @media only screen and (min-width: 420px) {
-	.speechBubble {
+	.speechBubble, .comicText {
 		font-size: 14px;
 		padding: 6px;
+	}
+	.speechBubble {
 		max-width: 140px;
 	}
 }
 
 @media only screen and (min-width: 740px) {
-	.speechBubble {
+	.speechBubble, .comicText {
 		font-size: 16px;
 		padding: 10px;
+	}
+	.speechBubble {
 		max-width: 230px;
 	}
 }
 .speechBubble.player1bubble {
 	left: 22%;
-	bottom: 68%;
+	bottom: 65%;
 }
-.speechBubble.player1bubble:before {
+.comicText:before, .speechBubble.player1bubble:before {
 	content: "";
 	width: 0;
 	height: 0;
 	border-left: 2px solid transparent;
 	border-right: 10px solid transparent;
-	border-top: 15px solid  var(--category-purple);
+	border-top: 15px solid  var(--speechbg);
 	position: absolute;
 	top: 100%;
 	left: 10px;
 }
 .speechBubble.player2bubble {
 	right: 30%;
-	bottom: 60%;
+	top: 55%;
 }
 .speechBubble.player2bubble:before {
 	content: "";
@@ -256,9 +313,9 @@ body {
 	height: 0;
 	border-left: 10px solid transparent;
 	border-right: 2px solid transparent;
-	border-top: 15px solid var(--category-purple);
+	border-bottom: 15px solid var(--speechbg);
 	position: absolute;
-	top: 100%;
+	bottom: 100%;
 	right: 10px;
 }
 
@@ -291,37 +348,3 @@ blockquote {
 }
 
 
-.comicText {
-	font-family: "National 2 Web", sans-serif;
-	font-size: 3vh;
-	border: 2px solid #000;
-	position: absolute;
-	bottom: 20px;
-	left: 10px;
-	padding: 0 10px;
-	width: calc(100% - 20px);
-	background: white;
-	box-sizing: border-box;
-	color: #555;
-	box-shadow: 2px 2px 0px 2px #000;
-}
-.comicText p span.highlight {
-	font-weight: bold;
-	color: var(--category-bg-purple);
-}
-.comicText p span.orange {
-	font-weight: bold;
-	color: #ff7e00;
-}
-
-@media only screen and (max-width: 640px) {
-	.comicText {
-		bottom: auto;
-		top: 100%;
-		left: 0px;
-		width: 100%;
-		background: none;
-		border: none;
-		box-shadow: none;
-	}
-}

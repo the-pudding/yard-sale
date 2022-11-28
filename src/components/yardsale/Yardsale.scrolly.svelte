@@ -48,186 +48,211 @@
 			{"image":"the-100", "xmetric":"left","x":0, "ymetric": "top", "y":0, "width": 100, "opacity": 0.3},
 			{"image":"player1-full", "xmetric":"left","x":5, "ymetric": "bottom", "y":5, "width": 30, "opacity": 1},
 			{"image":"player2-full", "xmetric":"right","x": 5, "ymetric": "bottom", "y":5, "width": 30, "opacity": 1},
-			{"image":"player1-happy", "xmetric":"left","x":-20, "ymetric": "top", "y":28, "width": 30, "opacity": 0},
-			{"image":"player2-happy", "xmetric":"right","x": -20, "ymetric": "top", "y":28, "width": 30, "opacity": 0},
-			{"image":"player1-sad", "xmetric":"left","x":5, "ymetric": "top", "y":28, "width": 30, "opacity": 0},
-			{"image":"coin-flipping", "xmetric":"left","x":45, "ymetric": "top", "y":200, "width": 10, "opacity": 1},
-			{"image":"coin-tails", "xmetric":"left","x":45, "ymetric": "top", "y":200, "width": 10, "opacity": 0}
+			{"image":"player1-happy", "xmetric":"left","x":-20, "ymetric": "top", "y":33, "width": 30, "opacity": 0},
+			{"image":"player2-happy", "xmetric":"right","x": -20, "ymetric": "top", "y":33, "width": 30, "opacity": 0},
+			{"image":"player1-sad", "xmetric":"left","x":5, "ymetric": "top", "y":33, "width": 30, "opacity": 0},
+			{"image":"coin-flipping", "xmetric":"left","x":50, "ymetric": "top", "y":200, "width": 10, "opacity": 1},
+			{"image":"coin-tails", "xmetric":"left","x":50, "ymetric": "top", "y":200, "width": 10, "opacity": 0}
 			],
 		"scrolly2-2": [
-			{"image":"the-100", "xmetric":"left","x":0, "ymetric": "top", "y":0, "width": 100, "opacity": 0.1},
-			{"image":"player1-full", "xmetric":"left","x":5, "ymetric": "bottom", "y":5, "width": 30, "opacity": 0},
-			{"image":"player2-full", "xmetric":"right","x": 5, "ymetric": "bottom", "y":5, "width": 30, "opacity": 0},
-			{"image":"player1-happy", "xmetric":"left","x":5, "ymetric": "top", "y":28, "width": 30, "opacity": 1},
-			{"image":"player2-happy", "xmetric":"right","x": 5, "ymetric": "top", "y":28, "width": 30, "opacity": 1},
-			{"image":"player1-sad", "xmetric":"left","x":5, "ymetric": "top", "y":28, "width": 30, "opacity": 0},
-			{"image":"coin-flipping", "xmetric":"left","x":45, "ymetric": "top", "y":200, "width": 10, "opacity": 1},
-			{"image":"coin-tails", "xmetric":"left","x":40, "ymetric": "top", "y":28, "width": 20, "opacity": 0}
+			{"image":"the-100", "xmetric":"left","x":-50, "ymetric": "top", "y":-50, "width": 200, "opacity": 0.1},
+			{"image":"player1-full", "xmetric":"left","x":-35, "ymetric": "bottom", "y":-60, "width": 60, "opacity": 0},
+			{"image":"player2-full", "xmetric":"right","x": -35, "ymetric": "bottom", "y":-60, "width": 60, "opacity": 0},
+			{"image":"player1-happy", "xmetric":"left","x":5, "ymetric": "top", "y":33, "width": 30, "opacity": 1},
+			{"image":"player2-happy", "xmetric":"right","x": 5, "ymetric": "top", "y":33, "width": 30, "opacity": 1},
+			{"image":"player1-sad", "xmetric":"left","x":5, "ymetric": "top", "y":33, "width": 30, "opacity": 0},
+			{"image":"coin-flipping", "xmetric":"left","x":50, "ymetric": "top", "y":200, "width": 10, "opacity": 1},
+			{"image":"coin-tails", "xmetric":"left","x":50, "ymetric": "top", "y":33, "width": 10, "opacity": 0}
 			],
 		"scrolly2-3": [
-			{"image":"the-100", "xmetric":"left","x":0, "ymetric": "top", "y":0, "width": 100, "opacity": 0.1},
+			{"image":"the-100", "xmetric":"left","x":-50, "ymetric": "top", "y":-50, "width": 200, "opacity": 0.1},
 			{"image":"player1-full", "xmetric":"left","x":5, "ymetric": "bottom", "y":5, "width": 30, "opacity": 0},
 			{"image":"player2-full", "xmetric":"right","x": 5, "ymetric": "bottom", "y":5, "width": 30, "opacity": 0},
-			{"image":"player1-happy", "xmetric":"left","x":5, "ymetric": "top", "y":28, "width": 30, "opacity": 1},
-			{"image":"player2-happy", "xmetric":"right","x": 5, "ymetric": "top", "y":28, "width": 30, "opacity": 1},
-			{"image":"player1-sad", "xmetric":"left","x":5, "ymetric": "top", "y":28, "width": 30, "opacity": 0},
-			{"image":"coin-flipping", "xmetric":"left","x":45, "ymetric": "top", "y":28, "width": 10, "opacity": 1},
-			{"image":"coin-tails", "xmetric":"left","x":40, "ymetric": "top", "y":28, "width": 20, "opacity": 0}
+			{"image":"player1-happy", "xmetric":"left","x":5, "ymetric": "top", "y":33, "width": 30, "opacity": 1},
+			{"image":"player2-happy", "xmetric":"right","x": 5, "ymetric": "top", "y":33, "width": 30, "opacity": 1},
+			{"image":"player1-sad", "xmetric":"left","x":5, "ymetric": "top", "y":33, "width": 30, "opacity": 0},
+			{"image":"coin-flipping", "xmetric":"left","x":45, "ymetric": "top", "y":33, "width": 10, "opacity": 1},
+			{"image":"coin-tails", "xmetric":"left","x":44, "ymetric": "top", "y":33, "width": 12, "opacity": 0}
 			],
 		"scrolly2-4": [
-			{"image":"the-100", "xmetric":"left","x":0, "ymetric": "top", "y":0, "width": 100, "opacity": 0.1},
+			{"image":"the-100", "xmetric":"left","x":-50, "ymetric": "top", "y":-50, "width": 200, "opacity": 0.1},
 			{"image":"player1-full", "xmetric":"left","x":5, "ymetric": "bottom", "y":5, "width": 30, "opacity": 0},
 			{"image":"player2-full", "xmetric":"right","x": 5, "ymetric": "bottom", "y":5, "width": 30, "opacity": 0},
-			{"image":"player1-happy", "xmetric":"left","x":5, "ymetric": "top", "y":28, "width": 30, "opacity": 0},
-			{"image":"player2-happy", "xmetric":"right","x": 5, "ymetric": "top", "y":28, "width": 30, "opacity": 1},
-			{"image":"player1-sad", "xmetric":"left","x":5, "ymetric": "top", "y":28, "width": 30, "opacity": 1},
-			{"image":"coin-flipping", "xmetric":"left","x":45, "ymetric": "top", "y":40, "width": 10, "opacity": 0},
-			{"image":"coin-tails", "xmetric":"left","x":40, "ymetric": "top", "y":40, "width": 20, "opacity": 1}
+			{"image":"player1-happy", "xmetric":"left","x":5, "ymetric": "top", "y":33, "width": 30, "opacity": 0},
+			{"image":"player2-happy", "xmetric":"right","x": 5, "ymetric": "top", "y":33, "width": 30, "opacity": 1},
+			{"image":"player1-sad", "xmetric":"left","x":5, "ymetric": "top", "y":33, "width": 30, "opacity": 1},
+			{"image":"coin-flipping", "xmetric":"left","x":45, "ymetric": "top", "y":40, "width":10, "opacity": 0},
+			{"image":"coin-tails", "xmetric":"left","x":44, "ymetric": "top", "y":40, "width":12, "opacity": 1}
 			],
 		"scrolly2-5": [
-			{"image":"the-100", "xmetric":"left","x":0, "ymetric": "top", "y":0, "width": 100, "opacity": 0.1},
+			{"image":"the-100", "xmetric":"left","x":-50, "ymetric": "top", "y":-50, "width": 200, "opacity": 0.1},
 			{"image":"player1-full", "xmetric":"left","x":-20, "ymetric": "bottom", "y":5, "width": 30, "opacity": 0},
 			{"image":"player3-full", "xmetric":"right","x": -20, "ymetric": "bottom", "y":5, "width": 30, "opacity": 0},
-			{"image":"player1-happy", "xmetric":"left","x":5, "ymetric": "top", "y":28, "width": 30, "opacity": 0},
-			{"image":"player2-happy", "xmetric":"right","x": 5, "ymetric": "top", "y":28, "width": 30, "opacity": 1},
-			{"image":"player1-sad", "xmetric":"left","x":5, "ymetric": "top", "y":28, "width": 30, "opacity": 1},
+			{"image":"player1-happy", "xmetric":"left","x":5, "ymetric": "top", "y":33, "width": 30, "opacity": 0},
+			{"image":"player2-happy", "xmetric":"right","x": 5, "ymetric": "top", "y":33, "width": 30, "opacity": 1},
+			{"image":"player1-sad", "xmetric":"left","x":5, "ymetric": "top", "y":33, "width": 30, "opacity": 1},
 			{"image":"coin-flipping", "xmetric":"left","x":45, "ymetric": "top", "y":40, "width": 10, "opacity": 0},
-			{"image":"coin-tails", "xmetric":"left","x":40, "ymetric": "top", "y":40, "width": 20, "opacity": 1}
+			{"image":"coin-tails", "xmetric":"left","x":44, "ymetric": "top", "y":40, "width": 12, "opacity": 1}
 			],
 		"scrolly2-6": [
 			{"image":"the-100", "xmetric":"left","x":0, "ymetric": "top", "y":0, "width": 100, "opacity": 0.3},
 			{"image":"player1-full", "xmetric":"left","x":5, "ymetric": "bottom", "y":5, "width": 30, "opacity": 1},
 			{"image":"player3-full", "xmetric":"right","x": 5, "ymetric": "bottom", "y":5, "width": 30, "opacity": 1},
-			{"image":"player1-happy", "xmetric":"left","x":5, "ymetric": "top", "y":28, "width": 30, "opacity": 0},
-			{"image":"player2-happy", "xmetric":"right","x": 5, "ymetric": "top", "y":28, "width": 30, "opacity": 0},
-			{"image":"player1-sad", "xmetric":"left","x":5, "ymetric": "top", "y":28, "width": 30, "opacity": 0},
+			{"image":"player1-happy", "xmetric":"left","x":5, "ymetric": "top", "y":33, "width": 30, "opacity": 0},
+			{"image":"player2-happy", "xmetric":"right","x": 5, "ymetric": "top", "y":33, "width": 30, "opacity": 0},
+			{"image":"player1-sad", "xmetric":"left","x":5, "ymetric": "top", "y":33, "width": 30, "opacity": 0},
 			{"image":"coin-flipping", "xmetric":"left","x":45, "ymetric": "top", "y":40, "width": 10, "opacity": 0},
-			{"image":"coin-tails", "xmetric":"left","x":40, "ymetric": "top", "y":28, "width": 20, "opacity": 0}
+			{"image":"coin-tails", "xmetric":"left","x":44, "ymetric": "top", "y":33, "width": 12, "opacity": 0}
 			],
 		"scrolly2-7": [
-			{"image":"the-100", "xmetric":"left","x":0, "ymetric": "top", "y":0, "width": 100, "opacity": 0.1},
-			{"image":"player1-full", "xmetric":"left","x":5, "ymetric": "bottom", "y":5, "width": 30, "opacity": 0},
-			{"image":"player3-full", "xmetric":"right","x": 5, "ymetric": "bottom", "y":5, "width": 30, "opacity": 0},
-			{"image":"player1-happy", "xmetric":"left","x":5, "ymetric": "top", "y":28, "width": 30, "opacity": 1},
-			{"image":"player3-happy", "xmetric":"right","x": 5, "ymetric": "top", "y":28, "width": 30, "opacity": 1},
-			{"image":"player1-sad", "xmetric":"left","x":5, "ymetric": "top", "y":28, "width": 30, "opacity": 0},
+			{"image":"the-100", "xmetric":"left","x":-20, "ymetric": "top", "y":-50, "width": 200, "opacity": 0.1},
+			{"image":"player1-full", "xmetric":"left","x":-35, "ymetric": "bottom", "y":-60, "width": 60, "opacity": 0},
+			{"image":"player3-full", "xmetric":"right","x":-35, "ymetric": "bottom", "y":-60, "width": 60, "opacity": 0},
+			{"image":"player1-happy", "xmetric":"left","x":5, "ymetric": "top", "y":33, "width": 30, "opacity": 1},
+			{"image":"player2-happy", "xmetric":"right","x": 5, "ymetric": "top", "y":33, "width": 30, "opacity": 0},
+			{"image":"player3-happy", "xmetric":"right","x": 5, "ymetric": "top", "y":33, "width": 30, "opacity": 1},
+			{"image":"player1-sad", "xmetric":"left","x":5, "ymetric": "top", "y":33, "width": 30, "opacity": 0},
 			{"image":"coin-flipping", "xmetric":"left","x":45, "ymetric": "top", "y":40, "width": 10, "opacity": 0},
-			{"image":"coin-tails", "xmetric":"left","x":40, "ymetric": "top", "y":28, "width": 20, "opacity": 0}
+			{"image":"coin-tails", "xmetric":"left","x":44, "ymetric": "top", "y":33, "width": 12, "opacity": 0}
 			],
 		"scrolly2-8": [
-			{"image":"the-100", "xmetric":"left","x":0, "ymetric": "top", "y":0, "width": 100, "opacity": 0.1},
+			{"image":"the-100", "xmetric":"left","x":-20, "ymetric": "top", "y":-50, "width": 200, "opacity": 0.1},
 			{"image":"player1-full", "xmetric":"left","x":5, "ymetric": "bottom", "y":5, "width": 30, "opacity": 0},
 			{"image":"player3-full", "xmetric":"right","x": 5, "ymetric": "bottom", "y":5, "width": 30, "opacity": 0},
-			{"image":"player1-happy", "xmetric":"left","x":5, "ymetric": "top", "y":28, "width": 30, "opacity": 1},
-			{"image":"player3-happy", "xmetric":"right","x": 5, "ymetric": "top", "y":28, "width": 30, "opacity": 1},
-			{"image":"player1-sad", "xmetric":"left","x":5, "ymetric": "top", "y":28, "width": 30, "opacity": 0},
+			{"image":"player1-happy", "xmetric":"left","x":5, "ymetric": "top", "y":33, "width": 30, "opacity": 1},
+			{"image":"player2-happy", "xmetric":"right","x": 5, "ymetric": "top", "y":33, "width": 30, "opacity": 0},
+			{"image":"player3-sad", "xmetric":"right","x": 5, "ymetric": "top", "y":33, "width": 30, "opacity": 1},
+			{"image":"player1-sad", "xmetric":"left","x":5, "ymetric": "top", "y":33, "width": 30, "opacity": 0},
 			{"image":"coin-flipping", "xmetric":"left","x":45, "ymetric": "top", "y":200, "width": 10, "opacity": 0},
-			{"image":"coin-tails", "xmetric":"left","x":40, "ymetric": "top", "y":28, "width": 20, "opacity": 0}
+			{"image":"coin-tails", "xmetric":"left","x":44, "ymetric": "top", "y":33, "width": 10, "opacity": 0}
 			],
 		"scrolly2-9": [
-			{"image":"the-100", "xmetric":"left","x":0, "ymetric": "top", "y":0, "width": 100, "opacity": 0.1},
+			{"image":"the-100", "xmetric":"left","x":-20, "ymetric": "top", "y":-50, "width": 200, "opacity": 0.1},
 			{"image":"player1-full", "xmetric":"left","x":5, "ymetric": "bottom", "y":5, "width": 30, "opacity": 0},
 			{"image":"player3-full", "xmetric":"right","x": 5, "ymetric": "bottom", "y":5, "width": 30, "opacity": 0},
-			{"image":"player1-happy", "xmetric":"left","x":5, "ymetric": "top", "y":28, "width": 30, "opacity": 1},
-			{"image":"player3-happy", "xmetric":"right","x": 5, "ymetric": "top", "y":28, "width": 30, "opacity": 1},
-			{"image":"player1-sad", "xmetric":"left","x":5, "ymetric": "top", "y":28, "width": 30, "opacity": 0},
-			{"image":"coin-flipping", "xmetric":"left","x":45, "ymetric": "top", "y":28, "width": 10, "opacity": 1},
-			{"image":"coin-tails", "xmetric":"left","x":40, "ymetric": "top", "y":28, "width": 20, "opacity": 0}
+			{"image":"player1-happy", "xmetric":"left","x":5, "ymetric": "top", "y":33, "width": 30, "opacity": 1},
+			{"image":"player2-happy", "xmetric":"right","x": 5, "ymetric": "top", "y":33, "width": 30, "opacity": 0},
+			{"image":"player3-sad", "xmetric":"right","x": 5, "ymetric": "top", "y":33, "width": 30, "opacity": 1},
+			{"image":"player1-sad", "xmetric":"left","x":5, "ymetric": "top", "y":33, "width": 30, "opacity": 0},
+			{"image":"coin-flipping", "xmetric":"left","x":45, "ymetric": "top", "y":33, "width": 10, "opacity": 1},
+			{"image":"coin-tails", "xmetric":"left","x":44, "ymetric": "top", "y":33, "width": 12, "opacity": 0}
 			],
 		"scrolly2-10": [
-			{"image":"the-100", "xmetric":"left","x":0, "ymetric": "top", "y":0, "width": 100, "opacity": 0.1},
+			{"image":"the-100", "xmetric":"left","x":-20, "ymetric": "top", "y":-50, "width": 200, "opacity": 0.1},
 			{"image":"player1-full", "xmetric":"left","x":5, "ymetric": "bottom", "y":5, "width": 30, "opacity": 0},
 			{"image":"player3-full", "xmetric":"right","x": 5, "ymetric": "bottom", "y":5, "width": 30, "opacity": 0},
-			{"image":"player1-happy", "xmetric":"left","x":5, "ymetric": "top", "y":28, "width": 30, "opacity": 0},
-			{"image":"player3-happy", "xmetric":"right","x": 5, "ymetric": "top", "y":28, "width": 30, "opacity": 1},
-			{"image":"player1-sad", "xmetric":"left","x":5, "ymetric": "top", "y":28, "width": 30, "opacity": 1},
+			{"image":"player1-happy", "xmetric":"left","x":5, "ymetric": "top", "y":33, "width": 30, "opacity": 0},
+			{"image":"player2-happy", "xmetric":"right","x": 5, "ymetric": "top", "y":33, "width": 30, "opacity": 0},
+			{"image":"player3-happy", "xmetric":"right","x": 5, "ymetric": "top", "y":33, "width": 30, "opacity": 1},
+			{"image":"player1-sad", "xmetric":"left","x":5, "ymetric": "top", "y":33, "width": 30, "opacity": 1},
 			{"image":"coin-flipping", "xmetric":"left","x":45, "ymetric": "top", "y":40, "width": 10, "opacity": 0},
-			{"image":"coin-tails", "xmetric":"left","x":40, "ymetric": "top", "y":40, "width": 20, "opacity": 1}
+			{"image":"coin-tails", "xmetric":"left","x":44, "ymetric": "top", "y":40, "width": 12, "opacity": 1}
 			],
 		"scrolly3-0": {"roundLimit":2, "increment":1},
 		"scrolly3-1": {"roundLimit":2, "increment":1},
-		"scrolly3-2": {"roundLimit":10000, "increment":10},
-		"scrolly3-3": {"roundLimit":10000, "increment":1000},
+		"scrolly3-2": {"roundLimit":10000, "increment":4}
 	}
 
 	// Game info for each stage
 	const wealthLookup = {
 		"0": {
-			"player1": 0,
-			"player2": 0,
-			"wager": 0,
-			"player1Words": "",
-			"player2Words": ""
-		},
-		"1": {
 			"player1": 800,
 			"player2": 800,
 			"wager": 0,
 			"player1Words": "",
-			"player2Words": ""
+			"player2Words": "",
+			"player1Record": "0 - 0",
+			"player2Record": "0 - 0"
+		},
+		"1": {
+			"player1": 1000,
+			"player2": 1000,
+			"wager": 0,
+			"player1Words": "",
+			"player2Words": "",
+			"player1Record": "0 - 0",
+			"player2Record": "0 - 0"
 		},
 		"2": {
 			"player1": 1000,
 			"player2": 1000,
 			"wager": 200,
-			"player1Words": "I can only afford to bet 20%.",
-			"player2Words": "Same here."
+			"player1Words": "I have $1,000 and can only afford to bet 20%.",
+			"player2Words": "Same here.",
+			"player1Record": "0 - 0",
+			"player2Record": "0 - 0"
 		},
 		"3": {
 			"player1": 1000,
 			"player2": 1000,
 			"wager": 200,
 			"player1Words": "Heads!",
-			"player2Words": ""
+			"player2Words": "",
+			"player1Record": "0 - 0",
+			"player2Record": "0 - 0"
 		},
 		"4": {
 			"player1": 800,
 			"player2": 1200,
 			"wager": 200,
-			"player1Words": "Aww, I lost.",
-			"player2Words": "I won $200!"
+			"player1Words": "It's tails. I lost.",
+			"player2Words": "I won $200!",
+			"player1Record": "0 - 1",
+			"player2Record": "1 - 0"
 		},
 		"5": {
 			"player1": 800,
 			"player2": 1200,
 			"wager": 200,
-			"player1Words": "I'll win next time.",
-			"player2Words": ""
+			"player1Words": "",
+			"player2Words": "",
+			"player1Record": "0 - 1",
+			"player2Record": "1 - 0"
 		},
 		"6": {
 			"player1": 800,
 			"player2": 1200,
 			"wager": 200,
 			"player1Words": "",
-			"player2Words": ""
+			"player2Words": "",
+			"player1Record": "0 - 1",
+			"player2Record": "1 - 0"
 		},
 		"7": {
 			"player1": 800,
 			"player2": 1200,
 			"wager": 240,
 			"player1Words": "",
-			"player2Words": "I want to bet $240, since that's 20% of my money."
+			"player2Words": "I won last game. So I want to bet 20% of my money – $240.",
+			"player1Record": "0 - 1",
+			"player2Record": "1 - 0"
 		},
 		"8": {
 			"player1": 800,
 			"player2": 1200,
 			"wager": 160,
-			"player1Words": "A $240 wager is too much for me. Let's bet $160.",
-			"player2Words": ""
+			"player1Words": "That's too much. I lost last game, so I can only bet 20% of my money – $160.",
+			"player2Words": "OK fine.",
+			"player1Record": "0 - 1",
+			"player2Record": "1 - 0"
 		},
 		"9": {
 			"player1": 800,
 			"player2": 1200,
 			"wager": 160,
 			"player1Words": "Heads!",
-			"player2Words": ""
+			"player2Words": "",
+			"player1Record": "0 - 1",
+			"player2Record": "1 - 0"
 		},
 		"10": {
 			"player1": 640,
 			"player2": 1360,
 			"wager": 160,
-			"player1Words": "Lost again...",
-			"player2Words": "Two wins in a row!"
+			"player1Words": "Lost again. I'm down to $640.",
+			"player2Words": "Two wins in a row, baby!",
+			"player1Record": "0 - 2",
+			"player2Record": "2 - 0"
 		}
 	}
 
@@ -314,10 +339,10 @@
 
 				<!-- Speech bubbles -->
 				{#if container == "scrolly2" && wealthLookup[currentStageNumber].player1Words != "" }
-				<div class="speechBubble player1bubble" in:fade={{ delay: 400 }} out:fade>{wealthLookup[currentStageNumber].player1Words}</div>
+				<div class="speechBubble player1bubble" in:fade={{ delay: 0 }} out:fade>{wealthLookup[currentStageNumber].player1Words}</div>
 				{/if}
 				{#if container == "scrolly2" && wealthLookup[currentStageNumber].player2Words != "" }
-				<div class="speechBubble player2bubble" in:fade={{ delay: 400 }} out:fade>{wealthLookup[currentStageNumber].player2Words}</div>
+				<div class="speechBubble player2bubble" in:fade={{ delay: 600 }} out:fade>{wealthLookup[currentStageNumber].player2Words}</div>
 				{/if}
 				{:else}
 				<!-- YSM simulation -->
@@ -326,12 +351,23 @@
 
 				<!-- Comic coin flip overlay data -->
 				<div class="gameContainer">
-					{#if container == "scrolly2" && [2,3,4,5,7,8,9,10].indexOf(currentStageNumber) != -1 }
-					<div class="player1 wealthNumber" in:fade={{ delay: 400 }} out:fade>${comma(gameinfo.player1)}</div>
-					<div class="player2 wealthNumber" in:fade={{ delay: 400 }} out:fade>${comma(gameinfo.player2)}</div>
+					{#if container == "scrolly2" && [1,2,3,4,5,7,8,9,10].indexOf(currentStageNumber) != -1 }
+					<div class="player1 wealthNumber" in:fade={{ delay: 400 }} out:fade>
+						<div class="gameInfoItem brighter">Player 1</div>
+						<div class="gameInfoItem">${comma(gameinfo.player1)}</div>
+						<div class="gameInfoItem">{wealthLookup[currentStageNumber].player1Record}</div>
+					</div>
+					<div class="player2 wealthNumber" in:fade={{ delay: 400 }} out:fade>
+						<div class="gameInfoItem brighter">Player 2</div>
+						<div class="gameInfoItem">${comma(gameinfo.player2)}</div>
+						<div class="gameInfoItem">{wealthLookup[currentStageNumber].player2Record}</div>
+					</div>
 					{/if}
 					{#if container == "scrolly2" && [2,3,7,8,9].indexOf(currentStageNumber) != -1 }
-					<div class="wager" in:fade={{ delay: 0 }} out:fade>Wager<br><span>${comma(gameinfo.wager)}</span></div>
+					<div class="wager" in:fade={{ delay: 0 }} out:fade>
+						<div class="gameInfoItem brighter">Wager</div>
+						<div class="gameInfoItem">${comma(gameinfo.wager)}</div>
+					</div>
 					{/if}
 				</div>
 				<!-- Scroll down hint on stage 1 -->
@@ -341,6 +377,7 @@
 
 				<div class="fuzzy" style="opacity:{bgOpacity};"></div>
 			</div>
+			{#if currentText != ""}
 			<div class="comicText">
 				{#if container == "scrolly3" && currentStageNumber == 2 && r == 10000}
 				<p>Whoa, you lost all your money. Meanwhile, one person ended up with nearly all of the wealth!</p>
@@ -348,6 +385,7 @@
 				{@html convertToHTML(currentText)}
 				{/if}
 			</div>
+			{/if}
 		</div>
 		<div class="scrollyContainer">
 			<Scrolly bind:value top={400}>
@@ -373,53 +411,45 @@
 	}
 
 	.gameContainer {
+		display: block;
 		position: absolute;
-		top: 28%;
-		width:100%;
+		top: 40px;
+		width: 100%;
+		color: white;
+		font-size: 22px;
+		line-height: 1.3em;
 		font-family: "National 2 Web", sans-serif;
 	}
-	.gameContainer div {
-		position: absolute;
-		text-align: center;
+	.gameContainer .brighter {
+		color: var(--category-purple);
+		font-weight: bold;
+		text-transform: uppercase;
+		letter-spacing: 2px;
 	}
 	.gameContainer .wealthNumber {
 		position: absolute;
-		color: white;
-		background: #420070;
-		padding: 2px;
-		font-size: 24px;
+		top: 0px;
+		width: 200px;
 	}
-	@media only screen and (max-width: 860px) {
-		.gameContainer .wealthNumber {
-			font-size: 20px;
-		}
-	}
-	@media only screen and (max-width: 600px) {
-		.gameContainer .wealthNumber {
-			font-size: 16px;
-		}
-	}
-	@media only screen and (max-width: 400px) {
-		.gameContainer .wealthNumber {
-			font-size: 13px;
-		}
-	}
+
 	.gameContainer .wager {
-		color: #f5dcf2;
-		width:110px;
-		left:50%;
-		margin-left:-55px;
-		margin-top: -100px;
-		line-height:27px;
+		position: absolute;
+		text-align: center;
+		width: 100%;
+		left: 0%;
 	}
-	.gameContainer .wager span {
-		font-size:30px;
+	@media only screen and (max-width: 640px) { 
+		.gameContainer {
+			font-size: 18px;
+		}
 	}
-	.player1 {
+	.gameContainer .player1 {
 		left: 5%;
+		text-align: left;
 	}
-	.player2 {
+	.gameContainer .player2 {
 		right: 5%;
+		text-align: right;
 	}
 	.scrolly {
 		max-width:  1100px;
@@ -438,10 +468,13 @@
 		margin: 0 auto;
 		height:  auto;
 		z-index: 2;
-		border: 2px solid #000;
+		border: 1px solid #000;
 /*		padding-bottom: 100px;*/
 		max-height: 95vh;
 		max-width: 100vh;
+/*		box-shadow: 0px -1px 25px 0px rgba(0,0,0,0.5) inset;
+		-webkit-box-shadow: 0px -1px 25px 0px rgba(0,0,0,0.5) inset;
+		-moz-box-shadow: 0px -1px 25px 0px rgba(0,0,0,0.5) inset;*/
 	}
 	.scrollyImageContainer {
 		width: 100%;
@@ -462,6 +495,7 @@
 		position: absolute;
 		left: -125%;
 		top: -125%;
+		pointer-events: none;
 	}
 	@keyframes grain {
 		0%, 100% { transform:translate(0, 0) }
@@ -497,18 +531,14 @@
 		transition-timing-function: cubic-bezier(0.250, 0.100, 0.250, 1.000);
 	}
 	.player1-happy, .player2-happy, .player3-happy {
-		background: var(--category-purple) !important;
-		border: 2px solid var(--category-bg-purple);
-		box-shadow: 0px -1px 25px 0px rgba(0,0,0,0.75) inset;
-		-webkit-box-shadow: 0px -1px 25px 0px rgba(0,0,0,0.75) inset;
-		-moz-box-shadow: 0px -1px 25px 0px rgba(0,0,0,0.75) inset; 
+/*		background: var(--category-purple) !important;*/
+		background: #c5b3c7;
+/*		border: 1px solid var(--category-bg-purple);*/
 	} 
 	.player1-sad, .player2-sad, .player3-sad {
-		background: var(--category-purple2) !important;
-		border: 2px solid var(--category-bg-purple);
-		box-shadow: 0px -1px 25px 0px rgba(0,0,0,0.75) inset;
-		-webkit-box-shadow: 0px -1px 25px 0px rgba(0,0,0,0.75) inset;
-		-moz-box-shadow: 0px -1px 25px 0px rgba(0,0,0,0.75) inset;
+/*		background: var(--category-purple2) !important;*/
+		background: #c5b3c7;
+/*		border: 1px solid var(--category-bg-purple);*/
 	}
 
 	.scrollyBackground .hidden {
@@ -542,9 +572,9 @@
 	}
 
 	@media only screen and (max-width: 640px) {
-		.scrolly {
+		/*.scrolly {
 			margin-bottom: 100px;
-		}
+		}*/
 		.scrollyContainer {
 			width: 100%;
 			margin: 0 0%;

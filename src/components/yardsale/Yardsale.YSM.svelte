@@ -21,7 +21,7 @@
 		players = [];
 		for (let i in [...Array(playerNumber).keys()]) {
 			let player = {
-				"wealth": startingAmount,
+				"wealth": 1000,
 				"id": i,
 				"order": 0,
 				"height": 0
@@ -99,28 +99,18 @@
 	function sortPlayers() {
 		players.sort(dynamicSort("wealth"));
 		// Iterating through player to determine highest number AND to give players the redistributed pot
-		worldrecord = 0;
-		highestNumber = 0;
 		for (let i = 0; i < players.length; i++) {
 			players[i].wealth = players[i].wealth + redistributionPot / 100;
 			if (players[i].wealth > worldrecord) {
 				worldrecord = players[i].wealth;
 			}
 		};
-		if (worldrecord > 68000) {
-			highestNumber = 100000;
-		} else if (worldrecord > 33000) {
-			highestNumber = 75000;
-		} else if (worldrecord > 23000) {
+		if (worldrecord > 40000) {
+			highestNumber = 120000;
+		} else if (worldrecord > 8000) {
 			highestNumber = 50000;
-		} else if (worldrecord > 9000) {
-			highestNumber = 25000;
-		} else if (worldrecord > 4800) {
-			highestNumber = 10000;
-		} else if (worldrecord > 2400) {
-			highestNumber = 5000;
 		} else {
-			highestNumber = 2500;
+			highestNumber = 10000;
 		}
 		// Giving some breathing room for the highest number
 		// highestNumber = highestNumber <= 200 ? 200 : highestNumber * 1.2;
@@ -175,7 +165,7 @@
 			</div> -->
 			<div class="toolLabel"><strong>Redistribution</strong>: How much of each player's wealth should be redistributed to everyone else after each round?</div>
 			<div class="toolItem">
-				<Range min=0 max=100 bind:value={redistribution}/>
+				<Range min=0 max=100 bind:value={redistribution} on:input={reset} dis={running}/>
 				<div class="toolValue">{redistribution}%</div>
 			</div>
 			{/if}
@@ -204,7 +194,14 @@
 				{/each}
 				{#each players as player}
 				<rect class="player" x={player.order * ((chartWidth-100) / playerNumber) + 50 } width={chartWidth / 200} height={player.height} y={chartHeight - player.height}></rect>
+				{#if player.order == 0}
+					<text class="player1Text" x={player.order * ((chartWidth-50) /playerNumber) + 45 } y={chartHeight - player.height - 7}>Poorest: ${comma(Math.round(player.wealth))}</text>
+				{/if}
+				{#if player.order == 99 }
+					<text class="player2Text" x={player.order * ((chartWidth-50) /playerNumber) + 5} y={chartHeight - player.height - 7}>Richest: ${comma(Math.round(player.wealth))}</text>
+				{/if}
 				{/each}
+
 			</svg>
 		</div>
 		<div class="resetContainer">

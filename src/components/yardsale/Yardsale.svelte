@@ -34,18 +34,18 @@
 
 	<!-- SECTION 2 -->
 	<YardsaleCopy hed={copy.MiddleHed} words={copy.MiddleSection1} />
-	<YardsaleParetoChart />
-	<YardsaleFedChart />
-	<YardsaleCopy hed="" words={copy.MiddleSection2} />
+	<!-- <YardsaleParetoChart /> -->
+	<!-- <YardsaleFedChart /> -->
+	<!-- <YardsaleCopy hed="" words={copy.MiddleSection2} /> -->
 	<YardsaleYSM redist=-1 />
-	<YardsaleCopy hed="" words={copy.MiddleSection3} />
+	<YardsaleCopy hed="" words={copy.MiddleSection2} />
 
 	<!-- SECTION 3 -->
 	<YardsaleCopy hed={copy.EndHed} words={copy.EndSection1} />
 	<YardsaleYSM redist=1 />
 	<YardsaleCopy hed="" words={copy.EndSection2} />
-	<YardsaleTop400 />
-	<YardsaleCopy hed="" words={copy.EndSection3} />
+	<!-- <YardsaleTop400 /> -->
+	<!-- <YardsaleCopy hed="" words={copy.EndSection3} /> -->
 
 </div>
 

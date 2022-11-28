@@ -156,7 +156,7 @@
 					<div class="profile profile1">
 						<div class="headshot bg-{players.p1.mood}" style="background-image:url(assets/yardsale/art/player1-{players.p1.mood}.png)">
 							{#if players.p1.wins == 0 && players.p2.wins == 0}
-							<div class="speechBubble player1bubble" in:fade={{ delay: 0 }} out:fade>I bet 20% of my money!</div>
+							<div class="speechBubble player1bubble" in:fade={{ delay: 0 }} out:fade>I'm poorer, so I can only bet 20% of my money.</div>
 							{/if}
 							{#if players.p1.wins == 1 && players.p2.wins == 0}
 							<div class="speechBubble player1bubble" in:fade={{ delay: 0 }} out:fade>Yes! I win $20!</div>
@@ -207,8 +207,8 @@
 			<figure>
 				<div class="profile profile2">
 					<div class="headshot bg-{players.p2.mood}" style="background-image:url(assets/yardsale/art/player4-{players.p2.mood}.png)">
-						{#if players.p2.rate < 45 && players.p2.latest == "lost" && players.p1.wins > 2 }
-						<div class="speechBubble player2bubble" in:fade={{ delay: 0 }} out:fade>This is unfair.</div>
+						{#if players.p2.rate < 45 && players.p2.latest == "lost" && players.p1.wins > 2 &&  players.p1.wins < 8}
+						<div class="speechBubble player1bubble" in:fade={{ delay: 0 }} out:fade>This is unfair.</div>
 						{/if}
 					</div>
 					<div class="playerName"><strong>Player 2</strong>
@@ -277,7 +277,7 @@
 		flex: 2;
 	}
 	.ysm_container section figure {
-		background: white; 
+		background: #eee; 
 		padding: 60px 5px 5px;
 		border: 1px solid var(--category-purple2);
 	}
@@ -316,7 +316,7 @@
 		text-transform: none;
 		font-weight: normal;
 		font-size: 14px;
-		color: var(--category-purple2);
+		color: var(--category-bg-purple);
 	}
 	h3 {
 		font-weight: 500;

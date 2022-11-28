@@ -72,12 +72,8 @@
 		});
 		// setting the ticks based on the highest number
 		
-		if (worldrecord > 68000) {
-			highestNumber = 100000;
-		} else if (worldrecord > 33000) {
-			highestNumber = 75000;
-		} else if (worldrecord > 23000) {
-			highestNumber = 50000;
+		if (worldrecord > 20000) {
+			highestNumber = 120000;
 		} else if (worldrecord > 9000) {
 			highestNumber = 25000;
 		} else if (worldrecord > 4800) {
@@ -139,7 +135,7 @@
 			randomIndex = Math.floor(Math.random() * currentIndex);
 			currentIndex--;
 			[array[currentIndex], array[randomIndex]] = [
-			array[randomIndex], array[currentIndex]];
+				array[randomIndex], array[currentIndex]];
 		}
 		return array;
 	}
@@ -158,8 +154,15 @@
 			<text class="chartText" x=0 y={tick[1] - 5}>${comma(tick[0])}</text>
 			{/each}
 			{#each players as player}
-			<rect class="player player{player.is_it_me}" x={player.order * ((chartWidth-50) /playerNumber) + 50 } width={chartWidth / 200} height={player.height} y={chartHeight - player.height}></rect>
+			<rect class="player player{player.order}" x={player.order * ((chartWidth-50) /playerNumber) + 50 } width={chartWidth / 200} height={player.height} y={chartHeight - player.height}></rect>
+			{#if player.order == 0}
+				<text class="player1Text" x={player.order * ((chartWidth-50) /playerNumber) + 40 } y={chartHeight - player.height - 7}>You: ${Math.round(player.wealth)}</text>
+			{/if}
+			{#if player.order == 99 }
+				<text class="player2Text" x={player.order * ((chartWidth-50) /playerNumber) + 55} y={chartHeight - player.height - 7}>Richest: ${comma(Math.round(player.wealth))}</text>
+			{/if}
 			{/each}
+
 		</svg>
 	</div>
 	<div class="toolbar ysm_data">
@@ -187,11 +190,9 @@
 	svg { width: 100%; height: 100%; }
 	.toolLabel { margin-bottom: 20px; }
 	.player {
-		fill:  #9e9ac8;
+		fill:  var(--category-purple2);
 	}
-	.player.player1 {
-		fill: #ff7e00;
-	}
+	
 	svg line {
 		stroke-dasharray: 4px 4px;
 		stroke: rgba(0,0,0,0.2);
