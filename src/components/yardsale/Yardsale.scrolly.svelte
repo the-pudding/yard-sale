@@ -4,7 +4,6 @@
 	import Scrolly from "$components/helpers/Scrolly.svelte";
 	import { fade } from 'svelte/transition';
 	export let words; // words from google doc
-	export let scrollyNum; // 0 to 2
 	
 	export let container; // container name, ie "scrolly3"
 	let currentStageNumber = 0; // stage number
@@ -18,6 +17,8 @@
 	let bgOpacity = 1;
 	let r = 0;
 	let currentText;
+	let currentLocation = 0;
+	let progress;
 
 	// Keyframes for each stage
 	const stageLookup = {
@@ -34,6 +35,18 @@
 			{"image":"plus-minus", "xmetric":"left","x":-20, "ymetric": "top", "y":-20, "width": 140, "opacity": 0}
 			],
 		"scrolly1-2": [
+			{"image":"pawnshop", "xmetric":"left","x":0, "ymetric": "top", "y":0, "width": 100, "opacity": 0},
+			{"image":"watch-zoom", "xmetric":"left","x":0, "ymetric": "top", "y":0, "width": 100, "opacity": 0},
+			{"image":"phone", "xmetric":"left","x":-50, "ymetric": "top", "y":20, "width": 30, "opacity": 0},
+			{"image":"plus-minus", "xmetric":"left","x":0, "ymetric": "top", "y":0, "width": 100, "opacity": 1}
+			],
+		"scrolly1-2": [
+			{"image":"pawnshop", "xmetric":"left","x":0, "ymetric": "top", "y":0, "width": 100, "opacity": 0},
+			{"image":"watch-zoom", "xmetric":"left","x":0, "ymetric": "top", "y":0, "width": 100, "opacity": 0},
+			{"image":"phone", "xmetric":"left","x":-50, "ymetric": "top", "y":20, "width": 30, "opacity": 0},
+			{"image":"plus-minus", "xmetric":"left","x":0, "ymetric": "top", "y":0, "width": 100, "opacity": 1}
+			],
+		"scrolly1-3": [
 			{"image":"pawnshop", "xmetric":"left","x":0, "ymetric": "top", "y":0, "width": 100, "opacity": 0},
 			{"image":"watch-zoom", "xmetric":"left","x":0, "ymetric": "top", "y":0, "width": 100, "opacity": 0},
 			{"image":"phone", "xmetric":"left","x":-50, "ymetric": "top", "y":20, "width": 30, "opacity": 0},
@@ -156,8 +169,8 @@
 	// Game info for each stage
 	const wealthLookup = {
 		"0": {
-			"player1": 800,
-			"player2": 800,
+			"player1": 600,
+			"player2": 600,
 			"wager": 0,
 			"player1Words": "",
 			"player2Words": "",
@@ -178,7 +191,7 @@
 			"player2": 1000,
 			"wager": 200,
 			"player1Words": "I have $1,000 and can only afford to bet 20%.",
-			"player2Words": "Same here.",
+			"player2Words": "OK let's do $200.",
 			"player1Record": "0 - 0",
 			"player2Record": "0 - 0"
 		},
@@ -283,11 +296,10 @@
 		"player2": 1000,
 		"wager": 200
 	}
-
 	setInterval(function() {
-		updateWealth("player1");
-		updateWealth("player2");
-		updateWealth("wager");
+		for (var key in gameinfo) {
+			updateWealth(key);
+		}
 	},5);
 
 	function updateWealth(item) {
@@ -297,7 +309,6 @@
 			gameinfo[item] = gameinfo[item] - 1;
 		}
 	}
-
 
 	// Utility functions
 	function comma(x) {
@@ -317,6 +328,17 @@
 		return "<p>" + finalText.join("</p><p>") + "</p>";
 	}
 
+	let currentProgress = 0;
+	function getProgress() {
+		try {
+			currentProgress = (currentStageNumber + (progress[currentStageNumber]/2) ) / words.length;
+		} catch {
+			currentProgress = 0;
+		}	
+		if (currentProgress > 1) { currentProgress = 1; }
+	}
+	
+
 	$: {
 		newScroll(value)
 		currentStage = currentStage;
@@ -324,6 +346,8 @@
 		stepHeight = stepHeight;
 		panelHeight = stepWidth;
 		currentText = words[currentStageNumber];
+		progress = progress;
+		getProgress();
 	}
 	
 </script>
@@ -354,13 +378,23 @@
 					{#if container == "scrolly2" && [1,2,3,4,5,7,8,9,10].indexOf(currentStageNumber) != -1 }
 					<div class="player1 wealthNumber" in:fade={{ delay: 400 }} out:fade>
 						<div class="gameInfoItem brighter">Player 1</div>
-						<div class="gameInfoItem">${comma(gameinfo.player1)}</div>
 						<div class="gameInfoItem">{wealthLookup[currentStageNumber].player1Record}</div>
+						<div class="gameInfoItem">${comma(gameinfo.player1)}</div>
+						<div class="gameInfoItem">
+							<div class="gameInfoFullbar">
+								<div class="gameInfoBar" style="width:{gameinfo.player1/20}%"></div>
+							</div>
+						</div>
 					</div>
 					<div class="player2 wealthNumber" in:fade={{ delay: 400 }} out:fade>
 						<div class="gameInfoItem brighter">Player 2</div>
-						<div class="gameInfoItem">${comma(gameinfo.player2)}</div>
 						<div class="gameInfoItem">{wealthLookup[currentStageNumber].player2Record}</div>
+						<div class="gameInfoItem">${comma(gameinfo.player2)}</div>
+						<div class="gameInfoItem">
+							<div class="gameInfoFullbar">
+								<div class="gameInfoBar" style="width:{gameinfo.player2/20}%"></div>
+							</div>
+						</div>
 					</div>
 					{/if}
 					{#if container == "scrolly2" && [2,3,7,8,9].indexOf(currentStageNumber) != -1 }
@@ -377,7 +411,7 @@
 
 				<div class="fuzzy" style="opacity:{bgOpacity};"></div>
 			</div>
-			{#if currentText != ""}
+			<!-- {#if currentText != ""}
 			<div class="comicText">
 				{#if container == "scrolly3" && currentStageNumber == 2 && r == 10000}
 				<p>Whoa, you lost all your money. Meanwhile, one person ended up with nearly all of the wealth!</p>
@@ -385,19 +419,60 @@
 				{@html convertToHTML(currentText)}
 				{/if}
 			</div>
-			{/if}
+			{/if} -->
+
+			<!-- <div class="scrollIndicator">
+				{#each words as text, i}
+				<div class="scrollIndicatorStage" style="top: {i/words.length * 100}%"></div>
+				{/each}
+				<div class="scrollIndicatorPosition" style="height:{100 * currentProgress}%"></div>
+			</div> -->
 		</div>
+
+		<style>
+			.scrollIndicator {
+				position: absolute;
+				right: 0px;
+				height: 100%;
+				width: 5px;
+				top: 0;
+				background: rgba(255,255,255,0.1);
+			}
+			.scrollIndicatorStage, .scrollIndicatorPosition {
+				position: absolute;
+				left: 0px;
+				width: 100%;
+				height: 2px;
+				background: #000;
+			}
+			.scrollIndicatorPosition {
+				background: var(--category-bg-purple);
+				transition: all 20ms cubic-bezier(0.250, 0.250, 0.750, 0.750);
+				transition-timing-function: cubic-bezier(0.250, 0.250, 0.750, 0.750);
+			}
+		</style>
+
 		<div class="scrollyContainer">
-			<Scrolly bind:value top={400}>
+			<Scrolly bind:value bind:progress={progress}>
 				{#each words as text, i}
 				{@const active = value === i}
+				{#if text != ""}
 				<div class="step step{i}" class:active>
-					{#if container == "scrolly3" && currentStageNumber == 2 && r == 10000}
+					{#if container == "scrolly3" && currentStageNumber == 2 && r > 1500 && r < 4500}
+					<p>Still simulating 10,000 rounds...</p>
+					{:else if container == "scrolly3" && currentStageNumber == 2 && r > 4500 && r < 10000}
+					<p>Seriously, just wait...</p>
+					{:else if container == "scrolly3" && currentStageNumber == 2 && r == 10000}
 					<p>Whoa, you lost all your money. Meanwhile, one person ended up with nearly all of the wealth!</p>
 					{:else}
 					<p>{text}</p>
 					{/if}
 				</div>
+				{:else}
+				<div class="step step{i} stepHidden" class:active>
+					<p>{text}</p>
+				</div>
+				{/if}
 				{/each}
 			</Scrolly>
 		</div>
@@ -429,7 +504,7 @@
 	.gameContainer .wealthNumber {
 		position: absolute;
 		top: 0px;
-		width: 200px;
+		width: 50%;
 	}
 
 	.gameContainer .wager {
@@ -451,15 +526,41 @@
 		right: 5%;
 		text-align: right;
 	}
+	.gameInfoItem {
+		width: 100%;
+		position: relative;
+	}
+	.gameInfoFullbar {
+		width: 70%;
+		position: absolute;
+		height: 20px;
+		border: 2px solid var(--category-bg-purple);
+		background: var(--category-purple2);
+		left: 0;
+		top: 0;
+		margin-top: 4px;
+	}
+	.gameInfoBar {
+		height: 100%;
+		background: var(--category-bg-purple);	
+		position: absolute;
+		left: 0;
+		top: 0;
+	}
+	.player2 .gameInfoFullbar, .player2 .gameInfoBar  {
+		left: auto;
+		right: 0;
+	}
 	.scrolly {
 		max-width:  1100px;
 		margin: 0px auto;
 	}
 	.scrollyContainer {
-		margin-left: 65%;
-		width: 35%;
-		opacity: 0;
-		pointer-events: none;
+/*		margin-left: 65%;*/
+width: 100%;
+/*		opacity: 0;
+		pointer-events: none;*/
+		z-index: 3;
 	}
 	.scrollyBackground {
 		position: sticky;
@@ -467,14 +568,10 @@
 		width:  90%;
 		margin: 0 auto;
 		height:  auto;
-		z-index: 2;
 		border: 1px solid #000;
-/*		padding-bottom: 100px;*/
 		max-height: 95vh;
 		max-width: 100vh;
-/*		box-shadow: 0px -1px 25px 0px rgba(0,0,0,0.5) inset;
-		-webkit-box-shadow: 0px -1px 25px 0px rgba(0,0,0,0.5) inset;
-		-moz-box-shadow: 0px -1px 25px 0px rgba(0,0,0,0.5) inset;*/
+		z-index: -1;
 	}
 	.scrollyImageContainer {
 		width: 100%;
@@ -513,13 +610,13 @@
 		position: absolute;
 		width: 0; 
 		height: 0; 
-		border-left: 20px solid transparent;
-		border-right: 20px solid transparent;
-		border-top: 20px solid var(--category-purple2);
-		left: 50%;
-		bottom: 25%;
-		margin-left: -10px;
-		opacity: 0.7;
+		border-left: 10px solid transparent;
+		border-right: 10px solid transparent;
+		border-top: 15px solid var(--category-purple2);
+		right: 20px;
+		bottom: 20px;
+		margin-left: -5px;
+		opacity: 0.4;
 		z-index: 1000;
 		animation: bounce 1s ease infinite;
 	}
@@ -531,14 +628,11 @@
 		transition-timing-function: cubic-bezier(0.250, 0.100, 0.250, 1.000);
 	}
 	.player1-happy, .player2-happy, .player3-happy {
-/*		background: var(--category-purple) !important;*/
 		background: #c5b3c7;
-/*		border: 1px solid var(--category-bg-purple);*/
 	} 
 	.player1-sad, .player2-sad, .player3-sad {
-/*		background: var(--category-purple2) !important;*/
 		background: #c5b3c7;
-/*		border: 1px solid var(--category-bg-purple);*/
+
 	}
 
 	.scrollyBackground .hidden {
@@ -548,33 +642,27 @@
 		display: block;
 		height: 100vh;
 		text-align: left;
-		z-index: 100;
 		width: 100%;
 		min-width: 200px;
-		margin-left:  5px;
-		opacity:  1;
 		box-sizing: border-box;
 	}
-/*	.step.active {
-		opacity:  1;
-	}*/
+	.step.stepHidden {
+		opacity: 0;
+		pointer-events: none;
+	}
 	.step > p {
 		font-family: "National 2 Web";
-		width: 100%;
-		/*border:  1px solid #000;*/
-		/*padding: 1rem;*/
-		/*background:  white;*/
-		font-size:  23px;
-		padding:  4rem 0;
+		max-width: 500px;
+		margin: 0 auto;
+		background:  rgba(0,0,0,0.8);
+		font-size:  18px;
+		padding:  10px;
 		box-sizing: border-box;
-/*		color: white;
-		text-shadow: -1px -1px 6px rgba(0, 0, 0, 0.5);*/
+		color: white;
+		text-shadow: -1px -1px 6px rgba(0, 0, 0, 0.5);
 	}
 
 	@media only screen and (max-width: 640px) {
-		/*.scrolly {
-			margin-bottom: 100px;
-		}*/
 		.scrollyContainer {
 			width: 100%;
 			margin: 0 0%;

@@ -155,17 +155,17 @@
 				<figure>
 					<div class="profile profile1">
 						<div class="headshot bg-{players.p1.mood}" style="background-image:url(assets/yardsale/art/player1-{players.p1.mood}.png)">
-							{#if players.p1.wins == 0 && players.p2.wins == 0}
-							<div class="speechBubble player1bubble" in:fade={{ delay: 0 }} out:fade>I'm poorer, so I can only bet 20% of my money.</div>
-							{/if}
-							{#if players.p1.wins == 1 && players.p2.wins == 0}
-							<div class="speechBubble player1bubble" in:fade={{ delay: 0 }} out:fade>Yes! I win $20!</div>
+							{#if players.p1.wins == 0 && players.p2.wins == 1}
+							<div class="speechBubble player1bubble" in:fade={{ delay: 0 }} out:fade>Now my turn to win!</div>
 							{/if}
 							{#if players.p1.rate < 45 && players.p1.latest == "lost" && players.p2.wins > 2}
 							<div class="speechBubble player1bubble" in:fade={{ delay: 0 }} out:fade>Let me win half the time!</div>
 							{/if}
-							{#if players.p1.rate == 50 && players.p1.wins > 2 && players.p1.wealth < players.p2.wealth}
+							{#if players.p1.rate == 50 && players.p1.wins < 2 && players.p1.wealth < players.p2.wealth}
 							<div class="speechBubble player1bubble" in:fade={{ delay: 0 }} out:fade>I've won 50%, but I lost money!?</div>
+							{/if}
+							{#if players.p1.rate == 50 && players.p1.wins >= 2 && players.p1.wins < 3 && players.p1.wealth < players.p2.wealth}
+							<div class="speechBubble player1bubble" in:fade={{ delay: 0 }} out:fade>When I lose, I have less to wager!</div>
 							{/if}
 						</div>
 						<div class="playerName">
@@ -175,7 +175,7 @@
 						</div>
 
 						<!-- Winner buttons -->
-						{#if round == 0}
+						{#if players.p1.wins == 0 && players.p2.wins == 1}
 						<div class="winButton button winp1 bounce" player="p1" on:click={playRound}>Win</div>
 						{:else}
 						<div class="winButton button winp1" player="p1" on:click={playRound}>Win</div>
@@ -207,6 +207,13 @@
 			<figure>
 				<div class="profile profile2">
 					<div class="headshot bg-{players.p2.mood}" style="background-image:url(assets/yardsale/art/player4-{players.p2.mood}.png)">
+						
+						{#if players.p1.wins == 0 && players.p2.wins == 0}
+						<div class="speechBubble player1bubble" in:fade={{ delay: 0 }} out:fade>Click the win button.</div>
+						{/if}
+						{#if players.p1.wins == 0 && players.p2.wins == 1}
+						<div class="speechBubble player1bubble" in:fade={{ delay: 0 }} out:fade>I win $20!</div>
+						{/if}
 						{#if players.p2.rate < 45 && players.p2.latest == "lost" && players.p1.wins > 2 &&  players.p1.wins < 8}
 						<div class="speechBubble player1bubble" in:fade={{ delay: 0 }} out:fade>This is unfair.</div>
 						{/if}
@@ -215,7 +222,11 @@
 						<br>{ formatMoney(players.p2.wealth) }
 						<br>{players.p2.wins}-{round-players.p2.wins} ({players.p2.rate}%)
 					</div>
+					{#if round == 0}
+					<div class="winButton button winp2 bounce" player="p2" on:click={playRound}>Win</div>
+					{:else}
 					<div class="winButton button winp2" player="p2" on:click={playRound}>Win</div>
+					{/if}
 				</div>
 				<LayerCake
 				data={players.p2.data}

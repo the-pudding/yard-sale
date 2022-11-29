@@ -159,14 +159,15 @@ body {
 	font-family: "National 2 Web"; 
 }
 
-.player.player0, .player.player99  {
-	fill: var(--category-bg-purple);
-	position: relative;
+svg rect.player.player0, svg rect.player.player99  {
+	fill: var(--category-bg-purple) !important;
 }
 .player1Text, .player2Text {
 	fill: var(--category-bg-purple);
-	font-weight: bold;
+	font-weight: 800;
 	font-size: 14px;
+	paint-order: stroke;
+	fill-opacity:1;stroke:#fff;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;
 }
 .player2Text {
 	text-anchor: end;
@@ -221,14 +222,13 @@ body {
 	background: white;
 	color: var(--category-bg-purple) !important;
 	padding: 5px;
-/*	border-radius: 8px;*/
-font-size: 12px;
-line-height: 1.5em;
-text-align:left;
-font-family: "National 2 Web", sans-serif;
-box-shadow: 10px 6px 41px 0px rgba(0,0,0,0.3);
--webkit-box-shadow: 10px 6px 41px 0px rgba(0,0,0,0.3);
--moz-box-shadow: 10px 6px 41px 0px rgba(0,0,0,0.3);
+	font-size: 12px;
+	line-height: 1.5em;
+	text-align:left;
+	font-family: "National 2 Web", sans-serif;
+	box-shadow: 10px 6px 41px 0px rgba(0,0,0,0.3);
+	-webkit-box-shadow: 10px 6px 41px 0px rgba(0,0,0,0.3);
+	-moz-box-shadow: 10px 6px 41px 0px rgba(0,0,0,0.3);
 }
 .comicText p {
 	margin: 0 0 16px  !important;
@@ -237,17 +237,10 @@ box-shadow: 10px 6px 41px 0px rgba(0,0,0,0.3);
 	margin: 0  !important;
 }
 .comicText {	
-	max-width: 500px;
+	max-width: calc(100% - 100px);
 	position: absolute;
 	bottom: 20px;
-	left: 20px;
-	width: calc(100% - 20px);
-}
-.comicText p span.highlight {
-/*	font-weight: bold;
-	color: var(--category-bg-purple);
-	padding: 0px 1px;
-	background: var(--category-purple);*/
+	left: 80px;
 }
 .comicText p span.orange {
 	font-weight: bold;
@@ -255,27 +248,16 @@ box-shadow: 10px 6px 41px 0px rgba(0,0,0,0.3);
 }
 .speechBubble {
 	position: absolute;
-	max-width: 130px;
+	max-width: 200px;
+	z-index: 99;
 }
-/*@media only screen and (max-width: 640px) {
-	.comicText {
-		bottom: auto;
-		top: 100%;
-		left: 0px;
-		width: 100%;
-		transform: translateX(0%);
-		background: none;
-		border: none;
-		box-shadow: none;
-	}
-}*/
 @media only screen and (min-width: 420px) {
 	.speechBubble, .comicText {
 		font-size: 14px;
 		padding: 6px;
 	}
 	.speechBubble {
-		max-width: 140px;
+		max-width: 200px;
 	}
 }
 
@@ -292,7 +274,7 @@ box-shadow: 10px 6px 41px 0px rgba(0,0,0,0.3);
 	left: 22%;
 	bottom: 65%;
 }
-.comicText:before, .speechBubble.player1bubble:before {
+.speechBubble.player1bubble:before {
 	content: "";
 	width: 0;
 	height: 0;
@@ -302,6 +284,17 @@ box-shadow: 10px 6px 41px 0px rgba(0,0,0,0.3);
 	position: absolute;
 	top: 100%;
 	left: 10px;
+}
+.comicText:before {
+	content: "";
+	width: 0;
+	height: 0;
+	border-left: 12px solid transparent;
+	border-right: 0px solid transparent;
+	border-bottom: 12px solid  var(--speechbg);
+	position: absolute;
+	bottom: 0%;
+	right: 100%;
 }
 .speechBubble.player2bubble {
 	right: 30%;

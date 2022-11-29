@@ -80,31 +80,21 @@
 		}
 	}
 
-	function shuffle(array) {
-		let currentIndex = array.length,  randomIndex;
-		while (currentIndex != 0) {
-			randomIndex = Math.floor(Math.random() * currentIndex);
-			currentIndex--;
-			[array[currentIndex], array[randomIndex]] = [
-				array[randomIndex], array[currentIndex]];
-		}
-		return array;
-	}
 
-	function comma(x) {
-		return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-	}
 
 
 	function sortPlayers() {
 		players.sort(dynamicSort("wealth"));
 		// Iterating through player to determine highest number AND to give players the redistributed pot
+		worldrecord = 0;
+		highestNumber = 0;
 		for (let i = 0; i < players.length; i++) {
 			players[i].wealth = players[i].wealth + redistributionPot / 100;
 			if (players[i].wealth > worldrecord) {
 				worldrecord = players[i].wealth;
 			}
 		};
+		
 		if (worldrecord > 40000) {
 			highestNumber = 120000;
 		} else if (worldrecord > 8000) {
@@ -112,6 +102,7 @@
 		} else {
 			highestNumber = 10000;
 		}
+
 		// Giving some breathing room for the highest number
 		// highestNumber = highestNumber <= 200 ? 200 : highestNumber * 1.2;
 		// setting the ticks based on the highest number
@@ -127,10 +118,9 @@
 	}
 
 	function reset() {
-		worldrecord = 0;
-		highestNumber = 0;
 		round = 0;
 		roundLimit = 0;
+		redistributionPot = 0;
 		generatePlayers();
 		sortPlayers();
 	}
@@ -141,10 +131,28 @@
 
 	$: {
 		chartHeight = windowHeight - 50;
-		redistribution = redistribution;
-		startingAmount = startingAmount;
+		//redistribution = redistribution;
+		//redistributionPot = 0;
+		//startingAmount = startingAmount;
 		generatePlayers();
 		sortPlayers();
+	}
+
+	// Utilities
+
+	function shuffle(array) {
+		let currentIndex = array.length,  randomIndex;
+		while (currentIndex != 0) {
+			randomIndex = Math.floor(Math.random() * currentIndex);
+			currentIndex--;
+			[array[currentIndex], array[randomIndex]] = [
+				array[randomIndex], array[currentIndex]];
+		}
+		return array;
+	}
+
+	function comma(x) {
+		return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 	}
 </script>
 
@@ -153,20 +161,17 @@
 		<div class="toolbar ysm_data">
 
 			{#if redist == 1}
-			<!-- <div class="toolItem">
-				<div class="toolLabel">Starting amount for each player: <span class="toolValue">${startingAmount}</span></div>
-				<Range min=100 max=2000 bind:value={startingAmount} on:change={generatePlayers}/>
-				
-			</div> -->
-			<!-- <div class="toolItem">
-				<div class="toolLabel">Wager: <span class="toolValue">{maxWager}% of poorer player's wealth</span></div>
-				<Range min=1 max=100 bind:value={maxWager}/>
-				
-			</div> -->
+
+			<div class="toolLabel"><strong>Wager</strong>: What is the maximum percentage of wealth is each person willing to wager?</div>
+			<div class="toolItem">
+				<Range min=1 max=100 bind:value={maxWager} dis={running}/>
+				<div class="toolValue">{maxWager}%</div>
+			</div>
+
 			<div class="toolLabel"><strong>Redistribution</strong>: How much of each player's wealth should be redistributed to everyone else after each round?</div>
 			<div class="toolItem">
-				<Range min=0 max=100 bind:value={redistribution} on:input={reset} dis={running}/>
-				<div class="toolValue">{redistribution}%</div>
+				<Range min=0 max=5 step=0.1 bind:value={redistribution} dis={running}/>
+				<div class="toolValue">{redistribution.toFixed(1)}%</div>
 			</div>
 			{/if}
 
@@ -194,11 +199,15 @@
 				{/each}
 				{#each players as player}
 				<rect class="player" x={player.order * ((chartWidth-100) / playerNumber) + 50 } width={chartWidth / 200} height={player.height} y={chartHeight - player.height}></rect>
+				{/each}
+
+
+				{#each players as player}
 				{#if player.order == 0}
-					<text class="player1Text" x={player.order * ((chartWidth-50) /playerNumber) + 45 } y={chartHeight - player.height - 7}>Poorest: ${comma(Math.round(player.wealth))}</text>
+				<text class="player1Text" x={player.order * ((chartWidth-50) /playerNumber) + 45 } y={chartHeight - player.height - 7}>Poorest: ${comma(Math.round(player.wealth))}</text>
 				{/if}
 				{#if player.order == 99 }
-					<text class="player2Text" x={player.order * ((chartWidth-50) /playerNumber) + 5} y={chartHeight - player.height - 7}>Richest: ${comma(Math.round(player.wealth))}</text>
+				<text class="player2Text" x={player.order * ((chartWidth-50) /playerNumber) + 5} y={chartHeight - player.height - 7}>Richest: ${comma(Math.round(player.wealth))}</text>
 				{/if}
 				{/each}
 
@@ -280,16 +289,13 @@
 		margin-bottom: 20px;
 		color: var(--category-bg-purple);
 	}
-	.range {
-		margin: 10px 0;
-	}
 	.ysm_container {
 		width: 100%;
 		max-width:700px;
 		margin: 10px auto 0;
 		font-family: "National 2 Web"; 
 	}
-	.chartArea { height: 60vh; max-height: 500px; margin-bottom: 10px; padding: 10px; box-sizing: border-box; }
+	.chartArea { height: 60vh; max-height: 500px; min-height: 300px; margin-bottom: 10px; padding: 10px; box-sizing: border-box; }
 	svg { width: calc(100% - 30px); height: 100%; }
 	.chartArea .toolLabel { position: absolute; left: 10px; top: 10px }
 	.player {

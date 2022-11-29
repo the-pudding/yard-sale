@@ -4,11 +4,12 @@
 	export let max = 100;
 	export let step = 1;
 	export let showTicks = false;
-	export let value = min;
+	export let value;
 	export let label = "";
 	export let dis;
 
 	const getDecimalCount = (value) => {
+		console.log(value)
 		if (Math.floor(value) === value) return 0;
 		return value.toString().split(".")[1].length || 0;
 	};
