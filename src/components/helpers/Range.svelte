@@ -9,7 +9,6 @@
 	export let dis;
 
 	const getDecimalCount = (value) => {
-		console.log(value)
 		if (Math.floor(value) === value) return 0;
 		return value.toString().split(".")[1].length || 0;
 	};
@@ -52,19 +51,19 @@
 	}
 
 	input[type="range"]:focus {
-		box-shadow: 0 0 4px 0 var(--color-focus, #999);
+		box-shadow: 0 0 4px 0 var(--category-bg-purple, #999);
 	}
 
 	input[type="range"]:focus::-webkit-slider-thumb,
 	input[type="range"]:focus::-moz-range-thumb,
 	input[type="range"]:focus::-ms-thumb {
-		box-shadow: 0 0 4px 0 var(--color-focus, #999);
+		box-shadow: 0 0 4px 0 var(--category-bg-purple, #999);
 	}
 
 	input[type="range"]::-webkit-slider-runnable-track {
 		width: 100%;
-		height: calc(var(--thumb-width) / 4);
-		background: #ccc;
+		height: calc(var(--thumb-width) / 3);
+		background: #fff;
 		border-radius: 4px;
 	}
 
@@ -72,19 +71,20 @@
 		height: var(--thumb-width);
 		width: var(--thumb-width);
 		border-radius: 50%;
-		background: var(--category-bg-purple);
+		background: var(--category-purple2);
+		border: 1px solid var(--category-bg-purple);
 		appearance: none;
 		margin-top: calc(var(--thumb-width) / -3);
 	}
 
 	input[type="range"]:focus::-webkit-slider-runnable-track {
-		background: var(--color-gray-300);
+		background: #fff;
 	}
 
 	input[type="range"]::-moz-range-track {
 		width: 100%;
 		height: calc(var(--thumb-width) / 4);
-		background: var(--color-gray-300);
+		background: #fff;
 		border-radius: 4px;
 	}
 
@@ -93,7 +93,7 @@
 		height: var(--thumb-width);
 		width: var(--thumb-width);
 		border-radius: 50%;
-		background: var(--color-gray-900);
+				background: #fff;
 	}
 
 	input[type="range"]::-ms-track {
@@ -107,7 +107,7 @@
 
 	input[type="range"]::-ms-fill-lower,
 	input[type="range"]::-ms-fill-upper {
-		background: var(--color-gray-300);
+				background: #fff;
 		border: 0.2px solid var(--color-black);
 		border-radius: 4px;
 		box-shadow: 1px 1px 1px var(--color-black), 0 0 1px var(--color-black);
@@ -117,12 +117,12 @@
 		height: var(--thumb-width);
 		width: var(--thumb-width);
 		border-radius: 50%;
-		background: var(--color-gray-900);
+				background: #fff;
 	}
 
 	input[type="range"]:focus::-ms-fill-lower,
 	input[type="range"]:focus::-ms-fill-upper {
-		background: var(--color-gray-300);
+				background: #fff;
 	}
 
 	.ticks {

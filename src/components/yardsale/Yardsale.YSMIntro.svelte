@@ -102,8 +102,8 @@
 	$: {
 		stepWidth = stepWidth;
 		stepHeight = stepHeight;
-		panelHeight = stepWidth * 0.7; 
-		chartHeight = panelHeight - 50;
+		panelHeight = stepWidth * 0.85; 
+		chartHeight = panelHeight;
 		increment = increment;
 		roundLimit = roundLimit;
 		generatePlayers();
@@ -155,12 +155,15 @@
 			{/each}
 			{#each players as player}
 			<rect class="player player{player.order}" x={player.order * ((chartWidth-50) /playerNumber) + 50 } width={chartWidth / 200} height={player.height} y={chartHeight - player.height}></rect>
-			{#if player.order == 0}
-				<text class="player1Text" x={player.order * ((chartWidth-50) /playerNumber) + 40 } y={chartHeight - player.height - 7}>You: ${Math.round(player.wealth)}</text>
-			{/if}
-			{#if player.order == 99 }
-				<text class="player2Text" x={player.order * ((chartWidth-50) /playerNumber) + 55} y={chartHeight - player.height - 7}>Richest: ${comma(Math.round(player.wealth))}</text>
-			{/if}
+			{/each}
+
+			{#each players as player}
+				{#if player.order == 0}
+				<text class="player1Text" x={player.order * ((chartWidth-50) /playerNumber) + 45 } y={chartHeight - player.height - 7}>Poorest: ${comma(Math.round(player.wealth))}</text>
+				{/if}
+				{#if player.order == 99 }
+				<text class="player2Text" width={200} x={player.order * ((chartWidth-50) /playerNumber) + 50} y={chartHeight - player.height - 7}>Richest: ${comma(Math.round(player.wealth))}</text>
+				{/if}
 			{/each}
 
 		</svg>
@@ -188,21 +191,11 @@
 	.ysm_container { padding:  20px; width: 100%; height:  100%;}
 	.chartArea {  width: 100%; margin-bottom: 10px; }
 	svg { width: 100%; height: 100%; }
+	.ysm_container svg .player1Text, .ysm_container svg .player2Text {
+		stroke: #c8becf;
+	}
 	.toolLabel { margin-bottom: 20px; }
-	.player {
+	rect.player {
 		fill:  var(--category-purple2);
-	}
-	
-	svg line {
-		stroke-dasharray: 4px 4px;
-		stroke: rgba(0,0,0,0.2);
-		transition: all 100ms cubic-bezier(0.250, 0.100, 0.250, 1.000);
-		transition-timing-function: cubic-bezier(0.250, 0.100, 0.250, 1.000);
-	}
-	svg text {
-		font-family: "National 2 Web";
-		fill: #000;
-		transition: all 100ms cubic-bezier(0.250, 0.100, 0.250, 1.000);
-		transition-timing-function: cubic-bezier(0.250, 0.100, 0.250, 1.000);
 	}
 </style>

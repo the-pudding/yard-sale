@@ -7,14 +7,12 @@
 	export let stroke = "#ccc";
 
 	export let curve = curveLinear;
-	export let words = 0;
 
 	$: path = line().x($xGet).y($yGet).curve(curve);
 	$: pathD = path($data);
 </script>
 
 <path d={pathD} {stroke} />
-<!-- <text>{words}</text> -->
 
 <style>
 	path {

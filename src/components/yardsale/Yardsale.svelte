@@ -5,13 +5,7 @@
 
 	import YardsaleScrolly from "$components/yardsale/Yardsale.scrolly.svelte";
 	import YardsaleCopy from "$components/yardsale/Yardsale.copy.svelte";
-	import YardsaleMathDiagram from "$components/yardsale/Yardsale.mathdiagram.svelte";
 	import YardsaleMathSimulation from "$components/yardsale/Yardsale.mathsimulation.svelte";
-	import YardsalePoorChart from "$components/yardsale/Yardsale.poorchart.svelte";
-	import YardsaleRichChart from "$components/yardsale/Yardsale.richchart.svelte";
-	import YardsaleParetoChart from "$components/yardsale/Yardsale.paretochart.svelte";
-	import YardsaleFedChart from "$components/yardsale/Yardsale.fedchart.svelte";
-	import YardsaleTop400 from "$components/yardsale/Yardsale.top400.svelte";
 	import YardsaleYSM from "$components/yardsale/Yardsale.YSM.svelte";
 </script>
 
@@ -27,9 +21,6 @@
 
 	<!-- SECTION 2 -->
 	<YardsaleCopy hed={copy.MiddleHed} words={copy.MiddleSection1} />
-	<!-- <YardsaleParetoChart /> -->
-	<!-- <YardsaleFedChart /> -->
-	<!-- <YardsaleCopy hed="" words={copy.MiddleSection2} /> -->
 	<YardsaleYSM redist=-1 />
 	<YardsaleCopy hed="" words={copy.MiddleSection2} />
 
@@ -37,8 +28,7 @@
 	<YardsaleCopy hed={copy.EndHed} words={copy.EndSection1} />
 	<YardsaleYSM redist=1 />
 	<YardsaleCopy hed="" words={copy.EndSection2} />
-	<!-- <YardsaleTop400 /> -->
-	<!-- <YardsaleCopy hed="" words={copy.EndSection3} /> -->
+
 
 </div>
 

@@ -81,8 +81,6 @@
 	}
 
 
-
-
 	function sortPlayers() {
 		players.sort(dynamicSort("wealth"));
 		// Iterating through player to determine highest number AND to give players the redistributed pot
@@ -131,9 +129,6 @@
 
 	$: {
 		chartHeight = windowHeight - 50;
-		//redistribution = redistribution;
-		//redistributionPot = 0;
-		//startingAmount = startingAmount;
 		generatePlayers();
 		sortPlayers();
 	}
@@ -156,27 +151,34 @@
 	}
 </script>
 
+<!-- If redistribution is on, display the options -->
+{#if redist == 1}
+
+<div class="body_container">
+	<p><strong>Maximum wager:</strong> What is the maximum percentage of wealth each person is willing to wager each round?</p>
+	<div class="toolbar ysm_data fullInfo">
+		<div class="toolItem">
+			<Range min=1 max=100 bind:value={maxWager} dis={running}/>
+			<div class="toolValue">{maxWager}%</div>
+		</div>
+	</div>
+
+
+	<p><strong>Redistribution:</strong> How much of each player's wealth should be redistributed to everyone else after each round?</p>
+	<div class="toolbar ysm_data fullInfo">
+		<div class="toolItem">
+			<Range min=0 max=10 step=0.1 bind:value={redistribution} dis={running}/>
+			<div class="toolValue">{redistribution.toFixed(1)}%</div>
+		</div>
+	</div>
+
+	<p>This time players will be willing to bet <strong>{maxWager}%</strong> of their wealth each game. After each round, we'll tax every player <strong>{redistribution.toFixed(1)}%</strong> and disperse it evenly to all players.</p>
+</div>
+{/if}
+
+<!-- YSM -->
 <div class="interactive_container">
 	<div class="ysm_container">
-		<div class="toolbar ysm_data">
-
-			{#if redist == 1}
-
-			<div class="toolLabel"><strong>Wager</strong>: What is the maximum percentage of wealth is each person willing to wager?</div>
-			<div class="toolItem">
-				<Range min=1 max=100 bind:value={maxWager} dis={running}/>
-				<div class="toolValue">{maxWager}%</div>
-			</div>
-
-			<div class="toolLabel"><strong>Redistribution</strong>: How much of each player's wealth should be redistributed to everyone else after each round?</div>
-			<div class="toolItem">
-				<Range min=0 max=5 step=0.1 bind:value={redistribution} dis={running}/>
-				<div class="toolValue">{redistribution.toFixed(1)}%</div>
-			</div>
-			{/if}
-
-		</div>
-
 		<div class="chartArea" bind:clientWidth={chartWidth} bind:clientHeight={windowHeight}>
 			<div class="toolLabel">Round: <span class="toolValue">{comma(round)}</span></div>
 			<div class="toolItem">
@@ -198,7 +200,7 @@
 				<text class="chartText" x=0 y={chartHeight - (tick / highestNumber * chartHeight) - 5}>${comma(tick)}</text>
 				{/each}
 				{#each players as player}
-				<rect class="player" x={player.order * ((chartWidth-100) / playerNumber) + 50 } width={chartWidth / 200} height={player.height} y={chartHeight - player.height}></rect>
+				<rect class="player player{player.order}" x={player.order * ((chartWidth-100) / playerNumber) + 50 } width={chartWidth / 200} height={player.height} y={chartHeight - player.height}></rect>
 				{/each}
 
 
@@ -207,7 +209,7 @@
 				<text class="player1Text" x={player.order * ((chartWidth-50) /playerNumber) + 45 } y={chartHeight - player.height - 7}>Poorest: ${comma(Math.round(player.wealth))}</text>
 				{/if}
 				{#if player.order == 99 }
-				<text class="player2Text" x={player.order * ((chartWidth-50) /playerNumber) + 5} y={chartHeight - player.height - 7}>Richest: ${comma(Math.round(player.wealth))}</text>
+				<text class="player2Text" width={200} x={player.order * ((chartWidth-100) / playerNumber) + 50} y={chartHeight - player.height - 7}>Richest: ${comma(Math.round(player.wealth))}</text>
 				{/if}
 				{/each}
 
@@ -220,22 +222,12 @@
 </div>
 
 <style>
-	.interactive_container {
-		overflow-x: hidden;
-	}
 	.ysm_container {
 		background: white;
 		padding: 20px 0 0px;
 		border: 1px solid var(--category-purple2);
 	}
 
-	@media only screen and (max-width: 640px) {
-		.ysm_container {
-			border: none;
-			border-top: 1px solid var(--category-bg-purple);
-			border-bottom: 1px solid var(--category-bg-purple);
-		}
-	}
 	.toolbar {
 		position: relative;
 		margin-bottom: 10px;
@@ -243,28 +235,14 @@
 	}
 	.toolItem {
 		text-align: right;
-		color: black;
 		position: absolute;
 		right: 10px;
 		top: 0px;
 	}
-	.toolbar .toolLabel {
-		display: block;
-		max-width: 500px;
-		margin: 0 auto;
-		font-family: "National 2 Web"; 
-		font-size: 18px;
-		line-height: 1.6em;
-		color: var(--category-bg-purple);
-	}
-	.toolbar .toolLabel strong {
-		color: var(--category-bg-purple);
-	}
 	.toolbar .toolItem {
-		width: 80%;
+		width: calc(100% - 60px);
 		position: relative;
-		margin: 20px auto 0;
-		max-width: 400px;
+		margin: 20px 10px;
 	}
 	.chartArea .toolItem .toolLabel {
 		color: black;
@@ -293,23 +271,9 @@
 		width: 100%;
 		max-width:700px;
 		margin: 10px auto 0;
-		font-family: "National 2 Web"; 
 	}
 	.chartArea { height: 60vh; max-height: 500px; min-height: 300px; margin-bottom: 10px; padding: 10px; box-sizing: border-box; }
 	svg { width: calc(100% - 30px); height: 100%; }
 	.chartArea .toolLabel { position: absolute; left: 10px; top: 10px }
-	.player {
-		fill:  #9e9ac8;
-	}
-	svg line {
-		stroke-dasharray: 4px 4px;
-		stroke: var(--color-gray-300);
-		transition: all 100ms cubic-bezier(0.250, 0.100, 0.250, 1.000);
-		transition-timing-function: cubic-bezier(0.250, 0.100, 0.250, 1.000);
-	}
-	svg text {
 
-		transition: all 100ms cubic-bezier(0.250, 0.100, 0.250, 1.000);
-		transition-timing-function: cubic-bezier(0.250, 0.100, 0.250, 1.000);
-	}
 </style>

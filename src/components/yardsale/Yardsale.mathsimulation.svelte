@@ -5,7 +5,7 @@
 	import Line from "$components/charts/Line.svelte";
 	import AxisX from "$components/charts/AxisX.svg.svelte";
 	import AxisY from "$components/charts/AxisY.svg.svelte";
-	// import poorData from "$data/yardsale-poorchart.csv";
+
 	let round = 0;
 	let roundMax = 10;
 	let players = {
@@ -45,22 +45,27 @@
 	const formatTickY = d => "$"+d;
 	let wagerData = getWager();
 
+
+	// Playing one round of the a coin flip.
+	// Triggered on "Win" button click
 	function playRound(event) {
+		// Setting the latest winner
 		let player = event.target.getAttribute("player");
 		players.p1.latest = player == "p1" ? "win" : "lost";
 		players.p2.latest = player == "p2" ? "win" : "lost"; 
+		
+		// Calculating wager
 		wagerData = getWager();
 
 		let wager = wagerData[0];
 		
+		// Updating player info based on who won
 		players[player].wins += 1;
 		round += 1;
 		players.p1.rate = Math.round(players.p1.wins / round * 100);
 		players.p2.rate = Math.round(players.p2.wins / round * 100);
-
 		players.p1.mood = players.p1.rate >= 51 ? "happy" : "sad";
 		players.p2.mood = players.p2.rate >= 50 ? "happy" : "sad"; 
-
 		if (player == "p1") {
 			players.p1.data.push({"x": round, "y": players.p1.wealth += wager});
 			players.p2.data.push({"x": round, "y": players.p2.wealth -= wager});
@@ -68,9 +73,8 @@
 			players.p1.data.push({"x": round, "y": players.p1.wealth -= wager});
 			players.p2.data.push({"x": round, "y": players.p2.wealth += wager});
 		}
-		if (round > 9) {
-			roundMax = null;
-		}
+
+		// Updating chart settings
 		if (players.p1.wealth > players.p1.minmax[1]) {
 			players.p1.minmax[1] = players.p1.wealth * 1.1;
 		}
@@ -83,8 +87,13 @@
 		if (players.p2.wealth < players.p2.minmax[0]) {
 			players.p2.minmax[0] = players.p2.wealth * 0.9;
 		}
+
+		if (round > 9) {
+			roundMax = null;
+		}
+
+		// Getting new wager data for interface
 		wagerData = getWager();
-		console.log(players)
 	}
 
 	function reset() {
@@ -114,6 +123,7 @@
 				}]
 			}
 		}
+		wagerData = [20,"Player 1"];
 	}
 
 	function getWager() {
@@ -142,12 +152,14 @@
 </script>
 <div class="interactive_container">
 	<div class="ysm_container">
+		<!-- Top text -->
 		<div class="fullInfo">
 			<div class="wager_amount">
 				Winner gets <strong>{formatMoney(wagerData[0])}</strong>
-				<div class="wager_info">(20% of {wagerData[1]}'s wealth)</div>
+				<div class="fullInfoSub">(20% of {wagerData[1]}'s wealth)</div>
 			</div>
 		</div>
+		<!-- TWO CHARTS -->
 		<div class="chart_container extrawide">
 
 			<!-- PLAYER 1 CONTAINER -->
@@ -161,10 +173,13 @@
 							{#if players.p1.rate < 45 && players.p1.latest == "lost" && players.p2.wins > 2}
 							<div class="speechBubble player1bubble" in:fade={{ delay: 0 }} out:fade>Let me win half the time!</div>
 							{/if}
-							{#if players.p1.rate == 50 && players.p1.wins < 2 && players.p1.wealth < players.p2.wealth}
+							{#if players.p1.wins == 1 && players.p2.wins ==1}
+							<div class="speechBubble player1bubble" in:fade={{ delay: 0 }} out:fade>I'm 1-1, but I lost money?</div>
+							{/if}
+							{#if players.p1.rate == 50 && players.p1.wins > 1 && players.p1.wealth < players.p2.wealth}
 							<div class="speechBubble player1bubble" in:fade={{ delay: 0 }} out:fade>I've won 50%, but I lost money!?</div>
 							{/if}
-							{#if players.p1.rate == 50 && players.p1.wins >= 2 && players.p1.wins < 3 && players.p1.wealth < players.p2.wealth}
+							{#if players.p1.rate == 50 && players.p1.wins >= 5 && players.p1.wins < 3 && players.p1.wealth < players.p2.wealth}
 							<div class="speechBubble player1bubble" in:fade={{ delay: 0 }} out:fade>When I lose, I have less to wager!</div>
 							{/if}
 						</div>
@@ -195,69 +210,61 @@
 						<Line 
 						strokeWidth="5"
 						stroke="#420070"
-						words={ formatMoney(players.p1.wealth - 100, true) }
 						/>
 					</Svg>
-				</LayerCake>
-			</figure>
-		</section>
+					</LayerCake>
+				</figure>
+			</section>
 
-		<!-- PLAYER 2 CONTAINER -->
-		<section>
-			<figure>
-				<div class="profile profile2">
-					<div class="headshot bg-{players.p2.mood}" style="background-image:url(assets/yardsale/art/player4-{players.p2.mood}.png)">
-						
-						{#if players.p1.wins == 0 && players.p2.wins == 0}
-						<div class="speechBubble player1bubble" in:fade={{ delay: 0 }} out:fade>Click the win button.</div>
-						{/if}
-						{#if players.p1.wins == 0 && players.p2.wins == 1}
-						<div class="speechBubble player1bubble" in:fade={{ delay: 0 }} out:fade>I win $20!</div>
-						{/if}
-						{#if players.p2.rate < 45 && players.p2.latest == "lost" && players.p1.wins > 2 &&  players.p1.wins < 8}
-						<div class="speechBubble player1bubble" in:fade={{ delay: 0 }} out:fade>This is unfair.</div>
+			<!-- PLAYER 2 CONTAINER -->
+			<section>
+				<figure>
+					<div class="profile profile2">
+						<div class="headshot bg-{players.p2.mood}" style="background-image:url(assets/yardsale/art/player4-{players.p2.mood}.png)">
+							
+							{#if players.p1.wins == 0 && players.p2.wins == 0}
+							<div class="speechBubble player1bubble" in:fade={{ delay: 0 }} out:fade>Click the win button.</div>
+							{/if}
+							{#if players.p2.rate < 45 && players.p2.latest == "lost" && players.p1.wins > 2 &&  players.p1.wins < 8}
+							<div class="speechBubble player1bubble" in:fade={{ delay: 0 }} out:fade>This is unfair.</div>
+							{/if}
+						</div>
+						<div class="playerName"><strong>Player 2</strong>
+							<br>{ formatMoney(players.p2.wealth) }
+							<br>{players.p2.wins}-{round-players.p2.wins} ({players.p2.rate}%)
+						</div>
+						{#if round == 0}
+						<div class="winButton button winp2 bounce" player="p2" on:click={playRound}>Win</div>
+						{:else}
+						<div class="winButton button winp2" player="p2" on:click={playRound}>Win</div>
 						{/if}
 					</div>
-					<div class="playerName"><strong>Player 2</strong>
-						<br>{ formatMoney(players.p2.wealth) }
-						<br>{players.p2.wins}-{round-players.p2.wins} ({players.p2.rate}%)
-					</div>
-					{#if round == 0}
-					<div class="winButton button winp2 bounce" player="p2" on:click={playRound}>Win</div>
-					{:else}
-					<div class="winButton button winp2" player="p2" on:click={playRound}>Win</div>
-					{/if}
-				</div>
-				<LayerCake
-				data={players.p2.data}
-				{x}
-				{y}
-				{padding}
-				xDomain={ [0, roundMax] } 
-				yDomain={ [players.p2.minmax[0], players.p2.minmax[1]] } 
-				>
-				<Svg>
-					<AxisY formatTick={formatTickY} baseTick=1000 />
-					<AxisX />
-					<Line 
-					strokeWidth="5"
-					stroke="#420070"
-					words={ formatMoney(players.p2.wealth - 1000, true) }
-					/>
-				</Svg>
-			</LayerCake>
-		</figure>
-	</section>
-</div>
-<div class="resetContainer extrawide">
-	<div class="reset" on:click={reset}>Reset</div>
-</div>
-</div>
+					<LayerCake
+					data={players.p2.data}
+					{x}
+					{y}
+					{padding}
+					xDomain={ [0, roundMax] } 
+					yDomain={ [players.p2.minmax[0], players.p2.minmax[1]] } 
+					>
+					<Svg>
+						<AxisY formatTick={formatTickY} baseTick=1000 />
+						<AxisX />
+						<Line 
+						strokeWidth="5"
+						stroke="#420070"
+						/>
+					</Svg>
+					</LayerCake>
+				</figure>
+			</section>
+		</div>
+		<div class="resetContainer extrawide">
+			<div class="reset" on:click={reset}>Reset</div>
+		</div>
+	</div>
 </div>
 <style>
-	.interactive_container {
-		padding: 2px 0;
-	}
 	figure {
 		margin: 1rem auto;
 		width: 100%;
@@ -267,14 +274,12 @@
 	.chart_container, .resetContainer {
 		display: flex;
 		position: relative;
-		font-family: "National 2 Web"; 
 	}
 	.ysm_container  {
 		width: 100%;
 		max-width:700px;
 		margin: 0px auto;
 		padding: 0 10px;
-		font-family: "National 2 Web";
 		color:  var(--category-bg-purple);
 		-webkit-touch-callout: none;
 		-webkit-user-select: none; 
@@ -302,11 +307,10 @@
 		.chart_container, .resetContainer {
 			display: block;
 			position: relative;
-			font-family: "National 2 Web"; 
 		}
 		.ysm_container section {
 			flex: 1;
-			margin:  0px !important;
+			margin: 0px !important;
 		}
 		figure {
 			margin: 1rem auto;
@@ -314,28 +318,8 @@
 			height: 35vh;
 		}
 	}
-	.fullInfo { 
-		position: relative;
-		width: 100%;
-		text-align: center;
-		padding: 5px;
-		line-height: 1.1em;
-		font-size: 24px;
-		margin: 10px 0;
-	}
-	.wager_info {
-		text-transform: none;
-		font-weight: normal;
-		font-size: 14px;
-		color: var(--category-bg-purple);
-	}
-	h3 {
-		font-weight: 500;
-		margin: 0 0 5px 0;
-	}
-	.body_container section:nth-child(2) {
-		text-align: right;
-	}
+
+	
 	.profile_container {
 		display: block;
 		width: 100%;
@@ -346,7 +330,7 @@
 		position: absolute;
 		width: 100%;
 		top: 10px;
-		left: 5px;
+		left: 10px;
 	}
 	.playerName {
 		position: absolute;
@@ -355,22 +339,15 @@
 		left: 60px;
 		line-height: 1.2em;
 	}
-	.profile1 {
-		left: 5px;
-	}
 	.headshot {
+		position: absolute;
 		width: 50px;
 		height: 60px;
-		background: #b1a4ba;
-		position: absolute;
-		top: 0;
-		border: 1px solid var(--category-bg-purple);
+		background-color: #cdcdcd;
+		border: 1px solid var(--category-purple2);
 		background-size: 120% auto;
 		background-repeat: no-repeat;
 		background-position: 30% 2px;
-		box-shadow: 0px -1px 25px 0px rgba(0,0,0,0.4) inset;
-		-webkit-box-shadow: 0px -1px 25px 0px rgba(0,0,0,0.4) inset;
-		-moz-box-shadow: 0px -1px 25px 0px rgba(0,0,0,0.4) inset; 
 	}
 	@media only screen and (max-width: 550px) {
 		.profile {
@@ -380,34 +357,17 @@
 			margin-top: 0;
 		}
 	}
-	.headshot.bg-sad {
-		background-color: var(--category-purple);
-	}
-	.headshot.bg-happy {
-		background-color: var(--category-purple);
-	}
 	.winButton {
 		position: absolute;
 		right: 20px;
 		top: 0px;
 		width: 60px;
 	}
-	.winButton.bounce {
-		animation: bounce 1s ease infinite;
-	}
 
 	.speechBubble {
-		width: 240%;
+		width: 300%;
 		bottom: 110%;
-		color: black;
-	}
-	.speechBubble {
-		left: 2%;
-	}
-	.speechBubble:before {
-		border-right: 3px solid transparent;
-		left: 30%;
-		right: auto;
+		left: 10%;
 	}
 
 </style>
