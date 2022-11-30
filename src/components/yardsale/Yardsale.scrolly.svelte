@@ -453,48 +453,10 @@
 				<div class="scrolldown_hint" out:fade></div>
 				{/if}
 
-				<div class="fuzzy" style="opacity:{bgOpacity};"></div>
+				<div class="fuzzy" style="opacity:{bgOpacity}; background-image: url('assets/yardsale/grain.png');"></div>
 			</div>
-			<!-- {#if currentText != ""}
-			<div class="comicText">
-				{#if container == "scrolly3" && currentStageNumber == 2 && r == 10000}
-				<p>Whoa, you lost all your money. Meanwhile, one person ended up with nearly all of the wealth!</p>
-				{:else}
-				{@html convertToHTML(currentText)}
-				{/if}
-			</div>
-			{/if} -->
-
-			<!-- <div class="scrollIndicator">
-				{#each words as text, i}
-				<div class="scrollIndicatorStage" style="top: {i/words.length * 100}%"></div>
-				{/each}
-				<div class="scrollIndicatorPosition" style="height:{100 * currentProgress}%"></div>
-			</div> -->
 		</div>
 
-		<style>
-			.scrollIndicator {
-				position: absolute;
-				right: 0px;
-				height: 100%;
-				width: 5px;
-				top: 0;
-				background: rgba(255,255,255,0.1);
-			}
-			.scrollIndicatorStage, .scrollIndicatorPosition {
-				position: absolute;
-				left: 0px;
-				width: 100%;
-				height: 2px;
-				background: #000;
-			}
-			.scrollIndicatorPosition {
-				background: var(--category-bg-purple);
-				transition: all 20ms cubic-bezier(0.250, 0.250, 0.750, 0.750);
-				transition-timing-function: cubic-bezier(0.250, 0.250, 0.750, 0.750);
-			}
-		</style>
 
 		<div class="scrollyContainer">
 			<Scrolly bind:value bind:progress={progress}>
@@ -635,7 +597,6 @@
 	.fuzzy {
 		animation: grain 20s steps(10) infinite;
 		content: "";
-		background-image: url("assets/yardsale/grain.png");
 		height: 500%;
 		width: 500%;
 		opacity: 1;
