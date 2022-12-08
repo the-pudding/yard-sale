@@ -203,7 +203,7 @@
 				<rect class="player player{player.order}" x={player.order * ((chartWidth-100) / playerNumber) + 50 } width={chartWidth / 200} height={player.height} y={chartHeight - player.height}></rect>
 				{/each}
 
-
+			{#if !running}
 				{#each players as player}
 				{#if player.order == 0}
 				<text class="player1Text" x={player.order * ((chartWidth-50) /playerNumber) + 45 } y={chartHeight - player.height - 7}>Poorest: ${comma(Math.round(player.wealth))}</text>
@@ -212,7 +212,7 @@
 				<text class="player2Text" width={200} x={player.order * ((chartWidth-100) / playerNumber) + 50} y={chartHeight - player.height - 7}>Richest: ${comma(Math.round(player.wealth))}</text>
 				{/if}
 				{/each}
-
+			{/if}
 			</svg>
 		</div>
 		<div class="resetContainer">

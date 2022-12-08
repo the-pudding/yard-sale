@@ -212,7 +212,7 @@
 			"player1": 1000,
 			"player2": 1000,
 			"wager": 200,
-			"player1Words": "I have $1,000 and can only afford to bet 20%.",
+			"player1Words": "I don't want to risk too much money, so I can wager 20% of my wealth.",
 			"player2Words": "OK let's do $200.",
 			"player1Record": "0 - 0",
 			"player2Record": "0 - 0"
@@ -319,13 +319,13 @@
 		// sets backgroudn colors for scrolly
 		if (container == "scrolly1" && currentStageNumber == 0) {
 			bgColor = "#000";
-			bgOpacity = 1;
+			bgOpacity = 0.5;
 		} else if (container == "scrolly3") {
 			bgColor = "#c8becf";
-			bgOpacity = 0.5;
+			bgOpacity = 0.3;
 		}  else {
 			bgColor = "#7c6a85";
-			bgOpacity = 1;
+			bgOpacity = 0.5;
 		}
 	}
 
@@ -417,7 +417,7 @@
 				<div class="gameContainer">
 					{#if container == "scrolly2" && [1,2,3,4,5,7,8,9,10,11,12].indexOf(currentStageNumber) != -1 }
 					<div class="player1 wealthNumber" in:fade={{ delay: 400 }} out:fade>
-						<div class="gameInfoItem brighter">Player 1</div>
+						<div class="gameInfoItem brighter">Me</div>
 						<div class="gameInfoItem">{wealthLookup[currentStageNumber].player1Record}</div>
 						<div class="gameInfoItem">${comma(gameinfo.player1)}</div>
 						<div class="gameInfoItem">
@@ -427,7 +427,11 @@
 						</div>
 					</div>
 					<div class="player2 wealthNumber" in:fade={{ delay: 400 }} out:fade>
+						{#if currentStageNumber < 6 }
 						<div class="gameInfoItem brighter">Player 2</div>
+						{:else}
+						<div class="gameInfoItem brighter">Player 3</div>
+						{/if}
 						<div class="gameInfoItem">{wealthLookup[currentStageNumber].player2Record}</div>
 						<div class="gameInfoItem">${comma(gameinfo.player2)}</div>
 						<div class="gameInfoItem">
