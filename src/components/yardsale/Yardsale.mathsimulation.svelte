@@ -6,6 +6,7 @@
 	import AxisX from "$components/charts/AxisX.svg.svelte";
 	import AxisY from "$components/charts/AxisY.svg.svelte";
 
+
 	let round = 0;
 	let roundMax = 10;
 	let players = {
@@ -14,7 +15,7 @@
 			"rate": 0,
 			"wealth": 100,
 			"minmax": [70,130],
-			"mood": "happy",
+			"mood": "sad",
 			"data": [{
 				x: 0,
 				y: 100
@@ -25,7 +26,7 @@
 			"rate": 0,
 			"wealth": 1000,
 			"minmax": [700,1300],
-			"mood": "happy",
+			"mood": "sad",
 			"data": [{
 				x: 0,
 				y: 1000
@@ -46,11 +47,18 @@
 	let wagerData = getWager();
 
 
+	let playerWinOrder = ["p1","p2","p1","p2","p1","p1","p2","p2","p2","p1","p1","p1","p2","p2"];
 	// Playing one round of the a coin flip.
 	// Triggered on "Win" button click
 	function playRound(event) {
 		// Setting the latest winner
 		let player = event.target.getAttribute("player");
+		let gamesPlayed = players.p1.data.length;
+		if (player == "" && gamesPlayed < playerWinOrder.length) {
+			player = playerWinOrder[gamesPlayed-1];
+		} else {
+			player = playerWinOrder[Math.round(Math.random()*playerWinOrder.length)];
+		}
 		players.p1.latest = player == "p1" ? "win" : "lost";
 		players.p2.latest = player == "p2" ? "win" : "lost"; 
 		
@@ -97,6 +105,7 @@
 	}
 
 	function reset() {
+		playerWinOrder = ["p1","p2"];
 		round = 0;
 		roundMax = 10;
 		players = {
@@ -128,10 +137,10 @@
 
 	function getWager() {
 		let w = players.p1.data[round].y * 0.2;
-		let poorerPlayer = "Player 1"; 
+		let poorerPlayer = "You (poorer player)"; 
 		if (players.p1.data[round].y > players.p2.data[round].y) {
 			w = players.p2.data[round].y * 0.2;
-			poorerPlayer = "Player 2";
+			poorerPlayer = "Richer player";
 		}
 		return [w, poorerPlayer];
 	}
@@ -155,9 +164,14 @@
 		<!-- Top text -->
 		<div class="fullInfo">
 			<div class="wager_amount">
-				Winner gets <strong>{formatMoney(wagerData[0])}</strong>
-				<div class="fullInfoSub">(20% of {wagerData[1]}'s wealth)</div>
+				Flip a coin to see who wins <strong>{formatMoney(wagerData[0])}</strong>
+			<!-- 	<div class="fullInfoSub">(20% of {wagerData[1]}'s wealth)</div> -->
 			</div>
+			{#if players.p1.data.length == 1}
+				<div class="flipButton button bounce" player="" on:click={playRound}>Flip coin</div>
+			{:else}
+				<div class="flipButton button" player="" on:click={playRound}>Flip coin</div>
+			{/if}
 		</div>
 		<!-- TWO CHARTS -->
 		<div class="chart_container extrawide">
@@ -167,6 +181,12 @@
 				<figure>
 					<div class="profile profile1">
 						<div class="headshot bg-{players.p1.mood}" style="background-image:url(assets/yardsale/art/player1-{players.p1.mood}.png)">
+							{#if players.p1.wins == 0 && players.p2.wins == 0}
+							<div class="speechBubble player1bubble" in:fade={{ delay: 0 }} out:fade>Flip the coin.</div>
+							{/if}
+							{#if players.p1.wins == 1 && players.p2.wins == 0}
+							<div class="speechBubble player1bubble" in:fade={{ delay: 0 }} out:fade>I won! Now I can wager more.</div>
+							{/if}
 							{#if players.p1.wins == 0 && players.p2.wins == 1}
 							<div class="speechBubble player1bubble" in:fade={{ delay: 0 }} out:fade>Now my turn to win!</div>
 							{/if}
@@ -184,16 +204,19 @@
 							{/if}
 						</div>
 						<div class="playerName">
-							<strong>Player 1</strong>
+							<strong>You (poorer player)</strong>
 							<br>{ formatMoney(players.p1.wealth) }
 							<br>{players.p1.wins}-{round-players.p1.wins} ({players.p1.rate}%)
 						</div>
 
 						<!-- Winner buttons -->
-						{#if players.p1.wins == 0 && players.p2.wins == 1}
-						<div class="winButton button winp1 bounce" player="p1" on:click={playRound}>Win</div>
-						{:else}
+						<!-- {#if players.p1.data.length > 3}
 						<div class="winButton button winp1" player="p1" on:click={playRound}>Win</div>
+						{/if} -->
+						{#if players.p1.mood == "sad" && round > 0}
+						<div class="winWords">Lose</div>
+						{:else if players.p1.mood == "happy" && round > 0}
+						<div class="winWords happyWords">Win</div>
 						{/if}
 					</div>
 					<LayerCake 
@@ -222,21 +245,21 @@
 					<div class="profile profile2">
 						<div class="headshot bg-{players.p2.mood}" style="background-image:url(assets/yardsale/art/player4-{players.p2.mood}.png)">
 							
-							{#if players.p1.wins == 0 && players.p2.wins == 0}
-							<div class="speechBubble player1bubble" in:fade={{ delay: 0 }} out:fade>Click the win button.</div>
-							{/if}
 							{#if players.p2.rate < 45 && players.p2.latest == "lost" && players.p1.wins > 2 &&  players.p1.wins < 8}
 							<div class="speechBubble player1bubble" in:fade={{ delay: 0 }} out:fade>This is unfair.</div>
 							{/if}
 						</div>
-						<div class="playerName"><strong>Player 2</strong>
+						<div class="playerName"><strong>Richer player</strong>
 							<br>{ formatMoney(players.p2.wealth) }
 							<br>{players.p2.wins}-{round-players.p2.wins} ({players.p2.rate}%)
 						</div>
-						{#if round == 0}
-						<div class="winButton button winp2 bounce" player="p2" on:click={playRound}>Win</div>
-						{:else}
+						<!-- {#if players.p1.data.length > 3}
 						<div class="winButton button winp2" player="p2" on:click={playRound}>Win</div>
+						{/if} -->
+						{#if players.p2.mood == "sad" && round > 0}
+						<div class="winWords">Lose</div>
+						{:else if players.p2.mood == "happy" && round > 0}
+						<div class="winWords happyWords">Win</div>
 						{/if}
 					</div>
 					<LayerCake
@@ -313,9 +336,9 @@
 			margin: 0px !important;
 		}
 		figure {
-			margin: 1rem auto;
+			margin: 0.3rem auto;
 			width: 100%;
-			height: 35vh;
+			height: 30vh;
 		}
 	}
 
@@ -349,6 +372,9 @@
 		background-repeat: no-repeat;
 		background-position: 30% 2px;
 	}
+	.headshot.bg-happy {
+		background-color: #f5cd49;
+	}
 	@media only screen and (max-width: 550px) {
 		.profile {
 			margin: 0 !important;
@@ -357,13 +383,30 @@
 			margin-top: 0;
 		}
 	}
+	.winWords {
+		position: absolute;
+		right: 20px;
+		top: 0px;
+		width: 60px;
+		font-weight: bold;
+		text-transform: uppercase;
+		text-align: center;
+		color: black;
+		background: #ccc;
+	}
+	.happyWords.winWords {
+		background: #f5cd49;
+	}
 	.winButton {
 		position: absolute;
 		right: 20px;
 		top: 0px;
 		width: 60px;
 	}
-
+	.flipButton {
+		margin: 10px auto;
+		width: 160px;
+	}
 	.speechBubble {
 		width: 300%;
 		bottom: 110%;

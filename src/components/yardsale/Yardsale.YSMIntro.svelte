@@ -1,5 +1,6 @@
 <script>
 	import { onMount } from 'svelte';
+	import { fade } from 'svelte/transition';
 	let players = [];
 	let ticks = [];
 	let windowHeight = 300;
@@ -12,7 +13,7 @@
 	export let roundLimit;
 	let chartWidth;
 	export let increment;
-	let running = false;
+	let running = true;
 
 	let stepHeight = 600;
 	let stepWidth = 600;
@@ -163,10 +164,10 @@
 			{#if !running}
 				{#each players as player}
 					{#if player.order == 0}
-					<text class="player1Text" x={player.order * ((chartWidth-50) /playerNumber) + 45 } y={chartHeight - player.height - 7}>Poorest: ${comma(Math.round(player.wealth))}</text>
+					<text class="player1Text" x={player.order * ((chartWidth-50) /playerNumber) + 45 } y={chartHeight - player.height - 7} in:fade={{ delay: 200 }}>Poorest: ${comma(Math.round(player.wealth))}</text>
 					{/if}
 					{#if player.order == 99 }
-					<text class="player2Text" width={200} x={player.order * ((chartWidth-50) /playerNumber) + 50} y={chartHeight - player.height - 7}>Richest: ${comma(Math.round(player.wealth))}</text>
+					<text class="player2Text" width={200} x={player.order * ((chartWidth-50) /playerNumber) + 50} y={chartHeight - player.height - 7} in:fade={{ delay: 200 }}>Richest: ${comma(Math.round(player.wealth))}</text>
 					{/if}
 				{/each}
 			{/if}

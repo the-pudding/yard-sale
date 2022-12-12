@@ -1,7 +1,9 @@
 <script>
 	import { onMount } from 'svelte';
 	import Range from "$components/helpers/Range.svelte";
+	import { fade } from 'svelte/transition';
 	let players = [];
+	let players_redist = [];
 	let ticks = [];
 	let windowHeight;
 	let playerNumber = 100;
@@ -12,13 +14,14 @@
 	let round = 0;
 	let roundLimit = 0;
 	let chartWidth, chartHeight;
-	let redistribution = 0;
+	let redistribution = 0.5;
 	let redistributionPot = 0;
 	let running = false;
 	export let redist;
 
 	function generatePlayers() {
 		players = [];
+		players_redist = [];
 		for (let i in [...Array(playerNumber).keys()]) {
 			let player = {
 				"wealth": 1000,
@@ -26,7 +29,14 @@
 				"order": 0,
 				"height": 0
 			} 
+			let player_redist  = {
+				"wealth": 1000,
+				"id": i,
+				"order": 0,
+				"height": 0
+			} 
 			players.push(player);
+			players_redist.push(player_redist);
 		}
 	}
 
@@ -43,6 +53,7 @@
 
 	function playRounds() {
 		players = shuffle(players); // randomize the array order to get random pairings
+		players_redist = shuffle(players_redist); 
 		redistributionPot = 0;
 		for (let i = 0; i < players.length; i+=2) { // iterate through all 50 games. each game gets players[i] and players[i+1].
 			let player1 = players[i];
@@ -54,14 +65,26 @@
 			// Adding the payout
 			players[i].wealth = players[i].wealth + payouts[0];
 			players[i + 1].wealth = players[i + 1].wealth + payouts[1];
+			
+			///// REDISTRIBUTION
+			
+			let player1_r = players_redist[i];
+			let player2_r = players_redist[i+1];
+			let playerOrder_r = player1_r.wealth > player2_r.wealth ? [player1_r, player2_r] : [player2_r, player1_r]; // array with [wealthierPlayer, poorerPlayer] 
+			let wager_r = playerOrder_r[1].wealth * maxWager/100; // the second player in the playerOrder array is poorer
+			let payouts_r = Math.random() > 0.5 ? [wager_r, -wager_r] : [-wager_r, wager_r]; // randomize who wins, and return array of payouts
+			
+			// Adding the payout
+			players_redist[i].wealth = players_redist[i].wealth + payouts_r[0];
+			players_redist[i + 1].wealth = players_redist[i + 1].wealth + payouts_r[1];
 
 			// Adding a portion to the redistribution pot
-			redistributionPot += players[i].wealth * redistribution/100;
-			redistributionPot += players[i + 1].wealth * redistribution/100;
+			redistributionPot += players_redist[i].wealth * redistribution/100;
+			redistributionPot += players_redist[i + 1].wealth * redistribution/100;
 
 			// Taking redistributed amount away from player
-			players[i].wealth = players[i].wealth - (players[i].wealth * redistribution/100);
-			players[i + 1].wealth = players[i + 1].wealth - (players[i + 1].wealth * redistribution/100);
+			players_redist[i].wealth = players_redist[i].wealth - (players_redist[i].wealth * redistribution/100);
+			players_redist[i + 1].wealth = players_redist[i + 1].wealth - (players_redist[i + 1].wealth * redistribution/100);
 		}
 		round+= 1;
 		sortPlayers();
@@ -82,12 +105,17 @@
 
 
 	function sortPlayers() {
+		// Redistribute the pot
+		for (var i = 0; i < players_redist.length; i++) {
+			players_redist[i].wealth = players_redist[i].wealth + redistributionPot / 100;
+		}
 		players.sort(dynamicSort("wealth"));
+		players_redist.sort(dynamicSort("wealth"));
 		// Iterating through player to determine highest number AND to give players the redistributed pot
 		worldrecord = 0;
 		highestNumber = 0;
 		for (let i = 0; i < players.length; i++) {
-			players[i].wealth = players[i].wealth + redistributionPot / 100;
+			players[i].wealth = players[i].wealth; // + redistributionPot / 100;
 			if (players[i].wealth > worldrecord) {
 				worldrecord = players[i].wealth;
 			}
@@ -112,6 +140,12 @@
 			players[i].order = i;
 			players[i].height = (players[i].wealth / highestNumber) * chartHeight;
 			players[i].height = players[i].height < 2 ? 2 : players[i].height;
+		}
+		
+		for (var i = 0; i < players_redist.length; i++) {
+			players_redist[i].order = i;
+			players_redist[i].height = (players_redist[i].wealth / highestNumber) * chartHeight;
+			players_redist[i].height = players_redist[i].height < 2 ? 2 : players_redist[i].height;
 		}
 	}
 
@@ -167,12 +201,13 @@
 	<p><strong>Redistribution:</strong> How much of each player's wealth should be redistributed to everyone else after each round?</p>
 	<div class="toolbar ysm_data fullInfo">
 		<div class="toolItem">
-			<Range min=0 max=10 step=0.1 bind:value={redistribution} dis={running}/>
+			<Range min=0 max=5 step=0.1 bind:value={redistribution} dis={running}/>
 			<div class="toolValue">{redistribution.toFixed(1)}%</div>
 		</div>
 	</div>
 
 	<p>This time players will be willing to bet <strong>{maxWager}%</strong> of their wealth each game. After each round, we'll tax every player <strong>{redistribution.toFixed(1)}%</strong> and disperse it evenly to all players.</p>
+	<p>Let's track how people playing <span class="purple">with redistribution</span> fare compared to people playing <span class="yellow">without redistribution</span>.</p>
 </div>
 {/if}
 
@@ -200,18 +235,45 @@
 				<text class="chartText" x=0 y={chartHeight - (tick / highestNumber * chartHeight) - 5}>${comma(tick)}</text>
 				{/each}
 				{#each players as player}
-				<rect class="player player{player.order}" x={player.order * ((chartWidth-100) / playerNumber) + 50 } width={chartWidth / 200} height={player.height} y={chartHeight - player.height}></rect>
+					{#if redist == 1}
+						<rect class="player player{player.order} faded" x={player.order * ((chartWidth-100) / playerNumber) + 50 } width={chartWidth / 200} height={player.height} y={chartHeight - player.height}></rect>
+					{:else}
+						<rect class="player player{player.order}" x={player.order * ((chartWidth-100) / playerNumber) + 50 } width={chartWidth / 200} height={player.height} y={chartHeight - player.height}></rect>
+					{/if}
 				{/each}
+				{#if redist == 1}
+					{#each players_redist as player}
+					<rect class="player player{player.order} redist" x={player.order * ((chartWidth-100) / playerNumber) + 50 } width={chartWidth / 200} height={player.height} y={chartHeight - player.height}></rect>
+					{/each}
+				{/if}
 
 			{#if !running}
+			
+				{#if redist == 1}
 				{#each players as player}
-				{#if player.order == 0}
-				<text class="player1Text" x={player.order * ((chartWidth-50) /playerNumber) + 45 } y={chartHeight - player.height - 7}>Poorest: ${comma(Math.round(player.wealth))}</text>
+						{#if player.order == 99 && round > 100}
+							<text class="player2Text red" width={200} x={player.order * ((chartWidth-100) / playerNumber) + 50} y={chartHeight - player.height - 7} in:fade={{ delay: 200 }}>Richest w/o redistribution: ${comma(Math.round(player.wealth))}</text>
+						{/if}
+					{/each}
+				
+					{#each players_redist as player}
+					{#if player.order == 0}
+					<text class="player1Text" x={player.order * ((chartWidth-50) /playerNumber) + 45 } y={chartHeight - player.height - 7} in:fade={{ delay: 200 }}>Poorest: ${comma(Math.round(player.wealth))}</text>
+					{/if}
+					{#if player.order == 99 }
+					<text class="player2Text" width={200} x={player.order * ((chartWidth-100) / playerNumber) + 50} y={chartHeight - player.height - 7} in:fade={{ delay: 200 }}>Richest: ${comma(Math.round(player.wealth))}</text>
+					{/if}
+					{/each}
+				{:else}
+					{#each players as player}
+						{#if player.order == 0}
+						<text class="player1Text" x={player.order * ((chartWidth-50) /playerNumber) + 45 } y={chartHeight - player.height - 7} in:fade={{ delay: 200 }}>Poorest: ${comma(Math.round(player.wealth))}</text>
+						{/if}
+						{#if player.order == 99 }
+						<text class="player2Text" width={200} x={player.order * ((chartWidth-100) / playerNumber) + 50} y={chartHeight - player.height - 7} in:fade={{ delay: 200 }}>Richest: ${comma(Math.round(player.wealth))}</text>
+						{/if}
+					{/each}
 				{/if}
-				{#if player.order == 99 }
-				<text class="player2Text" width={200} x={player.order * ((chartWidth-100) / playerNumber) + 50} y={chartHeight - player.height - 7}>Richest: ${comma(Math.round(player.wealth))}</text>
-				{/if}
-				{/each}
 			{/if}
 			</svg>
 		</div>
@@ -227,7 +289,6 @@
 		padding: 20px 0 0px;
 		border: 1px solid var(--category-purple2);
 	}
-
 	.toolbar {
 		position: relative;
 		margin-bottom: 10px;
@@ -258,11 +319,11 @@
 		color: var(--category-bg-purple);
 		position: absolute;
 		left: 102%;
-		top: 30px;
+		top: 0px;
+		font-size: 20px;
 	}
 	.toolValue {
-		margin-top: -40px;
-		font-size: 16px;
+		margin-top: -24px;
 		font-weight: bold;
 		margin-bottom: 20px;
 		color: var(--category-bg-purple);
@@ -275,5 +336,4 @@
 	.chartArea { height: 60vh; max-height: 500px; min-height: 300px; margin-bottom: 10px; padding: 10px; box-sizing: border-box; }
 	svg { width: calc(100% - 30px); height: 100%; }
 	.chartArea .toolLabel { position: absolute; left: 10px; top: 10px }
-
 </style>

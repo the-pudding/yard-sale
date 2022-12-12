@@ -5,6 +5,7 @@
 
 	import YardsaleScrolly from "$components/yardsale/Yardsale.scrolly.svelte";
 	import YardsaleCopy from "$components/yardsale/Yardsale.copy.svelte";
+	import YardsaleHed from "$components/yardsale/Yardsale.hed.svelte";
 	import YardsaleQuote from "$components/yardsale/Yardsale.quote.svelte";
 	import YardsaleMathSimulation from "$components/yardsale/Yardsale.mathsimulation.svelte";
 	import YardsaleYSM from "$components/yardsale/Yardsale.YSM.svelte";
@@ -13,8 +14,10 @@
 <div id="body">
 	<!-- SECTION 1 -->
 	<YardsaleScrolly words={copy.scrolly1} container="scrolly1" />
-	<YardsaleCopy hed={copy.Hed} words={copy.Nutgraf} />
+	<YardsaleHed />
+	<YardsaleCopy hed="" words={copy.Nutgraf} />
 	<YardsaleScrolly words={copy.scrolly2} container="scrolly2" />
+	<YardsaleCopy hed="" words={copy.Nutgraf2} />
 	<YardsaleScrolly words={copy.scrolly3} container="scrolly3" />
 	<YardsaleCopy hed="" words={copy.IntroSection1} />
 	<YardsaleMathSimulation />
@@ -34,11 +37,10 @@
 	<YardsaleCopy hed={copy.EndHed} words={copy.EndSection1} />
 	<YardsaleYSM redist=1 />
 	<YardsaleCopy hed="" words={copy.EndSection2} />
-	<YardsaleCopy hed="" words={copy.EndSection3} />
+	<YardsaleCopy hed="So, the watch" words={copy.EndSection3} />
 		
-	<!-- Methods -->
-	<YardsaleCopy hed="Methods" words={copy.Methods} />
-
+	<!-- READ MORE -->
+	<YardsaleCopy hed={copy.ReadMoreHed} words={copy.readmore} />
 </div>
 
 

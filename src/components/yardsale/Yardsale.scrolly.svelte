@@ -52,6 +52,18 @@
 			{"image":"phone", "xmetric":"left","x":-50, "ymetric": "top", "y":20, "width": 30, "opacity": 0},
 			{"image":"plus-minus", "xmetric":"left","x":0, "ymetric": "top", "y":0, "width": 100, "opacity": 1}
 			],
+		"scrolly1-5": [
+			{"image":"pawnshop", "xmetric":"left","x":0, "ymetric": "top", "y":0, "width": 100, "opacity": 0},
+			{"image":"watch-zoom", "xmetric":"left","x":0, "ymetric": "top", "y":0, "width": 100, "opacity": 0},
+			{"image":"phone", "xmetric":"left","x":-50, "ymetric": "top", "y":20, "width": 30, "opacity": 0},
+			{"image":"plus-minus", "xmetric":"left","x":0, "ymetric": "top", "y":0, "width": 100, "opacity": 1}
+		],
+		"scrolly1-6": [
+			{"image":"pawnshop", "xmetric":"left","x":0, "ymetric": "top", "y":0, "width": 100, "opacity": 0},
+			{"image":"watch-zoom", "xmetric":"left","x":0, "ymetric": "top", "y":0, "width": 100, "opacity": 0},
+			{"image":"phone", "xmetric":"left","x":-50, "ymetric": "top", "y":20, "width": 30, "opacity": 0},
+			{"image":"plus-minus", "xmetric":"left","x":0, "ymetric": "top", "y":0, "width": 100, "opacity": 1}
+		],
 		"scrolly2-0": [
 			{"image":"the-100", "xmetric":"left","x":0, "ymetric": "top", "y":0, "width": 100, "opacity": 1},
 			{"image":"player1-full", "xmetric":"left","x":-30, "ymetric": "bottom", "y":5, "width": 30, "opacity": 0},
@@ -66,8 +78,18 @@
 			{"image":"player1-sad", "xmetric":"left","x":5, "ymetric": "top", "y":33, "width": 30, "opacity": 0},
 			{"image":"coin-flipping", "xmetric":"left","x":50, "ymetric": "top", "y":200, "width": 10, "opacity": 1},
 			{"image":"coin-tails", "xmetric":"left","x":50, "ymetric": "top", "y":200, "width": 10, "opacity": 0}
-			],
+		],
 		"scrolly2-2": [
+			{"image":"the-100", "xmetric":"left","x":0, "ymetric": "top", "y":0, "width": 100, "opacity": 0.3},
+			{"image":"player1-full", "xmetric":"left","x":5, "ymetric": "bottom", "y":5, "width": 30, "opacity": 1},
+			{"image":"player2-full", "xmetric":"right","x": 5, "ymetric": "bottom", "y":5, "width": 30, "opacity": 1},
+			{"image":"player1-happy", "xmetric":"left","x":-20, "ymetric": "top", "y":33, "width": 30, "opacity": 0},
+			{"image":"player2-happy", "xmetric":"right","x": -20, "ymetric": "top", "y":33, "width": 30, "opacity": 0},
+			{"image":"player1-sad", "xmetric":"left","x":5, "ymetric": "top", "y":33, "width": 30, "opacity": 0},
+			{"image":"coin-flipping", "xmetric":"left","x":50, "ymetric": "top", "y":200, "width": 10, "opacity": 1},
+			{"image":"coin-tails", "xmetric":"left","x":50, "ymetric": "top", "y":200, "width": 10, "opacity": 0}
+			],
+		"scrolly2-3": [
 			{"image":"the-100", "xmetric":"left","x":-50, "ymetric": "top", "y":-50, "width": 200, "opacity": 0.1},
 			{"image":"player1-full", "xmetric":"left","x":5, "ymetric": "bottom", "y":5, "width": 30, "opacity": 0},
 			{"image":"player2-full", "xmetric":"right","x": 5, "ymetric": "bottom", "y":5, "width": 30, "opacity": 0},
@@ -77,7 +99,7 @@
 			{"image":"coin-flipping", "xmetric":"left","x":50, "ymetric": "top", "y":200, "width": 10, "opacity": 1},
 			{"image":"coin-tails", "xmetric":"left","x":50, "ymetric": "top", "y":33, "width": 10, "opacity": 0}
 			],
-		"scrolly2-3": [
+		"scrolly2-4": [
 			{"image":"the-100", "xmetric":"left","x":-50, "ymetric": "top", "y":-50, "width": 200, "opacity": 0.1},
 			{"image":"player1-full", "xmetric":"left","x":5, "ymetric": "bottom", "y":5, "width": 30, "opacity": 0},
 			{"image":"player2-full", "xmetric":"right","x": 5, "ymetric": "bottom", "y":5, "width": 30, "opacity": 0},
@@ -87,7 +109,7 @@
 			{"image":"coin-flipping", "xmetric":"left","x":45, "ymetric": "top", "y":33, "width": 10, "opacity": 1},
 			{"image":"coin-tails", "xmetric":"left","x":44, "ymetric": "top", "y":33, "width": 12, "opacity": 0}
 			],
-		"scrolly2-4": [
+		"scrolly2-5": [
 			{"image":"the-100", "xmetric":"left","x":-50, "ymetric": "top", "y":-50, "width": 200, "opacity": 0.1},
 			{"image":"player1-full", "xmetric":"left","x":5, "ymetric": "bottom", "y":5, "width": 30, "opacity": 0},
 			{"image":"player3-full", "xmetric":"right","x": 5, "ymetric": "bottom", "y":5, "width": 30, "opacity": 0},
@@ -97,17 +119,27 @@
 			{"image":"coin-flipping", "xmetric":"left","x":45, "ymetric": "top", "y":40, "width":10, "opacity": 0},
 			{"image":"coin-tails", "xmetric":"left","x":44, "ymetric": "top", "y":40, "width":12, "opacity": 1}
 			],
-		"scrolly2-5": [
+		"scrolly2-6": [
 			{"image":"the-100", "xmetric":"left","x":-50, "ymetric": "top", "y":-50, "width": 200, "opacity": 0.1},
-			{"image":"player1-full", "xmetric":"left","x":5, "ymetric": "bottom", "y":5, "width": 30, "opacity": 0},
-			{"image":"player3-full", "xmetric":"right","x": 5, "ymetric": "bottom", "y":5, "width": 30, "opacity": 0},
+			{"image":"player1-full", "xmetric":"left","x":-60, "ymetric": "bottom", "y":5, "width": 30, "opacity": 0},
+			{"image":"player3-full", "xmetric":"right","x": -60, "ymetric": "bottom", "y":5, "width": 30, "opacity": 0},
 			{"image":"player1-happy", "xmetric":"left","x":5, "ymetric": "top", "y":33, "width": 30, "opacity": 0},
 			{"image":"player2-happy", "xmetric":"right","x": 5, "ymetric": "top", "y":33, "width": 30, "opacity": 1},
 			{"image":"player1-sad", "xmetric":"left","x":5, "ymetric": "top", "y":33, "width": 30, "opacity": 1},
 			{"image":"coin-flipping", "xmetric":"left","x":45, "ymetric": "top", "y":40, "width": 10, "opacity": 0},
 			{"image":"coin-tails", "xmetric":"left","x":44, "ymetric": "top", "y":40, "width": 12, "opacity": 1}
 			],
-		"scrolly2-6": [
+		"scrolly2-7": [
+			{"image":"the-100", "xmetric":"left","x":0, "ymetric": "top", "y":0, "width": 100, "opacity": 0.3},
+			{"image":"player1-full", "xmetric":"left","x":5, "ymetric": "bottom", "y":5, "width": 30, "opacity": 1},
+			{"image":"player3-full", "xmetric":"right","x":5, "ymetric": "bottom", "y":5, "width": 30, "opacity": 1},
+			{"image":"player1-happy", "xmetric":"left","x":5, "ymetric": "top", "y":33, "width": 30, "opacity": 0},
+			{"image":"player2-happy", "xmetric":"right","x": 5, "ymetric": "top", "y":33, "width": 30, "opacity": 0},
+			{"image":"player1-sad", "xmetric":"left","x":5, "ymetric": "top", "y":33, "width": 30, "opacity": 0},
+			{"image":"coin-flipping", "xmetric":"left","x":45, "ymetric": "top", "y":40, "width": 10, "opacity": 0},
+			{"image":"coin-tails", "xmetric":"left","x":44, "ymetric": "top", "y":33, "width": 12, "opacity": 0}
+		],
+		"scrolly2-8": [
 			{"image":"the-100", "xmetric":"left","x":0, "ymetric": "top", "y":0, "width": 100, "opacity": 0.3},
 			{"image":"player1-full", "xmetric":"left","x":5, "ymetric": "bottom", "y":5, "width": 30, "opacity": 1},
 			{"image":"player3-full", "xmetric":"right","x": 5, "ymetric": "bottom", "y":5, "width": 30, "opacity": 1},
@@ -117,10 +149,10 @@
 			{"image":"coin-flipping", "xmetric":"left","x":45, "ymetric": "top", "y":40, "width": 10, "opacity": 0},
 			{"image":"coin-tails", "xmetric":"left","x":44, "ymetric": "top", "y":33, "width": 12, "opacity": 0}
 			],
-		"scrolly2-7": [
+		"scrolly2-9": [
 			{"image":"the-100", "xmetric":"left","x":-20, "ymetric": "top", "y":-50, "width": 200, "opacity": 0.1},
 			{"image":"player1-full", "xmetric":"left","x":5, "ymetric": "bottom", "y":5, "width": 30, "opacity": 0},
-			{"image":"player2-full", "xmetric":"right","x": 5, "ymetric": "bottom", "y":5, "width": 30, "opacity": 0},
+			{"image":"player3-full", "xmetric":"right","x": 5, "ymetric": "bottom", "y":5, "width": 30, "opacity": 0},
 			{"image":"player1-happy", "xmetric":"left","x":5, "ymetric": "top", "y":33, "width": 30, "opacity": 1},
 			{"image":"player2-happy", "xmetric":"right","x": 5, "ymetric": "top", "y":33, "width": 30, "opacity": 0},
 			{"image":"player3-happy", "xmetric":"right","x": 5, "ymetric": "top", "y":33, "width": 30, "opacity": 1},
@@ -128,10 +160,10 @@
 			{"image":"coin-flipping", "xmetric":"left","x":45, "ymetric": "top", "y":40, "width": 10, "opacity": 0},
 			{"image":"coin-tails", "xmetric":"left","x":44, "ymetric": "top", "y":33, "width": 12, "opacity": 0}
 			],
-		"scrolly2-8": [
+		"scrolly2-10": [
 			{"image":"the-100", "xmetric":"left","x":-20, "ymetric": "top", "y":-50, "width": 200, "opacity": 0.1},
 			{"image":"player1-full", "xmetric":"left","x":5, "ymetric": "bottom", "y":5, "width": 30, "opacity": 0},
-			{"image":"player2-full", "xmetric":"right","x": 5, "ymetric": "bottom", "y":5, "width": 30, "opacity": 0},
+			{"image":"player3-full", "xmetric":"right","x": 5, "ymetric": "bottom", "y":5, "width": 30, "opacity": 0},
 			{"image":"player1-happy", "xmetric":"left","x":5, "ymetric": "top", "y":33, "width": 30, "opacity": 1},
 			{"image":"player2-happy", "xmetric":"right","x": 5, "ymetric": "top", "y":33, "width": 30, "opacity": 0},
 			{"image":"player3-sad", "xmetric":"right","x": 5, "ymetric": "top", "y":33, "width": 30, "opacity": 1},
@@ -139,7 +171,7 @@
 			{"image":"coin-flipping", "xmetric":"left","x":45, "ymetric": "top", "y":200, "width": 10, "opacity": 0},
 			{"image":"coin-tails", "xmetric":"left","x":44, "ymetric": "top", "y":33, "width": 10, "opacity": 0}
 			],
-		"scrolly2-9": [
+		"scrolly2-11": [
 			{"image":"the-100", "xmetric":"left","x":-20, "ymetric": "top", "y":-50, "width": 200, "opacity": 0.1},
 			{"image":"player1-full", "xmetric":"left","x":5, "ymetric": "bottom", "y":5, "width": 30, "opacity": 0},
 			{"image":"player2-full", "xmetric":"right","x": 5, "ymetric": "bottom", "y":5, "width": 30, "opacity": 0},
@@ -150,10 +182,10 @@
 			{"image":"coin-flipping", "xmetric":"left","x":45, "ymetric": "top", "y":33, "width": 10, "opacity": 1},
 			{"image":"coin-tails", "xmetric":"left","x":44, "ymetric": "top", "y":33, "width": 12, "opacity": 0}
 			],
-		"scrolly2-10": [
+		"scrolly2-12": [
 			{"image":"the-100", "xmetric":"left","x":-20, "ymetric": "top", "y":-50, "width": 200, "opacity": 0.1},
 			{"image":"player1-full", "xmetric":"left","x":5, "ymetric": "bottom", "y":5, "width": 30, "opacity": 0},
-			{"image":"player2-full", "xmetric":"right","x": 5, "ymetric": "bottom", "y":5, "width": 30, "opacity": 0},
+			{"image":"player3-full", "xmetric":"right","x": 5, "ymetric": "bottom", "y":5, "width": 30, "opacity": 0},
 			{"image":"player1-happy", "xmetric":"left","x":5, "ymetric": "top", "y":33, "width": 30, "opacity": 1},
 			{"image":"player2-happy", "xmetric":"right","x": 5, "ymetric": "top", "y":33, "width": 30, "opacity": 0},
 			{"image":"player3-sad", "xmetric":"right","x": 5, "ymetric": "top", "y":33, "width": 30, "opacity": 1},
@@ -161,18 +193,7 @@
 			{"image":"coin-flipping", "xmetric":"left","x":45, "ymetric": "top", "y":40, "width": 10, "opacity": 0},
 			{"image":"coin-tails", "xmetric":"left","x":44, "ymetric": "top", "y":40, "width": 12, "opacity": 1}
 			],
-		"scrolly2-11": [
-			{"image":"the-100", "xmetric":"left","x":-20, "ymetric": "top", "y":-50, "width": 200, "opacity": 0.1},
-			{"image":"player1-full", "xmetric":"left","x":5, "ymetric": "bottom", "y":5, "width": 30, "opacity": 0},
-			{"image":"player2-full", "xmetric":"right","x": 5, "ymetric": "bottom", "y":5, "width": 30, "opacity": 0},
-			{"image":"player1-sad", "xmetric":"left","x":5, "ymetric": "top", "y":33, "width": 30, "opacity": 1},
-			{"image":"player2-happy", "xmetric":"right","x": 5, "ymetric": "top", "y":33, "width": 30, "opacity": 0},
-			{"image":"player3-sad", "xmetric":"right","x": 5, "ymetric": "top", "y":33, "width": 30, "opacity": 1},
-			{"image":"player1-sad", "xmetric":"left","x":5, "ymetric": "top", "y":33, "width": 30, "opacity": 0},
-			{"image":"coin-flipping", "xmetric":"left","x":45, "ymetric": "top", "y":40, "width": 10, "opacity": 0},
-			{"image":"coin-tails", "xmetric":"left","x":44, "ymetric": "top", "y":40, "width": 12, "opacity": 1}
-			],
-		"scrolly2-12": [
+		"scrolly2-13": [
 			{"image":"the-100", "xmetric":"left","x":-20, "ymetric": "top", "y":-50, "width": 200, "opacity": 0.1},
 			{"image":"player1-full", "xmetric":"left","x":5, "ymetric": "bottom", "y":5, "width": 30, "opacity": 0},
 			{"image":"player2-full", "xmetric":"right","x": 5, "ymetric": "bottom", "y":5, "width": 30, "opacity": 0},
@@ -200,8 +221,8 @@
 			"player2Record": "0 - 0"
 		},
 		"1": {
-			"player1": 1000,
-			"player2": 1000,
+			"player1": 600,
+			"player2": 600,
 			"wager": 0,
 			"player1Words": "",
 			"player2Words": "",
@@ -211,13 +232,22 @@
 		"2": {
 			"player1": 1000,
 			"player2": 1000,
-			"wager": 200,
-			"player1Words": "I don't want to risk too much money, so I can wager 20% of my wealth.",
-			"player2Words": "OK let's do $200.",
+			"wager": 0,
+			"player1Words": "",
+			"player2Words": "",
 			"player1Record": "0 - 0",
 			"player2Record": "0 - 0"
 		},
 		"3": {
+			"player1": 1000,
+			"player2": 1000,
+			"wager": 200,
+			"player1Words": "I can only wager 20% of my money.",
+			"player2Words": "",
+			"player1Record": "0 - 0",
+			"player2Record": "0 - 0"
+		},
+		"4": {
 			"player1": 1000,
 			"player2": 1000,
 			"wager": 200,
@@ -226,27 +256,18 @@
 			"player1Record": "0 - 0",
 			"player2Record": "0 - 0"
 		},
-		"4": {
-			"player1": 800,
-			"player2": 1200,
-			"wager": 200,
-			"player1Words": "It's tails. I lost.",
-			"player2Words": "I won $200!",
-			"player1Record": "0 - 1",
-			"player2Record": "1 - 0"
-		},
 		"5": {
 			"player1": 800,
 			"player2": 1200,
 			"wager": 200,
-			"player1Words": "",
-			"player2Words": "",
+			"player1Words": "Ugh.",
+			"player2Words": "I won $200!",
 			"player1Record": "0 - 1",
 			"player2Record": "1 - 0"
 		},
 		"6": {
-			"player1": 800,
-			"player2": 1200,
+			"player1": 400,
+			"player2": 400,
 			"wager": 200,
 			"player1Words": "",
 			"player2Words": "",
@@ -254,24 +275,42 @@
 			"player2Record": "1 - 0"
 		},
 		"7": {
-			"player1": 800,
-			"player2": 1200,
-			"wager": 240,
+			"player1": 400,
+			"player2": 600,
+			"wager": 200,
 			"player1Words": "",
-			"player2Words": "I won last game. So I want to bet 20% of my money – $240.",
+			"player2Words": "",
 			"player1Record": "0 - 1",
 			"player2Record": "1 - 0"
 		},
 		"8": {
 			"player1": 800,
 			"player2": 1200,
-			"wager": 160,
-			"player1Words": "That's too much. I lost my first game, so I can only bet 20% of my money – $160.",
-			"player2Words": "OK fine.",
+			"wager": 240,
+			"player1Words": "",
+			"player2Words": "",
 			"player1Record": "0 - 1",
 			"player2Record": "1 - 0"
 		},
 		"9": {
+			"player1": 800,
+			"player2": 1200,
+			"wager": 240,
+			"player1Words": "",
+			"player2Words": "I can bet $240.",
+			"player1Record": "0 - 1",
+			"player2Record": "1 - 0"
+		},
+		"10": {
+			"player1": 800,
+			"player2": 1200,
+			"wager": 160,
+			"player1Words": "I can only bet $160.",
+			"player2Words": "Fine.",
+			"player1Record": "0 - 1",
+			"player2Record": "1 - 0"
+		},
+		"11": {
 			"player1": 800,
 			"player2": 1200,
 			"wager": 160,
@@ -280,7 +319,7 @@
 			"player1Record": "0 - 1",
 			"player2Record": "1 - 0"
 		},
-		"10": {
+		"12": {
 			"player1": 960,
 			"player2": 1040,
 			"wager": 160,
@@ -289,16 +328,16 @@
 			"player1Record": "1 - 1",
 			"player2Record": "1 - 1"
 		},
-		"11": {
+		"13": {
 			"player1": 960,
 			"player2": 1040,
 			"wager": 160,
-			"player1Words": "Wait, why am I not back to $1,000?",
+			"player1Words": "!!!!!",
 			"player2Words": "",
 			"player1Record": "1 - 1",
 			"player2Record": "1 - 1"
 		},
-		"12": {
+		"14": {
 			"player1": 960,
 			"player2": 1040,
 			"wager": 160,
@@ -398,8 +437,12 @@
 				<!-- If it's not the third scrolly, display the comic -->
 				{#if container != "scrolly3"}
 				{#each currentStage as { image, xmetric, x, ymetric, y, width, opacity }, i}
-				<img class="{image}" src="assets/yardsale/art/{image}.png" alt="stageImage" style="{xmetric}: {x}%; {ymetric}: {y}%; width: {width}%; opacity:{opacity};" in:fade={{ delay: 0 }} out:fade/>
-				{/each}
+				{#if image.indexOf("happy") != -1 && [5,6,12,13].indexOf(currentStageNumber) != -1}
+					<img class="{image} happy" src="assets/yardsale/art/{image}.png" alt="stageImage" style="{xmetric}: {x}%; {ymetric}: {y}%; width: {width}%; opacity:{opacity};" in:fade={{ delay: 0 }} out:fade/>
+				{:else}
+					<img class="{image}" src="assets/yardsale/art/{image}.png" alt="stageImage" style="{xmetric}: {x}%; {ymetric}: {y}%; width: {width}%; opacity:{opacity};" in:fade={{ delay: 0 }} out:fade/>
+				{/if}
+								{/each}
 
 				<!-- Speech bubbles -->
 				{#if container == "scrolly2" && wealthLookup[currentStageNumber].player1Words != "" }
@@ -415,7 +458,7 @@
 
 				<!-- Comic coin flip overlay data -->
 				<div class="gameContainer">
-					{#if container == "scrolly2" && [1,2,3,4,5,7,8,9,10,11,12].indexOf(currentStageNumber) != -1 }
+					{#if container == "scrolly2" && [2,3,4,5,8,9,10,11,12,13].indexOf(currentStageNumber) != -1 }
 					<div class="player1 wealthNumber" in:fade={{ delay: 400 }} out:fade>
 						<div class="gameInfoItem brighter">Me</div>
 						<div class="gameInfoItem">{wealthLookup[currentStageNumber].player1Record}</div>
@@ -428,9 +471,9 @@
 					</div>
 					<div class="player2 wealthNumber" in:fade={{ delay: 400 }} out:fade>
 						{#if currentStageNumber < 6 }
-						<div class="gameInfoItem brighter">Player 2</div>
+						<div class="gameInfoItem brighter">Fiona</div>
 						{:else}
-						<div class="gameInfoItem brighter">Player 3</div>
+						<div class="gameInfoItem brighter">Jon</div>
 						{/if}
 						<div class="gameInfoItem">{wealthLookup[currentStageNumber].player2Record}</div>
 						<div class="gameInfoItem">${comma(gameinfo.player2)}</div>
@@ -441,7 +484,7 @@
 						</div>
 					</div>
 					{/if}
-					{#if container == "scrolly2" && [2,3,7,8,9].indexOf(currentStageNumber) != -1 }
+					{#if container == "scrolly2" && [3,4,9,10,11].indexOf(currentStageNumber) != -1 }
 					<div class="wager" in:fade={{ delay: 0 }} out:fade>
 						<div class="gameInfoItem brighter">Wager</div>
 						<div class="gameInfoItem">${comma(gameinfo.wager)}</div>
@@ -581,7 +624,7 @@
 		width:  90%;
 		margin: 0 auto;
 		height:  95vh;
-		border: 1px solid #000;
+		border: 3px solid #000;
 		max-width: 95vh;
 		z-index: -1;
 	}
@@ -638,13 +681,13 @@
 		transition: all 800ms cubic-bezier(0.250, 0.100, 0.250, 1.000); 
 		transition-timing-function: cubic-bezier(0.250, 0.100, 0.250, 1.000);
 	}
-	.player1-happy, .player2-happy, .player3-happy {
+	
+	.player1-happy, .player2-happy, .player3-happy, .player1-sad, .player2-sad, .player3-sad {
 		background: #c5b3c7;
-	} 
-	.player1-sad, .player2-sad, .player3-sad {
-		background: #c5b3c7;
-
 	}
+	.player1-happy.happy, .player2-happy.happy, .player3-happy.happy {
+		background: #f5cd49;
+	} 
 
 	.scrollyBackground .hidden {
 		opacity:  0;
@@ -666,11 +709,12 @@
 		max-width: 500px;
 		margin: 0 auto;
 		background:  rgba(0,0,0,0.8);
-		font-size:  18px;
+		font-size:  1.4em;
 		padding:  10px;
 		box-sizing: border-box;
 		color: white;
 		text-shadow: -1px -1px 6px rgba(0, 0, 0, 0.5);
+		text-align: center;
 	}
 
 	@media only screen and (max-width: 640px) {

@@ -104,13 +104,14 @@ body {
 }
 .body_container {
 	width: 100%;
-	max-width:  580px;
+	max-width:  640px;
 	margin:  0 auto;
 	padding: 0px 10px;	
 	font-family: "National 2 Web"; 
-	font-size: 18px;
-	line-height: 1.6em;
+	font-size: 1.4em;
+	line-height: 1.5em;
 	box-sizing: border-box;
+	color: black;
 }
 .interactive_container .extrawide {
 	width:  140%;
@@ -138,12 +139,15 @@ blockquote {
 
 /* text */
 .body_container h2 {
-	font-size: 1.8rem;
+	font-size: 2.0rem;
 	line-height: 1.1em;
-	text-align: center;	
+	text-align: left;	
 	font-weight:  bold;
 	margin-top: 50px;
 	margin-bottom:  6px;
+}
+.body_container p {
+	margin-bottom: 25px;
 }
 .body_container section h3 {
 	font-size: 1.7rem;
@@ -165,8 +169,10 @@ blockquote {
 	cursor: pointer;
 	margin:  0 0px;
 	padding:  5px;
-	font-size:  15px;
-	border:  1px solid var(--category-bg-purple);
+	font-weight: bold;
+	font-size:  1em;
+	/* text-transform: uppercase; */
+	border:  2px solid var(--category-bg-purple);
 	background: var(--category-purple);
 	line-height: 1.1em;
 	box-shadow: 2px 2px 0px 0px  var(--category-bg-purple);
@@ -196,8 +202,8 @@ blockquote {
 	position: relative;
 	width: 100%;
 	text-align: center;
-	line-height: 1.3em;
-	font-size: 20px;
+	line-height: 1.6em;
+	font-size: 1.5em;
 	margin: 10px 0;
 }
 .fullInfoSub {
@@ -209,9 +215,24 @@ blockquote {
 }
 rect.player {
 	fill:  #9e9ac8;
+	opacity: 1;
 }
 rect.player.player0, rect.player.player99  {
 	fill: var(--category-bg-purple) !important;
+}
+rect.faded, rect.faded.player.player0, rect.faded.player.player99 {
+	fill:#f5cd49 !important;
+	opacity: 0.7;
+}
+.purple {
+	background: #b0abe6;
+	padding: 0 2px;
+	border-radius: 2px;
+}
+.yellow {
+	background: #f5cd49;
+	padding: 0 2px;
+	border-radius: 2px;
 }
 svg line {
 	stroke-dasharray: 4px 4px;
@@ -234,7 +255,9 @@ svg text {
 .player2Text {
 	text-anchor: end;
 }
-
+.player2Text.red {
+	fill: #d0a002 !important;
+}
 .chartText {
 	fill: #555;
 	font-size: 0.725em;
@@ -257,10 +280,12 @@ svg text {
 	right: 5px;
 	top:  0px;
 	background: var(--category-purple);
-	color:  var(--category-bg-purple);
-	border: 1px solid var(--category-bg-purple);
+	color:  var(--category-purple2);
+	border: 2px solid var(--category-purple2);
 	padding:  5px;
 	cursor: pointer;
+	text-transform: uppercase;
+	font-weight: bold;
 	-webkit-touch-callout: none;
 	-webkit-user-select: none; 
 	-khtml-user-select: none; 
@@ -268,9 +293,11 @@ svg text {
 	-ms-user-select: none; 
 	user-select: none;
 	box-shadow: none !important;
+	opacity: 0.5;
 }
 .reset:hover {
 	text-decoration: underline;
+	opacity: 1;
 }
 .reset:active {
 	color:  black;
