@@ -1,7 +1,7 @@
 <script>
 	export let copy;
 	import Header from "$components/Header.svelte";
-	import Footer from "$components/Footer.svelte";
+	// import Footer from "$components/Footer.svelte";
 
 	import YardsaleScrolly from "$components/yardsale/Yardsale.scrolly.svelte";
 	import YardsaleCopy from "$components/yardsale/Yardsale.copy.svelte";
@@ -36,7 +36,7 @@
 	<YardsaleCopy hed="{copy.EndHed}" words="{copy.EndSection1}" />
 	<YardsaleYSM redist="1" />
 	<YardsaleCopy hed="" words="{copy.EndSection2}" />
-	<img class="watch_bottom" src="assets/yardsale/art/thewatch.png" />
+	<img alt="watch on side" class="watch_bottom" src="assets/yardsale/art/thewatch.png" />
 	<YardsaleCopy hed="So, the watch" words="{copy.EndSection3}" />
 
 	<!-- READ MORE -->
