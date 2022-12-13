@@ -316,7 +316,7 @@
 		flex: 2;
 	}
 	.ysm_container section figure {
-		background: #eee; 
+		background: #fff; 
 		padding: 60px 5px 5px;
 		border: 1px solid var(--category-purple2);
 	}
@@ -338,7 +338,7 @@
 		figure {
 			margin: 0.3rem auto;
 			width: 100%;
-			height: 30vh;
+			height: 38vh;
 		}
 	}
 

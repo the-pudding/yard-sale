@@ -90,13 +90,15 @@ h6 {
 	font-size: var(--20px, 20px);
 }
 body {
-	background: #d5d0d9;
+	background: #ece6f0;
 	overflow-x: hidden;
 	width: 100%;
 }
 
 /* containers */
-
+#body {
+	margin-bottom: 100px;
+}
 .interactive_container {
 	width: 100%;
 	padding: 10px 0;
@@ -132,9 +134,8 @@ body {
 }
 
 blockquote {
-	padding: 20px;
+	padding: 20px 20px 10px;
 	background: rgba(50,0,50,0.1);
-	color: #000;
 }
 
 /* text */
@@ -366,7 +367,11 @@ svg text {
 	bottom: 100%;
 	right: 10px;
 }
-
+.watch_bottom {
+	max-width: 100%;
+	width: 640px;
+	margin: 70px auto -40px;
+}
 
 /* Animation */
 

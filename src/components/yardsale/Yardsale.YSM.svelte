@@ -284,6 +284,10 @@
 </div>
 
 <style>
+	.interactive_container {
+		margin: 1.5%;
+		width: 97%;
+	}
 	.ysm_container {
 		background: white;
 		padding: 20px 0 0px;

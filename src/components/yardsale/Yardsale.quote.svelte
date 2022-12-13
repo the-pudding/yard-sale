@@ -17,18 +17,26 @@
 </script>
 <div class="body_container">
 	<blockquote>
-		<div class="quoteImage"></div>
-		{@html words}
-		<p>–{person}</p>
+		<div class="quoteImage" style="background-image:url(assets/yardsale/art/{image}.png)"></div>
+		<div class="quote">{@html words}</div>
+		<p class="citation">—{person}</p>
 	</blockquote>
 </div>
 
 <style>
+	.quote {
+		font-style: italic;
+		color: #443045;
+	}
 	.quoteImage {
 		float: left;
 		margin: 0 10px 10px 0;
 		width: 100px;
 		height: 100px;
-		background: rgba(0,0,0,0.4);
+		background-color: var(--category-purple);
+		background-size: 100% 100%;
+	}
+	.citation {
+		text-align: right;
 	}
 </style>

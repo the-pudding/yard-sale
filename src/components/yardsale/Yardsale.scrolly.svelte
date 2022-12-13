@@ -26,43 +26,57 @@
 			{"image":"pawnshop", "xmetric":"left", "x":0, "ymetric": "top", "y":0, "width": 105, "opacity": 1},
 			{"image":"watch-zoom", "xmetric":"left", "x":0, "ymetric": "top","y":0, "width": 105, "opacity": 0},
 			{"image":"phone", "xmetric":"left","x":-50, "ymetric": "top", "y":20, "width": 30, "opacity": 0},
-			{"image":"plus-minus", "xmetric":"left","x":0, "ymetric": "top", "y":0, "width": 105, "opacity": 0}
+			{"image":"plus-minus1", "xmetric":"left","x":0, "ymetric": "top", "y":0, "width": 105, "opacity": 0},
+			{"image":"watch-zoom2", "xmetric":"left","x":-20, "ymetric": "top", "y":-20, "width": 140, "opacity": 0}
 			],
 		"scrolly1-1": [
 			{"image":"pawnshop", "xmetric":"left","x":-20, "ymetric": "top", "y":-20, "width": 140, "opacity": 0},
 			{"image":"watch-zoom", "xmetric":"left","x":-20, "ymetric": "top", "y":-20, "width": 140, "opacity": 1},
 			{"image":"phone", "xmetric":"left","x":10, "ymetric": "top", "y":20, "width": 30, "opacity": 1},
-			{"image":"plus-minus", "xmetric":"left","x":-20, "ymetric": "top", "y":-20, "width": 140, "opacity": 0}
+			{"image":"plus-minus1", "xmetric":"left","x":-20, "ymetric": "top", "y":-20, "width": 140, "opacity": 0},
+			{"image":"watch-zoom2", "xmetric":"left","x":-100, "ymetric": "top", "y":-20, "width": 140, "opacity": 0}
 			],
 		"scrolly1-2": [
 			{"image":"pawnshop", "xmetric":"left","x":-20, "ymetric": "top", "y":-20, "width": 140, "opacity": 0},
 			{"image":"watch-zoom", "xmetric":"left","x":-20, "ymetric": "top", "y":-20, "width": 140, "opacity": 1},
-			{"image":"phone", "xmetric":"left","x":10, "ymetric": "top", "y":20, "width": 30, "opacity": 1},
-			{"image":"plus-minus", "xmetric":"left","x":-20, "ymetric": "top", "y":-20, "width": 140, "opacity": 0}
+			{"image":"phone", "xmetric":"left","x":-50, "ymetric": "top", "y":20, "width": 30, "opacity": 0},
+			{"image":"plus-minus1", "xmetric":"left","x":-20, "ymetric": "top", "y":-20, "width": 140, "opacity": 0},
+			{"image":"watch-zoom2", "xmetric":"left","x":-20, "ymetric": "top", "y":-20, "width": 140, "opacity": 1},
+			{"image":"plus-minus2", "xmetric":"left","x":-20, "ymetric": "top", "y":-20, "width": 140, "opacity": 0}
 			],
 		"scrolly1-3": [
 			{"image":"pawnshop", "xmetric":"left","x":0, "ymetric": "top", "y":0, "width": 100, "opacity": 0},
-			{"image":"watch-zoom", "xmetric":"left","x":0, "ymetric": "top", "y":0, "width": 100, "opacity": 0},
+			{"image":"watch-zoom", "xmetric":"left","x":5, "ymetric": "top", "y":5, "width": 90, "opacity": 0},
 			{"image":"phone", "xmetric":"left","x":-50, "ymetric": "top", "y":20, "width": 30, "opacity": 0},
-			{"image":"plus-minus", "xmetric":"left","x":0, "ymetric": "top", "y":0, "width": 100, "opacity": 1}
+			{"image":"plus-minus1", "xmetric":"left","x":5, "ymetric": "top", "y":5, "width": 90, "opacity": 1},
+			{"image":"watch-zoom2", "xmetric":"left","x":5, "ymetric": "top", "y":5, "width": 90, "opacity": 0},
+			{"image":"plus-minus2", "xmetric":"left","x":5, "ymetric": "top", "y":5, "width": 90, "opacity": 0}
 			],
 		"scrolly1-4": [
 			{"image":"pawnshop", "xmetric":"left","x":0, "ymetric": "top", "y":0, "width": 100, "opacity": 0},
 			{"image":"watch-zoom", "xmetric":"left","x":0, "ymetric": "top", "y":0, "width": 100, "opacity": 0},
 			{"image":"phone", "xmetric":"left","x":-50, "ymetric": "top", "y":20, "width": 30, "opacity": 0},
-			{"image":"plus-minus", "xmetric":"left","x":0, "ymetric": "top", "y":0, "width": 100, "opacity": 1}
+			{"image":"plus-minus1", "xmetric":"left","x":0, "ymetric": "top", "y":0, "width": 100, "opacity": 1},
+			{"image":"watch-zoom2", "xmetric":"left","x":-50, "ymetric": "top", "y":20, "width": 100, "opacity": 0},
+			{"image":"plus-minus2", "xmetric":"left","x":0, "ymetric": "top", "y":0, "width": 100, "opacity": 1}
 			],
 		"scrolly1-5": [
 			{"image":"pawnshop", "xmetric":"left","x":0, "ymetric": "top", "y":0, "width": 100, "opacity": 0},
 			{"image":"watch-zoom", "xmetric":"left","x":0, "ymetric": "top", "y":0, "width": 100, "opacity": 0},
 			{"image":"phone", "xmetric":"left","x":-50, "ymetric": "top", "y":20, "width": 30, "opacity": 0},
-			{"image":"plus-minus", "xmetric":"left","x":0, "ymetric": "top", "y":0, "width": 100, "opacity": 1}
+			{"image":"plus-minus1", "xmetric":"left","x":-10, "ymetric": "top", "y":-10, "width": 120, "opacity": 0},
+			{"image":"watch-zoom2", "xmetric":"left","x":-50, "ymetric": "top", "y":20, "width": 100, "opacity": 0},
+			{"image":"plus-minus2", "xmetric":"left","x":-10, "ymetric": "top", "y":-10, "width": 120, "opacity": 1},
+			{"image":"oligarch", "xmetric":"left","x":-10, "ymetric": "top", "y":-10, "width": 120, "opacity": 0}
 		],
 		"scrolly1-6": [
 			{"image":"pawnshop", "xmetric":"left","x":0, "ymetric": "top", "y":0, "width": 100, "opacity": 0},
 			{"image":"watch-zoom", "xmetric":"left","x":0, "ymetric": "top", "y":0, "width": 100, "opacity": 0},
 			{"image":"phone", "xmetric":"left","x":-50, "ymetric": "top", "y":20, "width": 30, "opacity": 0},
-			{"image":"plus-minus", "xmetric":"left","x":0, "ymetric": "top", "y":0, "width": 100, "opacity": 1}
+			{"image":"plus-minus1", "xmetric":"left","x":0, "ymetric": "top", "y":0, "width": 100, "opacity": 1},
+			{"image":"watch-zoom2", "xmetric":"left","x":-50, "ymetric": "top", "y":20, "width": 100, "opacity": 0},
+			{"image":"plus-minus2", "xmetric":"left","x":0, "ymetric": "top", "y":0, "width": 100, "opacity": 1},
+			{"image":"oligarch", "xmetric":"left","x":0, "ymetric": "top", "y":0, "width": 100, "opacity": 1}
 		],
 		"scrolly2-0": [
 			{"image":"the-100", "xmetric":"left","x":0, "ymetric": "top", "y":0, "width": 100, "opacity": 1},
@@ -465,7 +479,7 @@
 						<div class="gameInfoItem">${comma(gameinfo.player1)}</div>
 						<div class="gameInfoItem">
 							<div class="gameInfoFullbar">
-								<div class="gameInfoBar" style="width:{gameinfo.player1/20}%"></div>
+								<div class="gameInfoBar" style="width:{gameinfo.player1/15}%"></div>
 							</div>
 						</div>
 					</div>
@@ -479,7 +493,7 @@
 						<div class="gameInfoItem">${comma(gameinfo.player2)}</div>
 						<div class="gameInfoItem">
 							<div class="gameInfoFullbar">
-								<div class="gameInfoBar" style="width:{gameinfo.player2/20}%"></div>
+								<div class="gameInfoBar" style="width:{gameinfo.player2/15}%"></div>
 							</div>
 						</div>
 					</div>
