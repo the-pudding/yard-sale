@@ -505,13 +505,15 @@
 					</div>
 					{/if}
 				</div>
-				<!-- Scroll down hint on stage 1 -->
-				{#if container == "scrolly1" && currentStageNumber < 1}
-				<div class="scrolldown_hint" out:fade></div>
-				{/if}
 
 				<div class="fuzzy" style="opacity:{bgOpacity}; background-image: url('assets/yardsale/grain.png');"></div>
 			</div>
+			<!-- Scroll down hint on stage 1 -->
+			{#if container == "scrolly1" && currentStageNumber < 1}
+			<div class="scrolldown_hint" out:fade>
+				<div class="scrolldown_words">Scroll down</div>
+			</div>
+			{/if}
 		</div>
 
 
@@ -678,15 +680,25 @@
 		position: absolute;
 		width: 0; 
 		height: 0; 
-		border-left: 10px solid transparent;
-		border-right: 10px solid transparent;
-		border-top: 15px solid var(--category-purple2);
-		right: 20px;
-		bottom: 20px;
+		border-left: 20px solid transparent;
+		border-right: 20px solid transparent;
+		border-top: 20px solid var(--category-purple2);
+		right: 50%;
+		margin-right: -10px;
+		top: calc(100% + 50px);
 		margin-left: -5px;
-		opacity: 0.4;
+		opacity: 0.7;
 		z-index: 1000;
 		animation: bounce 1s ease infinite;
+	}
+	.scrolldown_words {
+		position: absolute;
+		width: 100px;
+		left: 50%;
+		margin-left: -50px;
+		text-align: center;
+		bottom: 22px;
+		opacity: 0.7;
 	}
 	.scrollyBackground img {
 		position: absolute;

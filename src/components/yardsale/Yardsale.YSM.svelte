@@ -278,7 +278,7 @@
 			</svg>
 		</div>
 		<div class="resetContainer">
-			<div class="reset button" on:click={reset}>Reset</div>
+			<button class="reset button" on:click={reset}>Reset</button>
 		</div>
 	</div>
 </div>

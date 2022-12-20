@@ -168,9 +168,9 @@
 			<!-- 	<div class="fullInfoSub">(20% of {wagerData[1]}'s wealth)</div> -->
 			</div>
 			{#if players.p1.data.length == 1}
-				<div class="flipButton button bounce" player="" on:click={playRound}>Flip coin</div>
+				<button class="flipButton button bounce" player="" on:click={playRound}>Flip coin</button>
 			{:else}
-				<div class="flipButton button" player="" on:click={playRound}>Flip coin</div>
+				<button class="flipButton button" player="" on:click={playRound}>Flip coin</button>
 			{/if}
 		</div>
 		<!-- TWO CHARTS -->
@@ -283,7 +283,7 @@
 			</section>
 		</div>
 		<div class="resetContainer extrawide">
-			<div class="reset" on:click={reset}>Reset</div>
+			<button class="reset" on:click={reset}>Reset</button>
 		</div>
 	</div>
 </div>
@@ -406,6 +406,8 @@
 	.flipButton {
 		margin: 10px auto;
 		width: 160px;
+		font-weight: bold;
+		font-size:  16px;
 	}
 	.speechBubble {
 		width: 300%;

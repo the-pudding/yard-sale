@@ -1,6 +1,6 @@
 <script>
 	export let copy;
-	import Header from "$components/Header.svelte";
+	// import Header from "$components/Header.svelte";
 	// import Footer from "$components/Footer.svelte";
 
 	import YardsaleScrolly from "$components/yardsale/Yardsale.scrolly.svelte";
