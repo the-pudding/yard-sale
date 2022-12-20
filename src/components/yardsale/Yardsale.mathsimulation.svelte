@@ -6,7 +6,7 @@
 	import AxisX from "$components/charts/AxisX.svg.svelte";
 	import AxisY from "$components/charts/AxisY.svg.svelte";
 
-
+	let winningPlayer = "p1";
 	let round = 0;
 	let roundMax = 10;
 	let players = {
@@ -52,15 +52,15 @@
 	// Triggered on "Win" button click
 	function playRound(event) {
 		// Setting the latest winner
-		let player = event.target.getAttribute("player");
+		// let player = event.target.getAttribute("player");
 		let gamesPlayed = players.p1.data.length;
-		if (player == "" && gamesPlayed < playerWinOrder.length) {
-			player = playerWinOrder[gamesPlayed-1];
+		if (gamesPlayed < playerWinOrder.length - 1) {
+			winningPlayer = playerWinOrder[gamesPlayed-1];
 		} else {
-			player = playerWinOrder[Math.round(Math.random()*playerWinOrder.length)];
+			winningPlayer = playerWinOrder[Math.round(Math.random()*(playerWinOrder.length-1) )];
 		}
-		players.p1.latest = player == "p1" ? "win" : "lost";
-		players.p2.latest = player == "p2" ? "win" : "lost"; 
+		players.p1.latest = winningPlayer == "p1" ? "win" : "lost";
+		players.p2.latest = winningPlayer == "p2" ? "win" : "lost"; 
 		
 		// Calculating wager
 		wagerData = getWager();
@@ -68,13 +68,14 @@
 		let wager = wagerData[0];
 		
 		// Updating player info based on who won
-		players[player].wins += 1;
+		console.log(winningPlayer);
+		players[winningPlayer].wins += 1;
 		round += 1;
 		players.p1.rate = Math.round(players.p1.wins / round * 100);
 		players.p2.rate = Math.round(players.p2.wins / round * 100);
 		players.p1.mood = players.p1.rate >= 51 ? "happy" : "sad";
 		players.p2.mood = players.p2.rate >= 50 ? "happy" : "sad"; 
-		if (player == "p1") {
+		if (winningPlayer == "p1") {
 			players.p1.data.push({"x": round, "y": players.p1.wealth += wager});
 			players.p2.data.push({"x": round, "y": players.p2.wealth -= wager});
 		} else {
@@ -190,13 +191,13 @@
 							{#if players.p1.wins == 0 && players.p2.wins == 1}
 							<div class="speechBubble player1bubble" in:fade={{ delay: 0 }} out:fade>Now my turn to win!</div>
 							{/if}
-							{#if players.p1.rate < 45 && players.p1.latest == "lost" && players.p2.wins > 2}
+							{#if players.p1.rate < 45 && players.p1.latest == "lost" && players.p2.wins > 2 && round < 20}
 							<div class="speechBubble player1bubble" in:fade={{ delay: 0 }} out:fade>Let me win half the time!</div>
 							{/if}
 							{#if players.p1.wins == 1 && players.p2.wins ==1}
 							<div class="speechBubble player1bubble" in:fade={{ delay: 0 }} out:fade>I'm 1-1, but I lost money?</div>
 							{/if}
-							{#if players.p1.rate == 50 && players.p1.wins > 1 && players.p1.wealth < players.p2.wealth}
+							{#if players.p1.rate == 50 && players.p1.wins > 1 && players.p1.wealth < players.p2.wealth && round < 20}
 							<div class="speechBubble player1bubble" in:fade={{ delay: 0 }} out:fade>I've won 50%, but I lost money!?</div>
 							{/if}
 							{#if players.p1.rate == 50 && players.p1.wins >= 5 && players.p1.wins < 3 && players.p1.wealth < players.p2.wealth}
@@ -213,9 +214,9 @@
 						<!-- {#if players.p1.data.length > 3}
 						<div class="winButton button winp1" player="p1" on:click={playRound}>Win</div>
 						{/if} -->
-						{#if players.p1.mood == "sad" && round > 0}
+						{#if winningPlayer == "p2" && round > 0}
 						<div class="winWords">Lose</div>
-						{:else if players.p1.mood == "happy" && round > 0}
+						{:else if winningPlayer == "p1" && round > 0}
 						<div class="winWords happyWords">Win</div>
 						{/if}
 					</div>
@@ -256,9 +257,9 @@
 						<!-- {#if players.p1.data.length > 3}
 						<div class="winButton button winp2" player="p2" on:click={playRound}>Win</div>
 						{/if} -->
-						{#if players.p2.mood == "sad" && round > 0}
+						{#if winningPlayer == "p1" && round > 0}
 						<div class="winWords">Lose</div>
-						{:else if players.p2.mood == "happy" && round > 0}
+						{:else if winningPlayer == "p2" && round > 0}
 						<div class="winWords happyWords">Win</div>
 						{/if}
 					</div>
