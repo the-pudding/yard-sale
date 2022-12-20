@@ -17,6 +17,7 @@
 	let redistribution = 0.5;
 	let redistributionPot = 0;
 	let running = false;
+	let loaded = 0;
 	export let redist;
 
 	function generatePlayers() {
@@ -38,6 +39,7 @@
 			players.push(player);
 			players_redist.push(player_redist);
 		}
+		
 	}
 
 	function playGame() {
@@ -301,23 +303,42 @@
 	.toolItem {
 		text-align: right;
 		position: absolute;
-		right: 10px;
+		right: 20px;
 		top: 0px;
+		width: 200px;
 	}
 	.toolbar .toolItem {
 		width: calc(100% - 60px);
 		position: relative;
 		margin: 20px 10px;
 	}
-	.chartArea .toolItem .toolLabel {
-		color: black;
+	.chartArea {
+		position: relative;
+	}
+	.chartArea .toolLabel {
+		color: black !important;
 		font-size: 16px;
 		line-height: 1.5em;
 		max-width: 500px;
-		margin: 0 auto;
+		/* margin: 0 auto; */
 		right: 0px;
 		left: auto;
 		width: 200px;
+	}
+	@media only screen and (max-width: 500px) {
+		.chartArea .toolItem, .chartArea .toolLabel {
+			position: static !important;
+			display: block;
+			text-align: center;
+			margin: 0px auto;
+			width: 80%;
+		}
+		.chartArea .toolLabel {
+			margin: 0px auto 10px !important;
+		}
+		.resetContainer {
+			margin-top: 80px
+		}
 	}
 	.toolbar .toolValue {
 		color: var(--category-bg-purple);

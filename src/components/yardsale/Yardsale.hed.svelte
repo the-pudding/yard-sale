@@ -44,4 +44,12 @@
 		font-size: 30px;
 	}
 }
+	@media only screen and (max-width: 400px) {
+			.hedContainer h1 {
+			font-size: 52px;
+		}
+		.hedContainer h1 span {
+		font-size: 30px;
+	}
+}
 </style>

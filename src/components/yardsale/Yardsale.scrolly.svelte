@@ -10,8 +10,9 @@
 	let currentStage; // full stage name, ie "scrolly3-1"
 
 	let value = 0; // current step, binded to scroll 
-	let stepHeight = 600;
-	let stepWidth = 600;
+	let containerHeight;
+	let stepHeight;
+	let stepWidth;
 	let panelHeight = stepWidth * 0.8;
 	let bgColor = "#000"
 	let bgOpacity = 1;
@@ -19,6 +20,7 @@
 	let currentText;
 	let currentLocation = 0;
 	let progress;
+	let loaded = 0;
 
 	// Keyframes for each stage
 	const stageLookup = {
@@ -431,12 +433,18 @@
 		if (currentProgress > 1) { currentProgress = 1; }
 	}
 	
-
+	let marginTop = 0;
+	setInterval(function() {
+		if (stepWidth != undefined) {
+			loaded = 1;
+		}
+	},100);
 	$: {
 		newScroll(value)
 		currentStage = currentStage;
 		stepWidth = stepWidth;
 		stepHeight = stepHeight;
+		containerHeight = containerHeight;
 		panelHeight = stepWidth;
 		currentText = words[currentStageNumber];
 		progress = progress;
@@ -444,9 +452,11 @@
 	}
 	
 </script>
-<div class="interactive_container">
+<svelte:window bind:innerHeight={containerHeight} />
+<div class="interactive_container" >
 	<section class="scrolly" id={container}>
-		<div class="scrollyBackground" bind:clientHeight={stepHeight} bind:clientWidth={stepWidth} style="background:{bgColor}; max-height:{panelHeight}px; ">
+		<div class="scrollyBackground" bind:clientHeight={stepHeight} bind:clientWidth={stepWidth} style="background:{bgColor}; max-height:{panelHeight}px; opacity: {loaded};">
+			
 			<div class="scrollyImageContainer">
 				<!-- If it's not the third scrolly, display the comic -->
 				{#if container != "scrolly3"}
@@ -522,7 +532,7 @@
 				{#each words as text, i}
 				{@const active = value === i}
 				{#if text != ""}
-				<div class="step step{i}" class:active>
+				<div class="step step{i}" class:active style="opacity: {loaded};" >
 					{#if container == "scrolly3" && currentStageNumber == 2 && r > 1500 && r < 4500}
 					<p>Still simulating 10,000 rounds...</p>
 					{:else if container == "scrolly3" && currentStageNumber == 2 && r > 4500 && r < 10000}
@@ -638,11 +648,12 @@
 		position: sticky;
 		top:  2.5vh;
 		width:  90%;
-		margin: 0 auto;
+		margin: auto auto;
 		height:  95vh;
 		border: 3px solid #000;
 		max-width: 95vh;
 		z-index: -1;
+		transition: opacity 500ms cubic-bezier(0.250, 0.250, 0.750, 0.750);
 	}
 	.scrollyImageContainer {
 		width: 100%;
@@ -682,23 +693,25 @@
 		height: 0; 
 		border-left: 20px solid transparent;
 		border-right: 20px solid transparent;
-		border-top: 20px solid var(--category-purple2);
+		border-top: 20px solid black;
 		right: 50%;
 		margin-right: -10px;
 		top: calc(100% + 50px);
 		margin-left: -5px;
-		opacity: 0.7;
+		opacity: 0.4;
 		z-index: 1000;
 		animation: bounce 1s ease infinite;
 	}
 	.scrolldown_words {
 		position: absolute;
-		width: 100px;
+		width: 120px;
 		left: 50%;
-		margin-left: -50px;
+		margin-left: -60px;
+		font-weight: bold;
 		text-align: center;
 		bottom: 22px;
-		opacity: 0.7;
+		color: black;
+		text-transform: uppercase;
 	}
 	.scrollyBackground img {
 		position: absolute;
@@ -725,6 +738,7 @@
 		width: 100%;
 		min-width: 200px;
 		box-sizing: border-box;
+		transition: opacity 500ms cubic-bezier(0.250, 0.250, 0.750, 0.750);
 	}
 	.step.stepHidden {
 		opacity: 0;
@@ -749,6 +763,7 @@
 			min-height: none;
 			float: none;
 			width:  96%;
+			top: 10vh;
 		}
 		.step > p {
 			width: 90%;

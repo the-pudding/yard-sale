@@ -36,6 +36,12 @@
 		background-color: var(--category-purple);
 		background-size: 100% 100%;
 	}
+	@media only screen and (max-width: 500px) {
+		.quoteImage {
+			width: 80px;
+			height: 80px;
+		}
+	}
 	.citation {
 		text-align: right;
 	}

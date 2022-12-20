@@ -25,10 +25,10 @@ mark {
 	padding: 0 4px;
 }
 
-a {
-	color: var(--color-link, blue);
+#body a {
+	color: #000;
 	text-decoration: none;
-	/* border-bottom: 1px solid currentColor; */
+	border-bottom: 1px solid #000;
 }
 
 

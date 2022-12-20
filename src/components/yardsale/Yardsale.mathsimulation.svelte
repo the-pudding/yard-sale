@@ -409,6 +409,14 @@
 		font-weight: bold;
 		font-size:  16px;
 	}
+	@media only screen and (max-width: 500px) {
+		.wager_amount {
+			text-align: center;
+		}
+		.fullInfo {
+			text-align: right;
+		}
+	}
 	.speechBubble {
 		width: 300%;
 		bottom: 110%;
