@@ -231,6 +231,7 @@
 				<button class="toolLabel button" disabled>Simulating...</button>
 				{/if}
 			</div>	
+			{#if chartWidth > 0}
 			<svg>
 				{#each ticks as tick}
 				<line x1=0 x2={chartWidth} y1={chartHeight - (tick / highestNumber * chartHeight) } y2={chartHeight - (tick / highestNumber * chartHeight)}></line>
@@ -278,6 +279,7 @@
 				{/if}
 			{/if}
 			</svg>
+			{/if}
 		</div>
 		<div class="resetContainer">
 			<button class="reset button" on:click={reset}>Reset</button>

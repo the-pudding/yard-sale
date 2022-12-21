@@ -152,6 +152,7 @@
 
 <div class="ysm_container interactive_container"  bind:clientHeight={stepHeight} bind:clientWidth={stepWidth}>	
 	<div class="chartArea" bind:clientWidth={chartWidth} style="height:{panelHeight}px;">
+		{#if chartWidth > 0}
 		<svg>
 			{#each ticks as tick}
 			<line x1=0 x2={chartWidth} y1={ tick[1] } y2={ tick[1] }></line>
@@ -172,6 +173,7 @@
 				{/each}
 			{/if}
 		</svg>
+		{/if}
 	</div>
 	<div class="toolbar ysm_data">
 		<div class="toolItem roundItem">
