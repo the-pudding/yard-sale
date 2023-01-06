@@ -1,1 +1,0 @@
-import{default as i}from"../components/pages/_page.svelte-0717bdd8.js";import"./index-7ca2a772.js";import"./index-d7fdf179.js";import"./wordmark-15d53902.js";const e=!0;export{i as component,e as server};
