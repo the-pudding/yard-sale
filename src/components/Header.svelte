@@ -38,4 +38,10 @@
 		top: 16px;
 		right: 16px;
 	}
+
+	@media (max-width: 480px) {
+		.tip {
+			display: none;
+		}
+	}
 </style>
