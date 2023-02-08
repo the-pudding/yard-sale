@@ -145,6 +145,10 @@
 		margin-left: 0.5em;
 	}
 
+	:global(.wordmark svg path) {
+		fill: currentColor;
+	}
+
 	@media only screen and (min-width: 30em) {
 		.story {
 			width: 50%;
